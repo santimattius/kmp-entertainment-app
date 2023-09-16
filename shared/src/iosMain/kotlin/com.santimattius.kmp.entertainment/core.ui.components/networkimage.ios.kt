@@ -18,5 +18,6 @@ internal actual fun __NetworkImage(
         modifier = modifier,
         painter = painter,
         contentDescription = contentDescription,
+        contentScale = contentScale
     )
 }

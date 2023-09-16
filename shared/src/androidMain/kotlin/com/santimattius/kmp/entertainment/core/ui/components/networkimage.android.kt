@@ -23,7 +23,8 @@ internal actual fun __NetworkImage(
         loading = {
             Box(contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(
-                    color = MaterialTheme.colorScheme.secondary, modifier = Modifier.size(32.dp)
+                    color = MaterialTheme.colorScheme.secondary,
+                    modifier = Modifier.size(32.dp)
                 )
             }
         },

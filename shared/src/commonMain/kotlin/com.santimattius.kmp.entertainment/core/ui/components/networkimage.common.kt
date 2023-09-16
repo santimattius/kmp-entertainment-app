@@ -19,5 +19,10 @@ internal fun NetworkImage(
     contentScale: ContentScale,
     contentDescription: String? = null,
 ) {
-    __NetworkImage(imageUrl, modifier, contentScale, contentDescription)
+    __NetworkImage(
+        imageUrl = imageUrl,
+        modifier = modifier,
+        contentScale = contentScale,
+        contentDescription = contentDescription
+    )
 }
