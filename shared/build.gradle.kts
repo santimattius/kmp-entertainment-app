@@ -37,6 +37,7 @@ kotlin {
                 implementation(compose.foundation)
                 implementation(compose.material)
                 implementation(compose.material3)
+                implementation(compose.materialIconsExtended)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
                 implementation(libs.voyager.navigator)
@@ -45,6 +46,9 @@ kotlin {
                 implementation(libs.ktor.client.logging)
                 implementation(libs.ktor.serialization.kotlinx.json)
                 implementation(libs.kotlinx.coroutines.core)
+
+                api(libs.precompose)
+                api(libs.precompose.view.model)
             }
         }
         val androidMain by getting {
@@ -92,4 +96,7 @@ android {
     kotlin {
         jvmToolchain(11)
     }
+}
+dependencies {
+    implementation(libs.androidx.core.animation)
 }

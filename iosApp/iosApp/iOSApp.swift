@@ -5,7 +5,7 @@ struct iOSApp: App {
 	var body: some Scene {
 		WindowGroup {
 		    ZStack {
-			    ContentView().ignoresSafeArea(.all)
+                ContentView().edgesIgnoringSafeArea(.top)
 			}.preferredColorScheme(.light)
 		}
 	}

@@ -1,6 +1,6 @@
-package com.santimattius.kmp.entertainment.feature.home
+package com.santimattius.kmp.entertainment.feature.movie.home
 
-data class HomeUiState(
+data class MovieUiState(
     val isLoading: Boolean = false,
     val isFailure: Boolean = false,
     val data: List<MovieUiModel> = emptyList(),

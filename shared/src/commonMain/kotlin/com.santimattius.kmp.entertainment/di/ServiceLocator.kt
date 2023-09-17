@@ -1,35 +1,59 @@
 package com.santimattius.kmp.entertainment.di
 
 import com.santimattius.kmp.entertainment.core.data.MovieRepository
+import com.santimattius.kmp.entertainment.core.data.TvShowRepository
 import com.santimattius.kmp.entertainment.core.network.ktorHttpClient
-import com.santimattius.kmp.entertainment.feature.detail.DetailViewModel
-import com.santimattius.kmp.entertainment.feature.home.HomeViewModel
+import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailViewModel
+import com.santimattius.kmp.entertainment.feature.movie.home.MoviesViewModel
+import com.santimattius.kmp.entertainment.feature.tvshow.detail.TvShowDetailViewModel
+import com.santimattius.kmp.entertainment.feature.tvshow.home.TvShowViewModel
 import io.ktor.client.HttpClient
 import kotlin.native.concurrent.ThreadLocal
 
 @ThreadLocal
 object ServiceLocator {
 
-    private const val API_KEY = ""
+    private const val API_KEY = "ee6fa3652297841e02d5808229a45d6d"
 
     private var client: HttpClient? = null
-    private var repository: MovieRepository? = null
+    private var movieRepository: MovieRepository? = null
+    private var tvShowRepository: TvShowRepository? = null
 
-    fun provideHomeViewModel(): HomeViewModel {
-        return HomeViewModel(provideMovieRepository())
+
+    fun provideMoviesViewModel(): MoviesViewModel {
+        return MoviesViewModel(provideMovieRepository())
     }
 
-    fun provideDetailViewModel(id: Long): DetailViewModel {
-        return DetailViewModel(id, provideMovieRepository())
+    fun provideTvShowsViewModel(): TvShowViewModel {
+        return TvShowViewModel(provideTvShowRepository())
+    }
+
+    fun provideMovieDetailViewModel(id: Long): MovieDetailViewModel {
+        return MovieDetailViewModel(id, provideMovieRepository())
+    }
+
+    fun provideTvShowDetailViewModel(id: Long): TvShowDetailViewModel {
+        return TvShowDetailViewModel(id, provideTvShowRepository())
     }
 
     private fun provideMovieRepository(): MovieRepository {
-        return repository ?: createMovieRepository()
+        return movieRepository ?: createMovieRepository()
     }
+
+    private fun provideTvShowRepository(): TvShowRepository {
+        return tvShowRepository ?: createTvShowRepository()
+    }
+
 
     private fun createMovieRepository(): MovieRepository {
         val newRepository = MovieRepository(provideHttpClient())
-        repository = newRepository
+        movieRepository = newRepository
+        return newRepository
+    }
+
+    private fun createTvShowRepository(): TvShowRepository {
+        val newRepository = TvShowRepository(provideHttpClient())
+        tvShowRepository = newRepository
         return newRepository
     }
 
