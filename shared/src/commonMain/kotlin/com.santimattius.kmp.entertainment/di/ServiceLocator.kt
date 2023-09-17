@@ -1,5 +1,6 @@
 package com.santimattius.kmp.entertainment.di
 
+import com.santimattius.kmp.entertainment.BuildConfig
 import com.santimattius.kmp.entertainment.core.data.MovieRepository
 import com.santimattius.kmp.entertainment.core.data.TvShowRepository
 import com.santimattius.kmp.entertainment.core.network.ktorHttpClient
@@ -13,7 +14,7 @@ import kotlin.native.concurrent.ThreadLocal
 @ThreadLocal
 object ServiceLocator {
 
-    private const val API_KEY = "ee6fa3652297841e02d5808229a45d6d"
+    private val API_KEY = BuildConfig.apiKey
 
     private var client: HttpClient? = null
     private var movieRepository: MovieRepository? = null

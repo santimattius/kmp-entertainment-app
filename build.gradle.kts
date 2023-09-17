@@ -7,3 +7,9 @@ plugins {
     id("org.jetbrains.compose").apply(false)
     id("org.jetbrains.kotlin.plugin.serialization").apply(false)
 }
+
+buildscript {
+    dependencies{
+        classpath("com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.14.0")
+    }
+}

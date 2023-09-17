@@ -43,7 +43,7 @@ fun MainApp(
         topBar = {
             if (currentRoute.notContainsRoute(Features.SPLASH.route)) {
                 AppBar(
-                    title = "Movie and TvShows",
+                    title = if (AppState.HOME_ROUTES.contains(route)) "Movies and TvShows" else "",
                     navigationIcon = if (!AppState.HOME_ROUTES.contains(route)) upNavigation else empty
                 )
             }

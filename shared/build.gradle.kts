@@ -1,13 +1,19 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
     id("org.jetbrains.compose")
     id("kotlinx-serialization")
+    id("com.codingfeline.buildkonfig")
 }
 
 group = "com.santimattius.kmp.entertainment"
 version = "1.0-SNAPSHOT"
+
+
 
 kotlin {
     androidTarget()
@@ -76,7 +82,14 @@ kotlin {
         }
     }
 }
+buildkonfig {
+    packageName = "com.santimattius.kmp.entertainment"
+    objectName = "BuildConfig"
 
+    defaultConfigs {
+        buildConfigField(STRING, "apiKey", getLocalProperty("api_key"))
+    }
+}
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
     namespace = "com.santimattius.entertainment.app"
@@ -97,6 +110,15 @@ android {
         jvmToolchain(11)
     }
 }
+
+
 dependencies {
     implementation(libs.androidx.core.animation)
+}
+
+
+fun Project.getLocalProperty(key: String, file: String = "local.properties"): String {
+    val p = Properties()
+    p.load(project.rootProject.file(file).reader())
+    return p.getProperty(key)
 }
