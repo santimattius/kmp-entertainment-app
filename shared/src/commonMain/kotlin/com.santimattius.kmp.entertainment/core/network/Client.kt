@@ -7,7 +7,9 @@ import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.http.ContentType
 import io.ktor.http.URLProtocol
+import io.ktor.http.contentType
 import io.ktor.http.path
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -34,5 +36,6 @@ internal fun ktorHttpClient(apiKey: String) = HttpClient {
             path("3/")
             parameters.append("api_key", apiKey)
         }
+        contentType(ContentType.Application.Json)
     }
 }

@@ -1,4 +1,4 @@
-package com.santimattius.kmp.entertainment.feature.home
+package com.santimattius.kmp.entertainment.feature.movie.home
 
 import com.santimattius.kmp.entertainment.core.ui.components.UiModel
 

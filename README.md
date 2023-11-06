@@ -1,4 +1,22 @@
-# KM Entertainment App
+# KMP Entertainment App (Working progress)
+
+[//]: # (Screenshot)
+<p align="center">
+  <img width="270" src="https://github.com/santimattius/kmp-entertainment-app/blob/feature/precompose-navigation/screenshots/kmp-android.png?raw=true"/>
+  <img width="320" src="https://github.com/santimattius/kmp-entertainment-app/blob/feature/precompose-navigation/screenshots/kmp-ios.png?raw=true"/>
+</p>
+
+## Content
+
+TheMovieDB API: Check this [documentation](https://www.themoviedb.org/documentation/api).
+
+## Setup
+
+Using local properties for define api key:
+
+```properties
+apiKey="{your-api-key}"
+```
 
 ## Set up the environment
 
@@ -45,3 +63,5 @@ Before you start, use the [KDoctor](https://github.com/Kotlin/kdoctor) tool to e
    ```
 
 Otherwise, KDoctor will highlight which parts of your setup still need to be configured and will suggest a way to fix them.
+
+## Dependencies (WIP)
