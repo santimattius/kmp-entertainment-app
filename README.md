@@ -1,4 +1,4 @@
-# KMP Entertainment App (Working progress)
+# KMP Entertainment App
 
 [//]: # (Screenshot)
 <p align="center">
@@ -64,4 +64,20 @@ Before you start, use the [KDoctor](https://github.com/Kotlin/kdoctor) tool to e
 
 Otherwise, KDoctor will highlight which parts of your setup still need to be configured and will suggest a way to fix them.
 
-## Dependencies (WIP)
+## Dependencies
+```toml
+[versions]
+kotlin="1.9.20"
+compose="1.5.10"
+activity-compose = "1.8.0"
+appcompat = "1.6.1"
+coil-compose = "2.4.0"
+core-ktx = "1.12.0"
+image-loader = "1.6.4"
+kotlinxCoroutinesAndroid = "1.7.3"
+ktorVersion = "2.3.3"
+precompose = "1.5.1"
+voyager = "1.0.0-rc05"
+```
+
+Check voyager implementation [here](https://github.com/santimattius/kmp-entertainment-app/tree/feature/voyager)
