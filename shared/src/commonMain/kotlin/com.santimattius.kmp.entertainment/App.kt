@@ -12,13 +12,17 @@ import com.santimattius.kmp.entertainment.core.ui.components.AppBar
 import com.santimattius.kmp.entertainment.core.ui.components.AppBottomNavigation
 import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
 import com.santimattius.kmp.entertainment.core.ui.themes.AppTheme
+import com.santimattius.kmp.entertainment.di.appModule
 import com.santimattius.kmp.entertainment.navigation.Features
 import com.santimattius.kmp.entertainment.navigation.Navigation
+import org.koin.compose.KoinApplication
 
 @Composable
 fun App() {
-    AppTheme {
-        MainApp()
+    KoinApplication(moduleList = { appModule() }) {
+        AppTheme {
+            MainApp()
+        }
     }
 }
 

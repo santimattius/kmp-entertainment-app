@@ -9,22 +9,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.DraggableGrid
-import com.santimattius.kmp.entertainment.di.ServiceLocator
 import com.santimattius.kmp.entertainment.feature.shared.ContentImageView
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
-import moe.tlaster.precompose.viewmodel.viewModel
 
 
 @Composable
 fun TvShowRoute(
     onMovieClick: (Long) -> Unit,
 ) {
-    val viewModel = viewModel(TvShowViewModel::class) {
-        ServiceLocator.provideTvShowsViewModel()
-    }
-
+    val viewModel = koinViewModel<TvShowViewModel>()
     TvShowScreen(viewModel, onMovieClick)
 }
 

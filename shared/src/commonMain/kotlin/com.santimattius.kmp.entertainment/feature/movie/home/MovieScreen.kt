@@ -9,9 +9,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.DraggableGrid
-import com.santimattius.kmp.entertainment.di.ServiceLocator
 import com.santimattius.kmp.entertainment.feature.shared.ContentImageView
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
 import moe.tlaster.precompose.viewmodel.viewModel
@@ -21,10 +21,7 @@ import moe.tlaster.precompose.viewmodel.viewModel
 fun MoviesRoute(
     onMovieClick: (Long) -> Unit,
 ) {
-    val viewModel = viewModel(MoviesViewModel::class) {
-        ServiceLocator.provideMoviesViewModel()
-    }
-
+    val viewModel = koinViewModel<MoviesViewModel>()
     MoviesContent(viewModel, onMovieClick)
 }
 
