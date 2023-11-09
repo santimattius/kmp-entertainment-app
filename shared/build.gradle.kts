@@ -55,6 +55,7 @@ kotlin {
 
                 api(libs.precompose)
                 api(libs.precompose.view.model)
+                api(libs.precompose.koin)
 
                 api(libs.koin.core)
                 api(libs.koin.compose)
