@@ -12,7 +12,7 @@ import org.koin.core.parameter.parametersOf
 
 @Composable
 fun MovieDetailRoute(id: Long) {
-    val viewModel = koinViewModel<MovieDetailViewModel> { parametersOf(id) }
+    val viewModel = koinViewModel(MovieDetailViewModel::class) { parametersOf(id) }
     MovieDetailContent(viewModel)
 }
 

@@ -5,6 +5,7 @@ import moe.tlaster.precompose.viewmodel.ViewModel
 import moe.tlaster.precompose.viewmodel.viewModel
 import org.koin.compose.LocalKoinScope
 import org.koin.core.parameter.ParametersDefinition
+import kotlin.reflect.KClass
 
 /**
  * Create Pre Compose view model instance using koin
@@ -14,7 +15,10 @@ import org.koin.core.parameter.ParametersDefinition
  * @return view model instance
  */
 @Composable
-inline fun <reified T : ViewModel> koinViewModel(noinline parameters: ParametersDefinition? = null): T {
+fun <T> koinViewModel(
+    modelClass: KClass<T>,
+    parameters: ParametersDefinition? = null,
+): T where T : ViewModel {
     val scope = LocalKoinScope.current
-    return viewModel { scope.get(parameters = parameters) }
+    return viewModel(modelClass) { scope.get(clazz = modelClass, parameters = parameters) }
 }

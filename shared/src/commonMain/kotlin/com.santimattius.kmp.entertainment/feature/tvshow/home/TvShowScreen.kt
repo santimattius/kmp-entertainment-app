@@ -20,7 +20,7 @@ import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
 fun TvShowRoute(
     onMovieClick: (Long) -> Unit,
 ) {
-    val viewModel = koinViewModel<TvShowViewModel>()
+    val viewModel = koinViewModel(TvShowViewModel::class)
     TvShowScreen(viewModel, onMovieClick)
 }
 

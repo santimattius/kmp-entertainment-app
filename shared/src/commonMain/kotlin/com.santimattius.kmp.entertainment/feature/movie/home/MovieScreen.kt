@@ -21,7 +21,7 @@ import moe.tlaster.precompose.viewmodel.viewModel
 fun MoviesRoute(
     onMovieClick: (Long) -> Unit,
 ) {
-    val viewModel = koinViewModel<MoviesViewModel>()
+    val viewModel = koinViewModel(MoviesViewModel::class)
     MoviesContent(viewModel, onMovieClick)
 }
 

@@ -12,7 +12,7 @@ import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TvShowDetailRoute(id: Long) {
-    val viewModel = koinViewModel<TvShowDetailViewModel> { parametersOf(id) }
+    val viewModel = koinViewModel(TvShowDetailViewModel::class) { parametersOf(id) }
     TvShowDetailContent(viewModel)
 }
 
