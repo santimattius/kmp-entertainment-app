@@ -55,6 +55,9 @@ kotlin {
 
                 api(libs.precompose)
                 api(libs.precompose.view.model)
+
+                api(libs.koin.core)
+                api(libs.koin.compose)
             }
         }
         val androidMain by getting {
@@ -65,6 +68,7 @@ kotlin {
                 implementation(libs.coil.compose)
                 implementation(libs.ktor.client.okhttp)
                 implementation(libs.kotlinx.coroutines.android)
+                implementation(libs.koin.android)
             }
         }
         val iosX64Main by getting
