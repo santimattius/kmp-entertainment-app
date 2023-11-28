@@ -17,7 +17,6 @@ data class MovieResponse(
 data class Movie(
     val id: Long,
     val adult: Boolean,
-    @SerialName("backdrop_path") val backdropPath: String,
     @SerialName("original_title") val originalTitle: String,
     val overview: String,
     val popularity: Double,
@@ -27,7 +26,7 @@ data class Movie(
     val video: Boolean,
     @SerialName("vote_average") val voteAverage: Double,
     @SerialName("vote_count") val voteCount: Long,
-){
+) {
     val poster: String
         get() = "https://image.tmdb.org/t/p/w500${posterPath}"
 }

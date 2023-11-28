@@ -10,6 +10,6 @@ plugins {
 
 buildscript {
     dependencies{
-        classpath("com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.14.0")
+        classpath(libs.buildkonfig.gradle.plugin)
     }
 }
