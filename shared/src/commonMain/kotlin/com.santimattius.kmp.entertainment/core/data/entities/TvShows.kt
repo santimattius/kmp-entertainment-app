@@ -1,4 +1,4 @@
-package com.santimattius.kmp.entertainment.core.data
+package com.santimattius.kmp.entertainment.core.data.entities
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
@@ -17,7 +17,6 @@ data class TvShowResponse(
 data class TvShowDto(
     @SerialName("id") val id: Long,
     @SerialName("name") val name: String,
-    @SerialName("backdrop_path") val backdropPath: String,
     @SerialName("first_air_date") val firstAirDate: String,
     @SerialName("origin_country") val originCountry: List<String>,
     @SerialName("original_language") val originalLanguage: String,

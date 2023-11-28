@@ -1,4 +1,4 @@
-package com.santimattius.kmp.entertainment.core.data
+package com.santimattius.kmp.entertainment.core.data.entities
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*
@@ -17,7 +17,6 @@ data class MovieResponse(
 data class Movie(
     val id: Long,
     val adult: Boolean,
-    @SerialName("backdrop_path") val backdropPath: String,
     @SerialName("original_title") val originalTitle: String,
     val overview: String,
     val popularity: Double,
