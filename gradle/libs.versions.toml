@@ -1,5 +1,9 @@
 [versions]
-activity-compose = "1.8.0"
+androidGradlePlugin = "8.1.2"
+kotlinVersion = "1.9.20"
+composeVersion = "1.5.10"
+
+activity-compose = "1.8.1"
 appcompat = "1.6.1"
 buildkonfigGradlePlugin = "0.14.0"
 coil-compose = "2.4.0"
@@ -16,7 +20,6 @@ koinCompose = "1.1.0"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
-buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesAndroid" }
@@ -38,6 +41,15 @@ koin-core = {module="io.insert-koin:koin-core", version.ref="koin"}
 koin-compose = {module="io.insert-koin:koin-compose", version.ref="koinCompose"}
 koin-android = {module="io.insert-koin:koin-android", version.ref="koin"}
 
+buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
+
 [bundles]
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinVersion" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinVersion" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeVersion" }
