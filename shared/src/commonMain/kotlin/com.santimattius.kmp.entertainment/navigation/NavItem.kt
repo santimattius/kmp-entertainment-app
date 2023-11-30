@@ -1,6 +1,7 @@
 package com.santimattius.kmp.entertainment.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.LiveTv
 import androidx.compose.material.icons.outlined.Movie
@@ -9,12 +10,28 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 enum class NavItem(
     val navCommand: NavCommand,
-    val icon: ImageVector,
+    val selectedIcon: ImageVector,
     val title: String,
+    val unselectedIcon: ImageVector = selectedIcon,
 ) {
-    Movies(NavCommand.ContentType(Features.Movies), Icons.Outlined.Movie, "Movies"),
-    TV(NavCommand.ContentType(Features.TvShows), Icons.Outlined.LiveTv, "Tv Shows"),
-    Favorites(NavCommand.ContentType(Features.Favorites), Icons.Outlined.Favorite, "Favorites"),
+    Movies(
+        navCommand = NavCommand.ContentType(Features.Movies),
+        selectedIcon = Icons.Outlined.Movie,
+        title = "Movies"
+    ),
+    TV(
+        navCommand = NavCommand.ContentType(Features.TvShows),
+        selectedIcon = Icons.Outlined.LiveTv,
+        title = "Tv Shows"
+    ),
+    Favorites(
+        navCommand = NavCommand.ContentType(Features.Favorites),
+        selectedIcon = Icons.Outlined.Favorite,
+        unselectedIcon = Icons.Default.FavoriteBorder,
+        title = "Favorites"
+    );
+
+    fun icon(selected: Boolean) = if (selected) selectedIcon else unselectedIcon
 }
 
 sealed class NavCommand(
