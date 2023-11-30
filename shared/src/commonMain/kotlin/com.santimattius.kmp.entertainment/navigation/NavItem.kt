@@ -1,6 +1,7 @@
 package com.santimattius.kmp.entertainment.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.LiveTv
 import androidx.compose.material.icons.outlined.Movie
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -11,8 +12,9 @@ enum class NavItem(
     val icon: ImageVector,
     val title: String,
 ) {
-    MOVIE(NavCommand.ContentType(Features.MOVIES), Icons.Outlined.Movie, "Movies"),
-    TV(NavCommand.ContentType(Features.TV_SHOWS), Icons.Outlined.LiveTv, "Tv Shows"),
+    Movies(NavCommand.ContentType(Features.Movies), Icons.Outlined.Movie, "Movies"),
+    TV(NavCommand.ContentType(Features.TvShows), Icons.Outlined.LiveTv, "Tv Shows"),
+    Favorites(NavCommand.ContentType(Features.Favorites), Icons.Outlined.Favorite, "Favorites"),
 }
 
 sealed class NavCommand(

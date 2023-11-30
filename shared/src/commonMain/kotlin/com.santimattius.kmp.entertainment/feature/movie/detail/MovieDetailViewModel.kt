@@ -1,6 +1,9 @@
 package com.santimattius.kmp.entertainment.feature.movie.detail
 
+import com.santimattius.kmp.entertainment.core.data.repositories.FavoriteRepository
 import com.santimattius.kmp.entertainment.core.data.repositories.MovieRepository
+import com.santimattius.kmp.entertainment.core.domain.Favorite
+import com.santimattius.kmp.entertainment.core.domain.Movie
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +14,8 @@ import moe.tlaster.precompose.viewmodel.viewModelScope
 
 class MovieDetailViewModel(
     id: Long,
-    private val repository: MovieRepository,
+    private val movieRepository: MovieRepository,
+    private val favoriteRepository: FavoriteRepository,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MovieDetailUiState(isLoading = true))
@@ -28,8 +32,35 @@ class MovieDetailViewModel(
     private fun find(id: Long) {
         viewModelScope.launch(exceptionHandler) {
             _state.update { it.copy(isLoading = true) }
-            val movie = repository.findById(id)
-            _state.update { it.copy(isLoading = false, data = movie) }
+            val movie = movieRepository.findById(id).asUiModel()
+            val isFavorite = favoriteRepository.isFavorite(movie.id)
+            _state.update { it.copy(isLoading = false, data = movie.copy(isFavorite = isFavorite)) }
         }
     }
+
+    fun onFavoriteClicked(movie: MovieUiModel) {
+        if (movie.isFavorite) {
+            favoriteRepository.remove(movie.id)
+        } else {
+            val favorite = Favorite(
+                resourceId = movie.id,
+                title = movie.title,
+                overview = movie.overview,
+                imageUrl = movie.image
+            )
+            favoriteRepository.add(favorite)
+        }
+        _state.update {
+            it.copy(
+                isLoading = false,
+                data = movie.copy(isFavorite = !movie.isFavorite)
+            )
+        }
+    }
+}
+
+private fun Movie.asUiModel(): MovieUiModel {
+    return MovieUiModel(
+        id = id, title = title, image = image, overview = overview
+    )
 }

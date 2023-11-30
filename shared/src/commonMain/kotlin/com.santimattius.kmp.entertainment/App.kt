@@ -60,7 +60,7 @@ fun MainApp(
 
     Scaffold(
         topBar = {
-            if (currentRoute.notContainsRoute(Features.SPLASH.route)) {
+            if (currentRoute.notContainsRoute(Features.Splash.route)) {
                 AppBar(
                     title = if (AppState.HOME_ROUTES.contains(route)) "Movies and TvShows" else "",
                     navigationIcon = if (!AppState.HOME_ROUTES.contains(route)) upNavigation else empty
@@ -68,7 +68,7 @@ fun MainApp(
             }
         },
         bottomBar = {
-            if (currentRoute.notContainsRoute(Features.SPLASH.route)) {
+            if (currentRoute.notContainsRoute(Features.Splash.route)) {
                 AppBottomNavigation(
                     bottomNavOptions = AppState.BOTTOM_NAV_ITEMS,
                     currentRoute = route,

@@ -11,14 +11,33 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
 
 class SQLDelightFavoriteLocalDataSource(
-    private val db: AppDatabase,
+    db: AppDatabase,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : FavoriteLocalDataSource {
 
+    private val databaseQueries = db.appDatabaseQueries
+
     override val all: Flow<List<Favorite>>
-        get() = db.appDatabaseQueries
+        get() = databaseQueries
             .selectAllFavorite()
             .asFlow()
             .mapToList(dispatcher)
 
+    override fun insert(favorite: Favorite) {
+        val (resourceId, title, overview, imageUrl) = favorite
+        databaseQueries.insertFavorite(
+            resourceId = resourceId,
+            title = title,
+            overview = overview,
+            imageUrl = imageUrl
+        )
+    }
+
+    override fun delete(resourceId: Long) {
+        databaseQueries.deleteFavoriteById(resourceId)
+    }
+
+    override fun findById(resourceId: Long): Favorite? {
+        return databaseQueries.selectFavoriteById(resourceId).executeAsOneOrNull()
+    }
 }

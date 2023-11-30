@@ -25,7 +25,9 @@ fun TvShowDetailContent(
 }
 
 @Composable
-fun DetailContent(state: TvShowDetailUiState) {
+fun DetailContent(
+    state: TvShowDetailUiState,
+) {
     when {
         state.isLoading -> {
             Center {
@@ -43,7 +45,10 @@ fun DetailContent(state: TvShowDetailUiState) {
             DetailContentView(
                 imageUrl = state.data.image,
                 title = state.data.title,
-                overview = state.data.overview
+                overview = state.data.overview,
+                onFavoriteClick = {
+
+                }
             )
         }
     }
