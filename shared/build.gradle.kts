@@ -1,14 +1,19 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.kotlin.konan.properties.Properties
 
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    kotlin("multiplatform")
+    // this is necessary to avoid the plugins to be loaded multiple times
+    // in each subproject's classloader
+    alias(libs.plugins.kotlin.multiplatform)
     kotlin("native.cocoapods")
-    id("com.android.library")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.multiplatform)
     id("kotlinx-serialization")
     id("com.codingfeline.buildkonfig")
+    alias(libs.plugins.sqldelight)
 }
+true
 
 group = "com.santimattius.kmp.entertainment"
 version = "1.0-SNAPSHOT"
@@ -58,6 +63,8 @@ kotlin {
 
                 api(libs.koin.core)
                 api(libs.koin.compose)
+
+                implementation(libs.sqldelight.coroutines.extensions)
             }
         }
         val androidMain by getting {
@@ -69,6 +76,7 @@ kotlin {
                 implementation(libs.ktor.client.okhttp)
                 implementation(libs.kotlinx.coroutines.android)
                 implementation(libs.koin.android)
+                implementation(libs.sqldelight.android.driver)
             }
         }
         val iosX64Main by getting
@@ -82,6 +90,7 @@ kotlin {
             dependencies {
                 implementation(libs.image.loader)
                 implementation(libs.ktor.client.darwin)
+                implementation(libs.sqldelight.ios.driver)
             }
         }
     }
@@ -94,6 +103,16 @@ buildkonfig {
         buildConfigField(STRING, "apiKey", getLocalProperty("api_key"))
     }
 }
+
+sqldelight {
+    databases {
+        create("AppDatabase") {
+            packageName.set("com.santimattius.kmp.entertainment")
+        }
+    }
+
+}
+
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
     namespace = "com.santimattius.entertainment.app"

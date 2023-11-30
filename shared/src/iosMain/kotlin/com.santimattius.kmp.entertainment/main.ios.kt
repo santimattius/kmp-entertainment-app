@@ -1,9 +1,8 @@
 package com.santimattius.kmp.entertainment
 
 import androidx.compose.ui.window.ComposeUIViewController
-import com.santimattius.kmp.entertainment.App
-import moe.tlaster.precompose.PreComposeApplication
+import com.santimattius.kmp.entertainment.core.db.DriverFactory
 
 actual fun getPlatformName(): String = "iOS"
 
-fun MainViewController() = ComposeUIViewController { App() }
+fun MainViewController() = ComposeUIViewController { App(DriverFactory()) }

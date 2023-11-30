@@ -1,8 +1,10 @@
 package com.santimattius.kmp.entertainment.di
 
 import com.santimattius.kmp.entertainment.BuildConfig
+import com.santimattius.kmp.entertainment.core.data.datasources.FavoriteLocalDataSource
 import com.santimattius.kmp.entertainment.core.data.datasources.RemoteMoviesDataSource
 import com.santimattius.kmp.entertainment.core.data.datasources.RemoteTvShowRemoteDataSource
+import com.santimattius.kmp.entertainment.core.data.datasources.sqldelight.SQLDelightFavoriteLocalDataSource
 import com.santimattius.kmp.entertainment.core.data.datasources.ktor.KtorRemoteMoviesDataSource
 import com.santimattius.kmp.entertainment.core.data.datasources.ktor.KtorTvShowRemoteDataSource
 import com.santimattius.kmp.entertainment.core.data.repositories.MovieRepository
@@ -26,6 +28,8 @@ val sharedModules = module {
 
     single<RemoteMoviesDataSource> { KtorRemoteMoviesDataSource(client = get()) }
     single<RemoteTvShowRemoteDataSource> { KtorTvShowRemoteDataSource(client = get()) }
+
+    single<FavoriteLocalDataSource> { SQLDelightFavoriteLocalDataSource(get()) }
 
     single { TvShowRepository(remoteTvShowRemoteDataSource = get()) }
     single { MovieRepository(remoteMoviesDataSource = get()) }
