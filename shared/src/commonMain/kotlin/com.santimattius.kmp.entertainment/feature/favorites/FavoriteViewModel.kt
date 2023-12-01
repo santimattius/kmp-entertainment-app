@@ -10,14 +10,14 @@ import moe.tlaster.precompose.viewmodel.viewModelScope
 class FavoriteViewModel(
     private val repository: FavoriteRepository,
 ) : ViewModel() {
-
     val state = repository.all.map { values ->
         values.map { item ->
             FavoriteUiModel(
                 id = item.resourceId,
                 title = item.title,
                 description = item.overview,
-                imageUrl = item.imageUrl
+                imageUrl = item.imageUrl,
+                type = item.type
             )
         }
     }.stateIn(
@@ -25,4 +25,8 @@ class FavoriteViewModel(
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = emptyList(),
     )
+
+    fun onFavoriteDelete(item: FavoriteUiModel) {
+        repository.remove(item.id)
+    }
 }

@@ -1,6 +1,7 @@
 package com.santimattius.kmp.entertainment.core.data.repositories
 
 import com.santimattius.kmp.entertainment.core.data.datasources.FavoriteLocalDataSource
+import com.santimattius.kmp.entertainment.core.domain.ContentType
 import com.santimattius.kmp.entertainment.core.domain.Favorite
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -16,7 +17,8 @@ class FavoriteRepository(
                 resourceId = item.resourceId,
                 title = item.title,
                 overview = item.overview,
-                imageUrl = item.imageUrl
+                imageUrl = item.imageUrl,
+                type = ContentType.valueOf(item.type)
             )
         }
     }
@@ -26,7 +28,8 @@ class FavoriteRepository(
             resourceId = item.resourceId,
             title = item.title,
             overview = item.overview,
-            imageUrl = item.imageUrl
+            imageUrl = item.imageUrl,
+            type = item.type.name,
         )
         localDataSource.insert(entity)
     }

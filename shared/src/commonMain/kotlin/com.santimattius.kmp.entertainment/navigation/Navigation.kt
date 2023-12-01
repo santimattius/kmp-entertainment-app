@@ -1,6 +1,7 @@
 package com.santimattius.kmp.entertainment.navigation
 
 import androidx.compose.runtime.Composable
+import com.santimattius.kmp.entertainment.core.domain.ContentType
 import com.santimattius.kmp.entertainment.feature.favorites.FavoriteRoute
 import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailRoute
 import com.santimattius.kmp.entertainment.feature.movie.home.MoviesRoute
@@ -53,7 +54,11 @@ fun Navigation(
             route = NavCommand.ContentType(Features.Favorites).route
         ) {
             FavoriteRoute {
-                //navigator.navigate(NavCommand.ContentTypeDetail(Features.TvShows).createRoute(it))
+                val content = when (it.type) {
+                    ContentType.MOVIE -> Features.Movies
+                    ContentType.TV -> Features.TvShows
+                }
+                navigator.navigate(NavCommand.ContentTypeDetail(content).createRoute(it.id))
             }
         }
 

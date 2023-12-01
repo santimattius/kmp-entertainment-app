@@ -2,6 +2,7 @@ package com.santimattius.kmp.entertainment.feature.movie.detail
 
 import com.santimattius.kmp.entertainment.core.data.repositories.FavoriteRepository
 import com.santimattius.kmp.entertainment.core.data.repositories.MovieRepository
+import com.santimattius.kmp.entertainment.core.domain.ContentType
 import com.santimattius.kmp.entertainment.core.domain.Favorite
 import com.santimattius.kmp.entertainment.core.domain.Movie
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -46,7 +47,8 @@ class MovieDetailViewModel(
                 resourceId = movie.id,
                 title = movie.title,
                 overview = movie.overview,
-                imageUrl = movie.image
+                imageUrl = movie.image,
+                type = ContentType.MOVIE,
             )
             favoriteRepository.add(favorite)
         }

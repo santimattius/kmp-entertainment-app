@@ -24,12 +24,13 @@ class SQLDelightFavoriteLocalDataSource(
             .mapToList(dispatcher)
 
     override fun insert(favorite: Favorite) {
-        val (resourceId, title, overview, imageUrl) = favorite
+        val (resourceId, title, overview, imageUrl, type) = favorite
         databaseQueries.insertFavorite(
             resourceId = resourceId,
             title = title,
             overview = overview,
-            imageUrl = imageUrl
+            imageUrl = imageUrl,
+            type = type
         )
     }
 

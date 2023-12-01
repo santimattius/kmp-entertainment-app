@@ -48,7 +48,13 @@ val sharedModules = module {
             favoriteRepository = get()
         )
     }
-    factory { params -> TvShowDetailViewModel(id = params.get(), repository = get()) }
+    factory { params ->
+        TvShowDetailViewModel(
+            id = params.get(),
+            repository = get(),
+            favoriteRepository = get()
+        )
+    }
 }
 
 fun appModule() = listOf(sharedModules)
