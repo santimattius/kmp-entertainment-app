@@ -35,7 +35,7 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
-            isStatic = true
+            isStatic = false
         }
         extraSpecAttributes["resources"] =
             "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
@@ -110,6 +110,8 @@ sqldelight {
             packageName.set("com.santimattius.kmp.entertainment")
         }
     }
+
+    linkSqlite.set(true)
 
 }
 

@@ -41,7 +41,7 @@ fun FavoriteScreen(
         Center {
             Text(
                 text = "There is no favorite content",
-                style = MaterialTheme.typography.headlineMedium
+                style = MaterialTheme.typography.headlineSmall
             )
         }
     } else {

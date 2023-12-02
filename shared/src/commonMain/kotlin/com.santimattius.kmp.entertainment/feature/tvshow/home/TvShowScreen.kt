@@ -56,7 +56,7 @@ fun TvShowContent(
             Center {
                 Text(
                     text = "An unexpected error has occurred",
-                    style = MaterialTheme.typography.headlineMedium
+                    style = MaterialTheme.typography.headlineSmall
                 )
             }
         }
