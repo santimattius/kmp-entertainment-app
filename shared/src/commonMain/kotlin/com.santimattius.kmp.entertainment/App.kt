@@ -15,13 +15,16 @@ import com.santimattius.kmp.entertainment.core.ui.themes.AppTheme
 import com.santimattius.kmp.entertainment.di.appModule
 import com.santimattius.kmp.entertainment.navigation.Features
 import com.santimattius.kmp.entertainment.navigation.Navigation
+import moe.tlaster.precompose.PreComposeApp
 import org.koin.compose.KoinApplication
 
 @Composable
 fun App() {
     KoinApplication(moduleList = { appModule() }) {
-        AppTheme {
-            MainApp()
+        PreComposeApp {
+            AppTheme {
+                MainApp()
+            }
         }
     }
 }
