@@ -1,5 +1,6 @@
 package com.santimattius.kmp.entertainment.core.ui.components
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -16,6 +17,7 @@ fun AppBar(
     navigationIcon: @Composable () -> Unit = { },
     containerColor: Color = MaterialTheme.colorScheme.primary,
     titleContentColor: Color = MaterialTheme.colorScheme.onPrimary,
+    actions: @Composable RowScope.() -> Unit = {},
 ) {
     TopAppBar(
         title = { Text(text = title) },
@@ -26,5 +28,6 @@ fun AppBar(
             navigationIconContentColor = titleContentColor,
             actionIconContentColor = titleContentColor,
         ),
+        actions = actions
     )
 }

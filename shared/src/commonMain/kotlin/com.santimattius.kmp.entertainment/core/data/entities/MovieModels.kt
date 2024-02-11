@@ -1,4 +1,4 @@
-package com.santimattius.kmp.entertainment.core.data
+package com.santimattius.kmp.entertainment.core.data.entities
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.*

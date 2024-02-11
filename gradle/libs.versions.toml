@@ -1,5 +1,11 @@
 [versions]
-activity-compose = "1.8.0"
+androidDriver = "2.0.0"
+androidGradlePlugin = "8.1.2"
+kotlinVersion = "1.9.20"
+composeVersion = "1.5.10"
+sqldelightVersion = "2.0.0"
+
+activity-compose = "1.8.1"
 appcompat = "1.6.1"
 buildkonfigGradlePlugin = "0.14.0"
 coil-compose = "2.4.0"
@@ -38,6 +44,20 @@ koin-core = {module="io.insert-koin:koin-core", version.ref="koin"}
 koin-compose = {module="io.insert-koin:koin-compose", version.ref="koinCompose"}
 koin-android = {module="io.insert-koin:koin-android", version.ref="koin"}
 
+sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelightVersion" }
+sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelightVersion" }
+sqldelight-ios-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelightVersion" }
+
+buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
+
 [bundles]
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinVersion" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinVersion" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeVersion" }
+sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelightVersion" }

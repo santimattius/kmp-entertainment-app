@@ -19,8 +19,12 @@ class AppState(
 ) {
 
     companion object {
-        val BOTTOM_NAV_ITEMS = listOf(NavItem.MOVIE, NavItem.TV)
-        val HOME_ROUTES = listOf(NavItem.MOVIE.navCommand.route, NavItem.TV.navCommand.route)
+        val BOTTOM_NAV_ITEMS = listOf(NavItem.Movies, NavItem.TV, NavItem.Favorites)
+        val HOME_ROUTES = listOf(
+            NavItem.Movies.navCommand.route,
+            NavItem.TV.navCommand.route,
+            NavItem.Favorites.navCommand.route
+        )
     }
 
     fun onUpClick() {

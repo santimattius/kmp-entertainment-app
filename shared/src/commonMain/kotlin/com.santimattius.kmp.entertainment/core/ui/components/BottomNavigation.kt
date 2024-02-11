@@ -37,7 +37,7 @@ fun AppBottomNavigation(
                 selectedContentColor = color,
                 icon = {
                     Icon(
-                        imageVector = item.icon,
+                        imageVector = item.icon(isSelected),
                         contentDescription = item.title,
                         tint = color
                     )
