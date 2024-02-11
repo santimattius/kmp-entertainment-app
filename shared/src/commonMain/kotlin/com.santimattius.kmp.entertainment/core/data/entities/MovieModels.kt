@@ -26,7 +26,7 @@ data class Movie(
     val video: Boolean,
     @SerialName("vote_average") val voteAverage: Double,
     @SerialName("vote_count") val voteCount: Long,
-){
+) {
     val poster: String
         get() = "https://image.tmdb.org/t/p/w500${posterPath}"
 }
