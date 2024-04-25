@@ -1,6 +1,6 @@
 package com.santimattius.kmp.entertainment.feature.tvshow.home
 
-import com.santimattius.kmp.entertainment.core.data.TvShowRepository
+import com.santimattius.kmp.entertainment.core.data.repositories.TvShowRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -8,6 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.santimattius.kmp.entertainment.core.db.DriverFactory
+import com.santimattius.kmp.entertainment.core.db.createDatabase
 import com.santimattius.kmp.entertainment.core.ui.components.AppBar
 import com.santimattius.kmp.entertainment.core.ui.components.AppBottomNavigation
 import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
@@ -17,10 +19,20 @@ import com.santimattius.kmp.entertainment.navigation.Features
 import com.santimattius.kmp.entertainment.navigation.Navigation
 import moe.tlaster.precompose.PreComposeApp
 import org.koin.compose.KoinApplication
+import org.koin.dsl.module
 
 @Composable
-fun App() {
-    KoinApplication(moduleList = { appModule() }) {
+fun App(
+    driverFactory: DriverFactory,
+) {
+    KoinApplication(
+        application = {
+            modules(appModule() + module {
+                single { driverFactory }
+                single { createDatabase(get()) }
+            })
+        }
+    ) {
         PreComposeApp {
             AppTheme {
                 MainApp()
@@ -48,7 +60,7 @@ fun MainApp(
 
     Scaffold(
         topBar = {
-            if (currentRoute.notContainsRoute(Features.SPLASH.route)) {
+            if (currentRoute.notContainsRoute(Features.Splash.route)) {
                 AppBar(
                     title = if (AppState.HOME_ROUTES.contains(route)) "Movies and TvShows" else "",
                     navigationIcon = if (!AppState.HOME_ROUTES.contains(route)) upNavigation else empty
@@ -56,7 +68,7 @@ fun MainApp(
             }
         },
         bottomBar = {
-            if (currentRoute.notContainsRoute(Features.SPLASH.route)) {
+            if (currentRoute.notContainsRoute(Features.Splash.route)) {
                 AppBottomNavigation(
                     bottomNavOptions = AppState.BOTTOM_NAV_ITEMS,
                     currentRoute = route,

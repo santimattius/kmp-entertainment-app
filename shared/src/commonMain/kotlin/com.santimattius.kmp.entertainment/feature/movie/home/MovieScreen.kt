@@ -3,6 +3,7 @@ package com.santimattius.kmp.entertainment.feature.movie.home
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,7 +54,10 @@ fun MoviesContent(
 
         state.isFailure -> {
             Center {
-                Text("Ha ocurrido un error")
+                Text(
+                    text = "An unexpected error has occurred",
+                    style = MaterialTheme.typography.headlineSmall
+                )
             }
         }
 

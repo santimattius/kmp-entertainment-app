@@ -21,11 +21,16 @@ fun MovieDetailContent(
     viewModel: MovieDetailViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    DetailContent(state)
+    DetailContent(state = state, onFavoriteClicked = viewModel::onFavoriteClicked)
 }
 
 @Composable
-fun DetailContent(state: MovieDetailUiState) {
+fun DetailContent(
+    state: MovieDetailUiState,
+    onFavoriteClicked: (MovieUiModel) -> Unit = {},
+) {
+    val content: MovieUiModel? = state.data
+
     when {
         state.isLoading -> {
             Center {
@@ -33,7 +38,7 @@ fun DetailContent(state: MovieDetailUiState) {
             }
         }
 
-        state.data == null || state.isFailure -> {
+        content == null || state.isFailure -> {
             Center {
                 Text("Ha ocurrido un error")
             }
@@ -41,9 +46,11 @@ fun DetailContent(state: MovieDetailUiState) {
 
         else -> {
             DetailContentView(
-                imageUrl = state.data.image,
-                title = state.data.title,
-                overview = state.data.overview
+                imageUrl = content.image,
+                title = content.title,
+                overview = content.overview,
+                isFavorite = content.isFavorite,
+                onFavoriteClick = { onFavoriteClicked(content) }
             )
         }
     }
