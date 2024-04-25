@@ -8,7 +8,6 @@ import com.santimattius.kmp.entertainment.MainView
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             MainView()
         }
