@@ -4,11 +4,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.DismissDirection
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SwipeToDismissBoxState
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDismissState
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.toMutableStateList
@@ -79,8 +80,8 @@ private fun FavoriteItem(
     onItemClick: (FavoriteUiModel) -> Unit,
     onItemDelete: (FavoriteUiModel) -> Unit,
 ) {
-    val dismissState = rememberDismissState()
-    val isDismissed = dismissState.isDismissed(DismissDirection.EndToStart)
+    val dismissState: SwipeToDismissBoxState = rememberSwipeToDismissBoxState()
+    val isDismissed = dismissState.currentValue == SwipeToDismissBoxValue.EndToStart
     if (isDismissed) {
         onItemDelete(item)
     }

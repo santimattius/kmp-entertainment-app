@@ -1,28 +1,26 @@
 [versions]
-androidDriver = "2.0.0"
-androidGradlePlugin = "8.1.2"
-kotlinVersion = "1.9.20"
-composeVersion = "1.5.10"
-sqldelightVersion = "2.0.0"
+androidGradlePlugin = "8.1.4"
+kotlinVersion = "1.9.23"
+composeVersion = "1.6.10-beta02"
+sqldelightVersion = "2.0.1"
 
-activity-compose = "1.8.1"
+activity-compose = "1.9.0"
 appcompat = "1.6.1"
 buildkonfigGradlePlugin = "0.14.0"
-coil-compose = "2.4.0"
-core-ktx = "1.12.0"
+coil-compose = "2.6.0"
+core-ktx = "1.13.0"
 image-loader = "1.6.4"
-kotlinxCoroutinesAndroid = "1.7.3"
-ktorVersion = "2.3.5"
+kotlinxCoroutinesAndroid = "1.8.0"
+ktorVersion = "2.3.10"
 precompose = "1.5.7"
-voyager = "1.0.0-rc05"
-koin = "3.5.0"
-koinCompose = "1.1.0"
+voyager = "1.0.0"
+koin = "3.5.6"
+koinCompose = "1.1.5"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
-buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose" }
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesAndroid" }
@@ -57,9 +55,7 @@ buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinVersion" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinVersion" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinVersion" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeVersion" }
 sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelightVersion" }
