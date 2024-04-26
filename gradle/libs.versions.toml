@@ -26,6 +26,8 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil-compose
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesAndroid" }
 precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
 precompose-view-model = { module = "moe.tlaster:precompose-viewmodel", version.ref = "precompose" }
+precompose-koin = { module = "moe.tlaster:precompose-koin", version.ref = "precompose" }
+
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 image-loader = { group = "io.github.qdsfdhvh", name = "image-loader", version.ref = "image-loader" }
 
