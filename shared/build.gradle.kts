@@ -58,6 +58,9 @@ kotlin {
                 implementation(libs.ktor.serialization.kotlinx.json)
                 implementation(libs.kotlinx.coroutines.core)
 
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network)
+
                 api(libs.precompose)
                 api(libs.precompose.view.model)
                 api(libs.precompose.koin)
@@ -73,7 +76,6 @@ kotlin {
                 api(libs.androidx.activity.compose)
                 api(libs.androidx.appcompat)
                 api(libs.androidx.core.ktx)
-                implementation(libs.coil.compose)
                 implementation(libs.ktor.client.okhttp)
                 implementation(libs.kotlinx.coroutines.android)
                 implementation(libs.koin.android)
@@ -89,7 +91,6 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
-                implementation(libs.image.loader)
                 implementation(libs.ktor.client.darwin)
                 implementation(libs.sqldelight.ios.driver)
             }
