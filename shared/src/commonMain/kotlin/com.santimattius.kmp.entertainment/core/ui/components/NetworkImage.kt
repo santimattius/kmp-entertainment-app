@@ -9,17 +9,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import coil.compose.SubcomposeAsyncImage
+import coil3.compose.LocalPlatformContext
+import coil3.compose.SubcomposeAsyncImage
+import coil3.request.ImageRequest
 
 @Composable
-internal actual fun __NetworkImage(
+internal fun NetworkImage(
     imageUrl: String,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     contentScale: ContentScale,
-    contentDescription: String?,
+    contentDescription: String? = null,
 ) {
     SubcomposeAsyncImage(
-        model = imageUrl,
+        model = ImageRequest.Builder(LocalPlatformContext.current)
+            .data(imageUrl).build(),
         loading = {
             Box(contentAlignment = Alignment.Center) {
                 CircularProgressIndicator(

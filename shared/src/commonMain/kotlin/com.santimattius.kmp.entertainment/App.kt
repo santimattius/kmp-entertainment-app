@@ -8,6 +8,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import coil3.ImageLoader
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.setSingletonImageLoaderFactory
+import coil3.network.ktor.KtorNetworkFetcherFactory
 import com.santimattius.kmp.entertainment.core.db.DriverFactory
 import com.santimattius.kmp.entertainment.core.db.createDatabase
 import com.santimattius.kmp.entertainment.core.ui.components.AppBar
@@ -21,10 +25,18 @@ import moe.tlaster.precompose.PreComposeApp
 import org.koin.compose.KoinApplication
 import org.koin.dsl.module
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun App(
     driverFactory: DriverFactory,
 ) {
+    setSingletonImageLoaderFactory { context ->
+        ImageLoader.Builder(context)
+            .components {
+                add(KtorNetworkFetcherFactory())
+            }
+            .build()
+    }
     KoinApplication(
         application = {
             modules(appModule() + module {
