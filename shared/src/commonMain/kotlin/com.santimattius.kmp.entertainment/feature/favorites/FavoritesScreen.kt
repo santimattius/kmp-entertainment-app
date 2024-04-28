@@ -2,6 +2,7 @@ package com.santimattius.kmp.entertainment.feature.favorites
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,19 +16,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.CustomAnimatedVisibility
 import com.santimattius.kmp.entertainment.core.ui.components.SwipeToDismissComponent
 import com.santimattius.kmp.entertainment.feature.shared.ContentItemView
-import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
+import org.koin.compose.koinInject
 
 
 @Composable
 fun FavoriteRoute(
     onFavoriteClick: (FavoriteUiModel) -> Unit,
 ) {
-    val viewModel = koinViewModel(FavoriteViewModel::class)
+    val viewModel = koinViewModel<FavoriteViewModel>()
     FavoriteScreen(viewModel, onFavoriteClick)
 }
 
@@ -61,6 +63,7 @@ fun FavoriteContent(
     onItemDelete: (FavoriteUiModel) -> Unit = {},
 ) {
     LazyColumn(
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(items = data, key = { item -> item.id }) { item ->

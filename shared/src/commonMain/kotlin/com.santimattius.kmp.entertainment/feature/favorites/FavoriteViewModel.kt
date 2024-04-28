@@ -1,11 +1,11 @@
 package com.santimattius.kmp.entertainment.feature.favorites
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.santimattius.kmp.entertainment.core.data.repositories.FavoriteRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
 
 class FavoriteViewModel(
     private val repository: FavoriteRepository,
