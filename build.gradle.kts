@@ -16,3 +16,12 @@ buildscript {
         classpath(libs.buildkonfig.gradle.plugin)
     }
 }
+
+allprojects {
+    configurations.all {
+        //TODO: Temporal resolution
+        resolutionStrategy {
+            force("androidx.compose.material:material-ripple:1.7.0-alpha05")
+        }
+    }
+}

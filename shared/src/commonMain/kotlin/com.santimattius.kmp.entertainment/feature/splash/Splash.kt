@@ -38,11 +38,17 @@ fun SplashScreen(navigate: () -> Unit) {
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
     ) {
+//        Image(
+//            painter = painterResource(Res.drawable.compose_multiplatform),
+//            modifier = Modifier.scale(scale.value),
+//            contentDescription = null
+//        )
         NetworkImage(
             imageUrl = "https://img.freepik.com/vector-gratis/produccion-peliculas-cine-composicion-transparente-realista-imagen-aislada-badajo-campos-vacios-ilustracion-vectorial_1284-66163.jpg?w=740&t=st=1694904624~exp=1694905224~hmac=936e49d4984b5c24111a43ff7835c3962d6cdf002d489f5ed196716577f7d2c3",
             contentDescription = "Logo",
             modifier = Modifier.scale(scale.value),
             contentScale = ContentScale.Crop
         )
+
     }
 }

@@ -6,6 +6,8 @@ import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.LiveTv
 import androidx.compose.material.icons.outlined.Movie
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 
 
 enum class NavItem(
@@ -55,8 +57,13 @@ sealed class NavCommand(
             .plus(argValues)
             .joinToString("/")
     }
+
+
+    val args = navArgs.map {
+        navArgument(it.key) { type = it.navType }
+    }
 }
 
-enum class NavArg(val key: String) {
-    ItemId("id")
+enum class NavArg(val key: String, val navType: NavType<*>) {
+    ItemId("id", NavType.LongType)
 }

@@ -8,4 +8,6 @@ import com.santimattius.kmp.entertainment.core.db.DriverFactory
 actual fun getPlatformName(): String = "Android"
 
 @Composable
-fun MainView(context: Context = LocalContext.current) = App(DriverFactory(context))
+fun MainView(context: Context = LocalContext.current){
+    App(DriverFactory(context))
+}
