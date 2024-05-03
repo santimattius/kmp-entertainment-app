@@ -10,8 +10,7 @@ import coil3.ImageLoader
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
 import coil3.network.ktor.KtorNetworkFetcherFactory
-import com.santimattius.kmp.entertainment.core.db.DriverFactory
-import com.santimattius.kmp.entertainment.core.db.createDatabase
+import com.santimattius.kmp.entertainment.core.db.TMDBDataBase
 import com.santimattius.kmp.entertainment.core.ui.components.AppBar
 import com.santimattius.kmp.entertainment.core.ui.components.AppBottomNavigation
 import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
@@ -24,7 +23,7 @@ import org.koin.dsl.module
 @OptIn(ExperimentalCoilApi::class)
 @Composable
 fun App(
-    driverFactory: DriverFactory,
+    appDatabase: TMDBDataBase,
 ) {
     setSingletonImageLoaderFactory { context ->
         ImageLoader.Builder(context)
@@ -36,8 +35,7 @@ fun App(
     KoinApplication(
         application = {
             modules(appModule() + module {
-                single { driverFactory }
-                single { createDatabase(get()) }
+                single { appDatabase }
             })
         }
     ) {

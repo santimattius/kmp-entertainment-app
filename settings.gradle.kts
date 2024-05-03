@@ -1,8 +1,3 @@
-rootProject.name = "kmp-entertainment-app"
-
-include(":androidApp")
-include(":shared")
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -15,7 +10,6 @@ pluginManagement {
         val agpVersion = extra["agp.version"] as String
         val composeVersion = extra["compose.version"] as String
 
-        kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)
         kotlin("android").version(kotlinVersion)
 
@@ -33,3 +27,8 @@ dependencyResolutionManagement {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
+
+include(":androidApp")
+include(":shared")
+
+rootProject.name = "kmp-entertainment-app"

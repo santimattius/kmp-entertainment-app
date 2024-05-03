@@ -1,21 +1,22 @@
 [versions]
-androidGradlePlugin = "8.1.4"
+androidGradlePlugin = "8.2.2"
 kotlinVersion = "1.9.23"
-composeVersion = "1.6.10-beta02"
-sqldelightVersion = "2.0.1"
+ksp = "1.9.23-1.0.20"
+composeVersion = "1.6.10-beta03"
+androidx-room = "2.7.0-alpha01"
 
 activity-compose = "1.9.0"
 appcompat = "1.6.1"
 buildkonfigGradlePlugin = "0.14.0"
 coil= "3.0.0-alpha06"
-core-ktx = "1.13.0"
+core-ktx = "1.13.1"
 kotlinxCoroutinesAndroid = "1.8.0"
 ktorVersion = "2.3.10"
 koin = "3.5.6"
 koinCompose = "1.1.5"
 
-androidx-navigation = "2.8.0-alpha02"
-androidx-lifecycle = "2.8.0-beta01"
+androidx-navigation = "2.7.0-alpha03"
+androidx-lifecycle = "2.8.0-beta02"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
@@ -43,9 +44,9 @@ koin-android = {module="io.insert-koin:koin-android", version.ref="koin"}
 androidx-lifecycle-viewmodel-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "androidx-navigation" }
 
-sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelightVersion" }
-sqldelight-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelightVersion" }
-sqldelight-ios-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelightVersion" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
 
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
 
@@ -57,4 +58,5 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinVersion" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinVersion" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeVersion" }
-sqldelight = { id = "app.cash.sqldelight", version.ref = "sqldelightVersion" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "androidx-room" }

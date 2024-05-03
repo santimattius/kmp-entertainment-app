@@ -1,14 +1,19 @@
 package com.santimattius.kmp.entertainment.core.db
 
-import app.cash.sqldelight.db.SqlDriver
-import com.santimattius.kmp.entertainment.AppDatabase
+import androidx.room.RoomDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 
-expect class DriverFactory {
-    fun createDriver(): SqlDriver
+
+expect class RoomFactory {
+
+    fun create(): RoomDatabase.Builder<TMDBDataBase>
 }
 
-fun createDatabase(driverFactory: DriverFactory): AppDatabase {
-    val driver = driverFactory.createDriver()
-
-    return AppDatabase(driver)
+fun getRoomDatabase(
+    builder: RoomDatabase.Builder<TMDBDataBase>
+): TMDBDataBase {
+    return builder
+        .setQueryCoroutineContext(Dispatchers.IO)
+        .build()
 }

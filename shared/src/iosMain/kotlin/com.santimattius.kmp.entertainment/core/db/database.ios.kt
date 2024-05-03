@@ -1,11 +1,20 @@
 package com.santimattius.kmp.entertainment.core.db
 
-import app.cash.sqldelight.db.SqlDriver
-import app.cash.sqldelight.driver.native.NativeSqliteDriver
-import com.santimattius.kmp.entertainment.AppDatabase
+import androidx.room.RoomDatabase
+import platform.Foundation.NSHomeDirectory
 
-actual class DriverFactory {
-    actual fun createDriver(): SqlDriver {
-        return NativeSqliteDriver(AppDatabase.Schema, "app_database.db")
+
+actual class RoomFactory {
+    actual fun create(): RoomDatabase.Builder<TMDBDataBase> {
+        val dbFilePath = NSHomeDirectory() + "/${DB_NAME}"
+//        return Room.databaseBuilder<TMDBDataBase>(
+//            name = dbFilePath,
+//            factory = { TMDBDataBase::class.instantiateImpl() }
+//        )
+        TODO("Not yet implemented")
+    }
+
+    companion object {
+        private const val DB_NAME = "the_movie.db"
     }
 }

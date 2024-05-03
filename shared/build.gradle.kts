@@ -7,9 +7,10 @@ plugins {
     kotlin("native.cocoapods")
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose.multiplatform)
-    id("kotlinx-serialization")
+    alias(libs.plugins.kotlin.serialization)
     id("com.codingfeline.buildkonfig")
-    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 true
 
@@ -19,7 +20,13 @@ version = "1.0-SNAPSHOT"
 
 
 kotlin {
-    androidTarget()
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = JavaVersion.VERSION_17.toString()
+            }
+        }
+    }
 
     iosX64()
     iosArm64()
@@ -34,6 +41,7 @@ kotlin {
         framework {
             baseName = "shared"
             isStatic = false
+            linkerOpts.add("-lsqlite3")
         }
         extraSpecAttributes["resources"] =
             "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
@@ -65,7 +73,7 @@ kotlin {
                 api(libs.koin.core)
                 api(libs.koin.compose)
 
-                implementation(libs.sqldelight.coroutines.extensions)
+                implementation(libs.androidx.room.runtime)
             }
         }
         val androidMain by getting {
@@ -76,7 +84,6 @@ kotlin {
                 implementation(libs.ktor.client.okhttp)
                 implementation(libs.kotlinx.coroutines.android)
                 implementation(libs.koin.android)
-                implementation(libs.sqldelight.android.driver)
             }
         }
         val iosX64Main by getting
@@ -89,7 +96,6 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation(libs.ktor.client.darwin)
-                implementation(libs.sqldelight.ios.driver)
             }
         }
     }
@@ -107,15 +113,8 @@ buildkonfig {
     }
 }
 
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("com.santimattius.kmp.entertainment")
-        }
-    }
-
-    linkSqlite.set(true)
-
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 android {
@@ -142,6 +141,17 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.animation)
+    with(libs.androidx.room.compiler) {
+        add("kspCommonMainMetadata", this)
+        add("kspAndroid", this)
+        add("kspAndroidTest", this)
+        add("kspIosX64", this)
+        add("kspIosX64Test", this)
+        add("kspIosArm64", this)
+        add("kspIosArm64Test", this)
+        add("kspIosSimulatorArm64", this)
+        add("kspIosSimulatorArm64Test", this)
+    }
 }
 
 

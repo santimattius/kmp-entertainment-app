@@ -39,7 +39,7 @@ class MovieDetailViewModel(
         }
     }
 
-    fun onFavoriteClicked(movie: MovieUiModel) {
+    fun onFavoriteClicked(movie: MovieUiModel) = viewModelScope.launch{
         if (movie.isFavorite) {
             favoriteRepository.remove(movie.id)
         } else {
