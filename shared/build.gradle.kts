@@ -113,10 +113,6 @@ buildkonfig {
     }
 }
 
-room {
-    schemaDirectory("$projectDir/schemas")
-}
-
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
     namespace = "com.santimattius.entertainment.app"
@@ -138,20 +134,17 @@ android {
     }
 }
 
-
 dependencies {
     implementation(libs.androidx.core.animation)
-    with(libs.androidx.room.compiler) {
-        add("kspCommonMainMetadata", this)
-        add("kspAndroid", this)
-        add("kspAndroidTest", this)
-        add("kspIosX64", this)
-        add("kspIosX64Test", this)
-        add("kspIosArm64", this)
-        add("kspIosArm64Test", this)
-        add("kspIosSimulatorArm64", this)
-        add("kspIosSimulatorArm64Test", this)
-    }
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspIosX64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+}
+
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 
