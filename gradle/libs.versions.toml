@@ -1,13 +1,13 @@
 [versions]
-androidGradlePlugin = "8.2.2"
-kotlinVersion = "1.9.23"
-ksp = "1.9.23-1.0.20"
-composeVersion = "1.6.10-beta03"
+androidGradlePlugin = "8.4.0"
+kotlinVersion = "2.0.0-RC2"
+ksp = "2.0.0-RC2-1.0.20"
+composeVersion = "1.6.10-rc01"
 androidx-room = "2.7.0-alpha01"
 
 activity-compose = "1.9.0"
 appcompat = "1.6.1"
-buildkonfigGradlePlugin = "0.14.0"
+buildkonfigGradlePlugin = "0.15.1"
 coil= "3.0.0-alpha06"
 core-ktx = "1.13.1"
 kotlinxCoroutinesAndroid = "1.8.0"
@@ -57,6 +57,8 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinVersion" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinVersion" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinVersion" }
+native-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlinVersion" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeVersion" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "androidx-room" }
