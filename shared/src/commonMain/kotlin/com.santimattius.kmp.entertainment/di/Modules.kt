@@ -16,6 +16,7 @@ import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailViewMo
 import com.santimattius.kmp.entertainment.feature.movie.home.MoviesViewModel
 import com.santimattius.kmp.entertainment.feature.tvshow.detail.TvShowDetailViewModel
 import com.santimattius.kmp.entertainment.feature.tvshow.home.TvShowViewModel
+import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -37,24 +38,31 @@ val sharedModules = module {
     single { MovieRepository(remoteMoviesDataSource = get()) }
     single { FavoriteRepository(localDataSource = get()) }
 
-    factory { MoviesViewModel(repository = get()) }
-    factory { TvShowViewModel(repository = get()) }
-    factory { FavoriteViewModel(repository = get()) }
+//    factory { MoviesViewModel(repository = get()) }
+//    factory { TvShowViewModel(repository = get()) }
+//    factory { FavoriteViewModel(repository = get()) }
 
-    factory { params ->
-        MovieDetailViewModel(
-            id = params.get(),
-            movieRepository = get(),
-            favoriteRepository = get()
-        )
-    }
-    factory { params ->
-        TvShowDetailViewModel(
-            id = params.get(),
-            repository = get(),
-            favoriteRepository = get()
-        )
-    }
+    viewModelOf(::MoviesViewModel)
+    viewModelOf(::TvShowViewModel)
+    viewModelOf(::FavoriteViewModel)
+
+//    factory { params ->
+//        MovieDetailViewModel(
+//            id = params.get(),
+//            movieRepository = get(),
+//            favoriteRepository = get()
+//        )
+//    }
+//    factory { params ->
+//        TvShowDetailViewModel(
+//            id = params.get(),
+//            repository = get(),
+//            favoriteRepository = get()
+//        )
+//    }
+
+    viewModelOf(::MovieDetailViewModel)
+    viewModelOf(::TvShowDetailViewModel)
 }
 
 fun appModule() = listOf(sharedModules)
