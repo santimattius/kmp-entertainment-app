@@ -1,21 +1,21 @@
 [versions]
 androidGradlePlugin = "8.1.4"
 kotlinVersion = "1.9.23"
-composeVersion = "1.6.10-beta02"
+composeVersion = "1.6.10-rc01"
 sqldelightVersion = "2.0.1"
 
 activity-compose = "1.9.0"
 appcompat = "1.6.1"
-buildkonfigGradlePlugin = "0.14.0"
+buildkonfigGradlePlugin = "0.15.1"
 coil= "3.0.0-alpha06"
-core-ktx = "1.13.0"
+core-ktx = "1.13.1"
 kotlinxCoroutinesAndroid = "1.8.0"
 ktorVersion = "2.3.10"
 koin = "3.5.6"
 koinCompose = "1.1.5"
 
 androidx-navigation = "2.8.0-alpha02"
-androidx-lifecycle = "2.8.0-beta01"
+androidx-lifecycle = "2.8.0-beta02"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
