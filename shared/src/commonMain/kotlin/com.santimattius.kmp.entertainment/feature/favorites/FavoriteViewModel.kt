@@ -6,6 +6,7 @@ import com.santimattius.kmp.entertainment.core.data.repositories.FavoriteReposit
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 class FavoriteViewModel(
     private val repository: FavoriteRepository,
@@ -27,6 +28,8 @@ class FavoriteViewModel(
     )
 
     fun onFavoriteDelete(item: FavoriteUiModel) {
-        repository.remove(item.id)
+       viewModelScope.launch {
+           repository.remove(item.id)
+       }
     }
 }

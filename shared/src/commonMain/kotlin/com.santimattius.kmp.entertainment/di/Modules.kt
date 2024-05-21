@@ -6,10 +6,11 @@ import com.santimattius.kmp.entertainment.core.data.datasources.RemoteMoviesData
 import com.santimattius.kmp.entertainment.core.data.datasources.RemoteTvShowRemoteDataSource
 import com.santimattius.kmp.entertainment.core.data.datasources.ktor.KtorRemoteMoviesDataSource
 import com.santimattius.kmp.entertainment.core.data.datasources.ktor.KtorTvShowRemoteDataSource
-import com.santimattius.kmp.entertainment.core.data.datasources.sqldelight.SQLDelightFavoriteLocalDataSource
+import com.santimattius.kmp.entertainment.core.data.datasources.room.RoomFavoriteLocalDataSource
 import com.santimattius.kmp.entertainment.core.data.repositories.FavoriteRepository
 import com.santimattius.kmp.entertainment.core.data.repositories.MovieRepository
 import com.santimattius.kmp.entertainment.core.data.repositories.TvShowRepository
+import com.santimattius.kmp.entertainment.core.db.TMDBDataBase
 import com.santimattius.kmp.entertainment.core.network.ktorHttpClient
 import com.santimattius.kmp.entertainment.feature.favorites.FavoriteViewModel
 import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailViewModel
@@ -32,7 +33,7 @@ val sharedModules = module {
     single<RemoteMoviesDataSource> { KtorRemoteMoviesDataSource(client = get()) }
     single<RemoteTvShowRemoteDataSource> { KtorTvShowRemoteDataSource(client = get()) }
 
-    single<FavoriteLocalDataSource> { SQLDelightFavoriteLocalDataSource(get()) }
+    single<FavoriteLocalDataSource> { RoomFavoriteLocalDataSource(get<TMDBDataBase>().getFavoriteDao()) }
 
     single { TvShowRepository(remoteTvShowRemoteDataSource = get()) }
     single { MovieRepository(remoteMoviesDataSource = get()) }

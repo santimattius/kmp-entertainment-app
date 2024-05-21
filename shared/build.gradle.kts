@@ -7,19 +7,24 @@ plugins {
     kotlin("native.cocoapods")
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose.multiplatform)
-    id("kotlinx-serialization")
+    alias(libs.plugins.kotlin.serialization)
     id("com.codingfeline.buildkonfig")
-    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 true
 
 group = "com.santimattius.kmp.entertainment"
 version = "1.0-SNAPSHOT"
 
-
-
 kotlin {
-    androidTarget()
+    androidTarget {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = JavaVersion.VERSION_17.toString()
+            }
+        }
+    }
 
     iosX64()
     iosArm64()
@@ -34,6 +39,7 @@ kotlin {
         framework {
             baseName = "shared"
             isStatic = false
+            linkerOpts.add("-lsqlite3")
         }
         extraSpecAttributes["resources"] =
             "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
@@ -66,10 +72,11 @@ kotlin {
                 api(libs.koin.compose)
                 api(libs.koin.composeViewModel)
 
-                implementation(libs.sqldelight.coroutines.extensions)
+                implementation(libs.androidx.room.runtime)
+                implementation(libs.sqlite.bundled)
             }
         }
-        val androidMain by getting {
+       val androidMain by getting {
             dependencies {
                 api(libs.androidx.activity.compose)
                 api(libs.androidx.appcompat)
@@ -77,7 +84,6 @@ kotlin {
                 implementation(libs.ktor.client.okhttp)
                 implementation(libs.kotlinx.coroutines.android)
                 implementation(libs.koin.android)
-                implementation(libs.sqldelight.android.driver)
             }
         }
         val iosX64Main by getting
@@ -90,7 +96,6 @@ kotlin {
             iosSimulatorArm64Main.dependsOn(this)
             dependencies {
                 implementation(libs.ktor.client.darwin)
-                implementation(libs.sqldelight.ios.driver)
             }
         }
     }
@@ -106,17 +111,6 @@ buildkonfig {
     defaultConfigs {
         buildConfigField(STRING, "apiKey", getLocalProperty("api_key"))
     }
-}
-
-sqldelight {
-    databases {
-        create("AppDatabase") {
-            packageName.set("com.santimattius.kmp.entertainment")
-        }
-    }
-
-    linkSqlite.set(true)
-
 }
 
 android {
@@ -140,9 +134,14 @@ android {
     }
 }
 
-
 dependencies {
     implementation(libs.androidx.core.animation)
+    ksp(libs.androidx.room.compiler)
+}
+
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 

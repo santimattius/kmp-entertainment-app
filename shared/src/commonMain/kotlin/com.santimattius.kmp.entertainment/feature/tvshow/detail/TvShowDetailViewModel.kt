@@ -46,23 +46,25 @@ class TvShowDetailViewModel(
     }
 
     fun onFavoriteClicked(tvShow: TvShowUiModel) {
-        if (tvShow.isFavorite) {
-            favoriteRepository.remove(tvShow.id)
-        } else {
-            val favorite = Favorite(
-                resourceId = tvShow.id,
-                title = tvShow.title,
-                overview = tvShow.overview,
-                imageUrl = tvShow.image,
-                type = ContentType.TV,
-            )
-            favoriteRepository.add(favorite)
-        }
-        _state.update {
-            it.copy(
-                isLoading = false,
-                data = tvShow.copy(isFavorite = !tvShow.isFavorite)
-            )
+        viewModelScope.launch(exceptionHandler) {
+            if (tvShow.isFavorite) {
+                favoriteRepository.remove(tvShow.id)
+            } else {
+                val favorite = Favorite(
+                    resourceId = tvShow.id,
+                    title = tvShow.title,
+                    overview = tvShow.overview,
+                    imageUrl = tvShow.image,
+                    type = ContentType.TV,
+                )
+                favoriteRepository.add(favorite)
+            }
+            _state.update {
+                it.copy(
+                    isLoading = false,
+                    data = tvShow.copy(isFavorite = !tvShow.isFavorite)
+                )
+            }
         }
     }
 }
