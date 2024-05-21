@@ -17,8 +17,6 @@ true
 group = "com.santimattius.kmp.entertainment"
 version = "1.0-SNAPSHOT"
 
-
-
 kotlin {
     androidTarget {
         compilations.all {
@@ -75,9 +73,10 @@ kotlin {
                 api(libs.koin.composeViewModel)
 
                 implementation(libs.androidx.room.runtime)
+                implementation(libs.sqlite.bundled)
             }
         }
-        val androidMain by getting {
+       val androidMain by getting {
             dependencies {
                 api(libs.androidx.activity.compose)
                 api(libs.androidx.appcompat)
@@ -137,10 +136,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.animation)
-    add("kspAndroid", libs.androidx.room.compiler)
-    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
-    add("kspIosX64", libs.androidx.room.compiler)
-    add("kspIosArm64", libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 }
 
 

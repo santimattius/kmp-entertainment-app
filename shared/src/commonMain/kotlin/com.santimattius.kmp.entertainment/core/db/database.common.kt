@@ -1,6 +1,7 @@
 package com.santimattius.kmp.entertainment.core.db
 
 import androidx.room.RoomDatabase
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -17,5 +18,6 @@ fun getRoomDatabase(
 ): TMDBDataBase {
     return builder
         .setQueryCoroutineContext(queryDispatcher)
+        .setDriver(BundledSQLiteDriver())
         .build()
 }
