@@ -72,6 +72,7 @@ kotlin {
 
                 api(libs.koin.core)
                 api(libs.koin.compose)
+                api(libs.koin.composeViewModel)
 
                 implementation(libs.androidx.room.runtime)
             }
