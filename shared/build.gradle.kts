@@ -4,13 +4,14 @@ import org.jetbrains.kotlin.konan.properties.Properties
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    kotlin("native.cocoapods")
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.cocoa.pods)
     alias(libs.plugins.kotlin.serialization)
-    id("com.codingfeline.buildkonfig")
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    id("com.codingfeline.buildkonfig")
 }
 true
 
@@ -25,7 +26,7 @@ kotlin {
             }
         }
     }
-
+    applyDefaultHierarchyTemplate()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -46,57 +47,46 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material)
-                implementation(compose.material3)
-                implementation(compose.materialIconsExtended)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
-
-                implementation(libs.ktor.client.core)
-                implementation(libs.ktor.client.content.negotiation)
-                implementation(libs.ktor.client.logging)
-                implementation(libs.ktor.serialization.kotlinx.json)
-                implementation(libs.kotlinx.coroutines.core)
-
-                implementation(libs.coil.compose)
-                implementation(libs.coil.network)
-
-                implementation(libs.androidx.lifecycle.viewmodel.compose)
-                implementation(libs.androidx.navigation.compose)
-
-                api(libs.koin.core)
-                api(libs.koin.compose)
-                api(libs.koin.composeViewModel)
-
-                implementation(libs.androidx.room.runtime)
-                implementation(libs.sqlite.bundled)
-            }
+        sourceSets.commonMain {
+            kotlin.srcDir("build/generated/ksp/metadata")
         }
-       val androidMain by getting {
-            dependencies {
-                api(libs.androidx.activity.compose)
-                api(libs.androidx.appcompat)
-                api(libs.androidx.core.ktx)
-                implementation(libs.ktor.client.okhttp)
-                implementation(libs.kotlinx.coroutines.android)
-                implementation(libs.koin.android)
-            }
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
+            implementation(compose.components.resources)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.kotlinx.coroutines.core)
+
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network)
+
+            implementation(libs.androidx.lifecycle.viewmodel.compose)
+            implementation(libs.androidx.navigation.compose)
+
+            api(libs.koin.core)
+            api(libs.koin.compose)
+            api(libs.koin.composeViewModel)
+
+            implementation(libs.androidx.room.runtime)
+            implementation(libs.sqlite.bundled)
         }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-            dependencies {
-                implementation(libs.ktor.client.darwin)
-            }
+        androidMain.dependencies {
+            api(libs.androidx.activity.compose)
+            api(libs.androidx.appcompat)
+            api(libs.androidx.core.ktx)
+            implementation(libs.ktor.client.okhttp)
+            implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.koin.android)
+        }
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin)
         }
     }
 
@@ -136,12 +126,19 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.animation)
-    ksp(libs.androidx.room.compiler)
-}
 
+    // Room
+    add("kspCommonMainMetadata", libs.androidx.room.compiler)
+}
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().configureEach {
+    if (name != "kspCommonMainKotlinMetadata") {
+        dependsOn("kspCommonMainKotlinMetadata")
+    }
 }
 
 

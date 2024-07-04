@@ -1,23 +1,23 @@
 [versions]
 androidGradlePlugin = "8.2.2"
-kotlinVersion = "1.9.23"
-ksp = "1.9.23-1.0.20"
-composeVersion = "1.6.10-rc01"
-androidx-room = "2.7.0-alpha02"
+kotlinVersion = "2.0.0"
+ksp = "2.0.0-1.0.22"
+composeVersion = "1.6.11"
+androidx-room = "2.7.0-alpha04"
 sqlite = "2.5.0-SNAPSHOT"
 
 activity-compose = "1.9.0"
-appcompat = "1.6.1"
+appcompat = "1.7.0"
 buildkonfigGradlePlugin = "0.15.1"
 coil= "3.0.0-alpha06"
 core-ktx = "1.13.1"
-kotlinxCoroutinesAndroid = "1.8.0"
-ktorVersion = "2.3.10"
+kotlinxCoroutinesAndroid = "1.8.1"
+ktorVersion = "2.3.11"
 koin = "3.6.0-alpha3"
 koinComposeMultiplatform = "1.2.0-Beta4"
 
 androidx-navigation = "2.8.0-alpha02"
-androidx-lifecycle = "2.8.0-rc03"
+androidx-lifecycle = "2.8.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
@@ -60,6 +60,8 @@ android-application = { id = "com.android.application", version.ref = "androidGr
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlinVersion" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlinVersion" }
+cocoa-pods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlinVersion" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinVersion" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeVersion" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "androidx-room" }
