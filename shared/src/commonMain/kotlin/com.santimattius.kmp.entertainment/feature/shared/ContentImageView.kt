@@ -1,5 +1,6 @@
 package com.santimattius.kmp.entertainment.feature.shared
 
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,63 +20,104 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.santimattius.kmp.entertainment.LocalNavAnimatedVisibilityScope
+import com.santimattius.kmp.entertainment.LocalSharedTransitionScope
+import com.santimattius.kmp.entertainment.SnackSharedElementKey
+import com.santimattius.kmp.entertainment.SnackSharedElementType
 import com.santimattius.kmp.entertainment.core.ui.components.NetworkImage
 import com.santimattius.kmp.entertainment.core.ui.components.UiModel
+import com.santimattius.kmp.entertainment.snackDetailBoundsTransform
 
 private const val IMAGE_ASPECT_RATIO = 0.67f
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun ContentImageView(
     modifier: Modifier = Modifier,
-    imageUrl: String,
+    model: UiItem,
     imageDescription: String,
     elevation: Dp,
 ) {
-    Card(
-        modifier = modifier,
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = elevation)
-    ) {
-        NetworkImage(
-            imageUrl = imageUrl,
-            contentDescription = imageDescription,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth()
-                .background(Color.LightGray)
-                .aspectRatio(ratio = IMAGE_ASPECT_RATIO),
-        )
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+        ?: throw IllegalStateException("No sharedTransitionScope found")
+    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
+        ?: throw IllegalStateException("No animatedVisibilityScope found")
+
+    with(sharedTransitionScope) {
+        Card(
+            modifier = modifier.sharedBounds(
+                rememberSharedContentState(
+                    key = SnackSharedElementKey(
+                        snackId = model.id,
+                        origin = "",
+                        type = SnackSharedElementType.Image
+                    )
+                ),
+                animatedVisibilityScope = animatedVisibilityScope,
+                boundsTransform = snackDetailBoundsTransform
+            ),
+            elevation = CardDefaults.elevatedCardElevation(defaultElevation = elevation)
+        ) {
+            NetworkImage(
+                imageUrl = model.imageUrl,
+                contentDescription = imageDescription,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxWidth()
+                    .background(Color.LightGray)
+                    .aspectRatio(ratio = IMAGE_ASPECT_RATIO),
+            )
+        }
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun ContentItemView(
     modifier: Modifier = Modifier,
     item: UiItem,
 ) {
-    ListItem(
-        modifier = modifier.wrapContentHeight(Alignment.Top),
-        colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
-        leadingContent = {
-            NetworkImage(
-                imageUrl = item.imageUrl,
-                contentDescription = item.description,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .width(100.dp)
-                    .background(Color.LightGray)
-                    .aspectRatio(ratio = IMAGE_ASPECT_RATIO),
-            )
-        },
-        headlineContent = {
-            Text(item.title)
-        },
-        supportingContent = {
-            Text(item.description, maxLines = 6, overflow = TextOverflow.Ellipsis)
-        }
-    )
+    val sharedTransitionScope = LocalSharedTransitionScope.current
+        ?: throw IllegalStateException("No sharedTransitionScope found")
+    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
+        ?: throw IllegalStateException("No animatedVisibilityScope found")
+
+    with(sharedTransitionScope) {
+        ListItem(
+            modifier = modifier.wrapContentHeight(Alignment.Top),
+            colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
+            leadingContent = {
+                NetworkImage(
+                    imageUrl = item.imageUrl,
+                    contentDescription = item.description,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .width(100.dp)
+                        .background(Color.LightGray)
+                        .aspectRatio(ratio = IMAGE_ASPECT_RATIO).sharedBounds(
+                            rememberSharedContentState(
+                                key = SnackSharedElementKey(
+                                    snackId = item.id,
+                                    origin = "",
+                                    type = SnackSharedElementType.Image
+                                )
+                            ),
+                            animatedVisibilityScope = animatedVisibilityScope,
+                            boundsTransform = snackDetailBoundsTransform
+                        ),
+                )
+            },
+            headlineContent = {
+                Text(item.title)
+            },
+            supportingContent = {
+                Text(item.description, maxLines = 6, overflow = TextOverflow.Ellipsis)
+            }
+        )
+    }
+
 }
 
 interface UiItem : UiModel {
-
     val title: String
     val description: String
     val imageUrl: String

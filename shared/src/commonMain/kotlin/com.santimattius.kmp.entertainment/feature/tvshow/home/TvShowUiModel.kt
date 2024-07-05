@@ -1,9 +1,16 @@
 package com.santimattius.kmp.entertainment.feature.tvshow.home
 
-import com.santimattius.kmp.entertainment.core.ui.components.UiModel
+import com.santimattius.kmp.entertainment.feature.shared.UiItem
 
 data class TvShowUiModel(
     override val id: Long,
-    val title: String,
+    override val title: String,
     val image: String,
-) : UiModel
+) : UiItem {
+
+    override val description: String
+        get() = ""
+
+    override val imageUrl: String
+        get() = image
+}

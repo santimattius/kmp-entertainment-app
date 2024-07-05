@@ -46,9 +46,7 @@ fun DetailContent(
 
         else -> {
             DetailContentView(
-                imageUrl = content.image,
-                title = content.title,
-                overview = content.overview,
+                model = content,
                 isFavorite = content.isFavorite,
                 onFavoriteClick = { onFavoriteClicked(content) }
             )
