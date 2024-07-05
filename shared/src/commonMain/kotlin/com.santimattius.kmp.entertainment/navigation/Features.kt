@@ -7,7 +7,7 @@ enum class Features(val route: String) {
     Favorites(route = "/favorites")
 }
 
-fun Features.convert(): String = when (this) {
+fun Features.toRoute(): String = when (this) {
     Features.Splash -> Splash::class.qualifiedName
     Features.Movies -> Movie::class.qualifiedName
     Features.TvShows -> TvShow::class.qualifiedName
