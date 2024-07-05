@@ -16,7 +16,7 @@ import com.santimattius.kmp.entertainment.core.ui.components.AppBottomNavigation
 import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
 import com.santimattius.kmp.entertainment.core.ui.themes.AppTheme
 import com.santimattius.kmp.entertainment.di.appModule
-import com.santimattius.kmp.entertainment.navigation.Navigation
+import com.santimattius.kmp.entertainment.navigation.AppNavigation
 import org.koin.compose.KoinApplication
 import org.koin.dsl.module
 
@@ -77,7 +77,7 @@ fun MainApp(
         }
     ) {
         Box(modifier = Modifier.fillMaxSize().padding(it)) {
-            Navigation(appState.navController)
+            AppNavigation(appState.navController)
         }
     }
 }

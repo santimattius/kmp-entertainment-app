@@ -24,6 +24,16 @@ fun NavHostController.navigatePoppingUpToStartDestination(route: String) {
     }
 }
 
+fun <T:Any> NavHostController.navigatePoppingUpToStartDestination(route: T) {
+    navigate(route) {
+        popUpTo(graph.findStartDestination().navigatorName) {
+            saveState = true
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
 internal fun NavGraphBuilder.composable(
     navCommand: NavCommand,
     enterTransition: AnimatedEnterTransition? = null,
