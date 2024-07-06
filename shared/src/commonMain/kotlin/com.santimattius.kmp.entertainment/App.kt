@@ -88,9 +88,3 @@ fun MainApp(
 
 
 expect fun getPlatformName(): String
-
-// TODO: move location
-val LocalNavAnimatedVisibilityScope = compositionLocalOf<AnimatedVisibilityScope?> { null }
-
-@OptIn(ExperimentalSharedTransitionApi::class)
-val LocalSharedTransitionScope = compositionLocalOf<SharedTransitionScope?> { null }

@@ -1,4 +1,4 @@
-package com.santimattius.kmp.entertainment
+package com.santimattius.kmp.entertainment.core.ui.animation
 
 import androidx.compose.animation.BoundsTransform
 import androidx.compose.animation.ExperimentalSharedTransitionApi
@@ -11,11 +11,9 @@ data class SnackSharedElementKey(
 )
 
 enum class SnackSharedElementType {
-    Bounds,
     Image,
     Title,
-    Tagline,
-    Background
+    Overview
 }
 
 @OptIn(ExperimentalSharedTransitionApi::class)

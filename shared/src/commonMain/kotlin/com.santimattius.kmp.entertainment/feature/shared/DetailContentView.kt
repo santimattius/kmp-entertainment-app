@@ -28,12 +28,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.santimattius.kmp.entertainment.LocalNavAnimatedVisibilityScope
-import com.santimattius.kmp.entertainment.LocalSharedTransitionScope
-import com.santimattius.kmp.entertainment.SnackSharedElementKey
-import com.santimattius.kmp.entertainment.SnackSharedElementType
+import com.santimattius.kmp.entertainment.core.ui.animation.LocalNavAnimatedVisibilityScope
+import com.santimattius.kmp.entertainment.core.ui.animation.LocalSharedTransitionScope
+import com.santimattius.kmp.entertainment.core.ui.animation.SnackSharedElementKey
+import com.santimattius.kmp.entertainment.core.ui.animation.SnackSharedElementType
+import com.santimattius.kmp.entertainment.core.ui.animation.currentOrThrow
+import com.santimattius.kmp.entertainment.core.ui.animation.snackDetailBoundsTransform
 import com.santimattius.kmp.entertainment.core.ui.components.NetworkImage
-import com.santimattius.kmp.entertainment.snackDetailBoundsTransform
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
@@ -43,10 +44,8 @@ fun DetailContentView(
     onFavoriteClick: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
-    val sharedTransitionScope = LocalSharedTransitionScope.current
-        ?: throw IllegalStateException("No Scope found")
-    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
-        ?: throw IllegalStateException("No Scope found")
+    val sharedTransitionScope = LocalSharedTransitionScope.currentOrThrow
+    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.currentOrThrow
     with(sharedTransitionScope) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -54,7 +53,7 @@ fun DetailContentView(
             modifier = Modifier
                 .verticalScroll(scrollState)
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.background)
         ) {
 
             Card(
@@ -89,7 +88,18 @@ fun DetailContentView(
                 )
             ) {
                 Text(
-                    modifier = Modifier.weight(2f).fillMaxWidth(),
+                    modifier = Modifier.weight(2f).fillMaxWidth()
+                        .sharedBounds(
+                            rememberSharedContentState(
+                                key = SnackSharedElementKey(
+                                    snackId = model.id,
+                                    origin = "",
+                                    type = SnackSharedElementType.Title
+                                )
+                            ),
+                            animatedVisibilityScope = animatedVisibilityScope,
+                            boundsTransform = snackDetailBoundsTransform
+                        ),
                     text = model.title,
                     style = MaterialTheme.typography.headlineMedium,
                     textAlign = TextAlign.Center,
@@ -109,7 +119,17 @@ fun DetailContentView(
                 text = model.description,
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier
+                modifier = Modifier.sharedBounds(
+                    rememberSharedContentState(
+                        key = SnackSharedElementKey(
+                            snackId = model.id,
+                            origin = "",
+                            type = SnackSharedElementType.Overview
+                        )
+                    ),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                    boundsTransform = snackDetailBoundsTransform
+                )
                     .fillMaxWidth()
                     .padding(
                         horizontal = 8.dp,

@@ -1,20 +1,15 @@
 package com.santimattius.kmp.entertainment.navigation
 
-import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.santimattius.kmp.entertainment.LocalNavAnimatedVisibilityScope
-import com.santimattius.kmp.entertainment.LocalSharedTransitionScope
 import com.santimattius.kmp.entertainment.core.domain.ContentType
+import com.santimattius.kmp.entertainment.core.ui.animation.LocalSharedTransitionScope
 import com.santimattius.kmp.entertainment.feature.favorites.FavoriteRoute
 import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailRoute
 import com.santimattius.kmp.entertainment.feature.movie.home.MoviesRoute
@@ -74,19 +69,6 @@ fun AppNavigation(
                     }
                 }
             }
-        }
-    }
-}
-
-// TODO: move this definitions
-inline fun <reified T : Any> NavGraphBuilder.composableNavAnimated(
-    noinline content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
-) {
-    composable<T> {
-        CompositionLocalProvider(
-            LocalNavAnimatedVisibilityScope provides this@composable
-        ) {
-            content(it)
         }
     }
 }

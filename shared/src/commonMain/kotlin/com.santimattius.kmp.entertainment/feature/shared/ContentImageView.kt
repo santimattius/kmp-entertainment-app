@@ -20,13 +20,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.santimattius.kmp.entertainment.LocalNavAnimatedVisibilityScope
-import com.santimattius.kmp.entertainment.LocalSharedTransitionScope
-import com.santimattius.kmp.entertainment.SnackSharedElementKey
-import com.santimattius.kmp.entertainment.SnackSharedElementType
+import com.santimattius.kmp.entertainment.core.ui.animation.LocalNavAnimatedVisibilityScope
+import com.santimattius.kmp.entertainment.core.ui.animation.LocalSharedTransitionScope
+import com.santimattius.kmp.entertainment.core.ui.animation.SnackSharedElementKey
+import com.santimattius.kmp.entertainment.core.ui.animation.SnackSharedElementType
+import com.santimattius.kmp.entertainment.core.ui.animation.currentOrThrow
+import com.santimattius.kmp.entertainment.core.ui.animation.snackDetailBoundsTransform
 import com.santimattius.kmp.entertainment.core.ui.components.NetworkImage
 import com.santimattius.kmp.entertainment.core.ui.components.UiModel
-import com.santimattius.kmp.entertainment.snackDetailBoundsTransform
 
 private const val IMAGE_ASPECT_RATIO = 0.67f
 
@@ -38,11 +39,8 @@ fun ContentImageView(
     imageDescription: String,
     elevation: Dp,
 ) {
-    val sharedTransitionScope = LocalSharedTransitionScope.current
-        ?: throw IllegalStateException("No sharedTransitionScope found")
-    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
-        ?: throw IllegalStateException("No animatedVisibilityScope found")
-
+    val sharedTransitionScope = LocalSharedTransitionScope.currentOrThrow
+    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.currentOrThrow
     with(sharedTransitionScope) {
         Card(
             modifier = modifier.sharedBounds(
@@ -76,10 +74,8 @@ fun ContentItemView(
     modifier: Modifier = Modifier,
     item: UiItem,
 ) {
-    val sharedTransitionScope = LocalSharedTransitionScope.current
-        ?: throw IllegalStateException("No sharedTransitionScope found")
-    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.current
-        ?: throw IllegalStateException("No animatedVisibilityScope found")
+    val sharedTransitionScope = LocalSharedTransitionScope.currentOrThrow
+    val animatedVisibilityScope = LocalNavAnimatedVisibilityScope.currentOrThrow
 
     with(sharedTransitionScope) {
         ListItem(
@@ -107,10 +103,38 @@ fun ContentItemView(
                 )
             },
             headlineContent = {
-                Text(item.title)
+                Text(
+                    text = item.title,
+                    modifier = Modifier.sharedBounds(
+                        rememberSharedContentState(
+                            key = SnackSharedElementKey(
+                                snackId = item.id,
+                                origin = "",
+                                type = SnackSharedElementType.Title
+                            )
+                        ),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        boundsTransform = snackDetailBoundsTransform
+                    )
+                )
             },
             supportingContent = {
-                Text(item.description, maxLines = 6, overflow = TextOverflow.Ellipsis)
+                Text(
+                    text = item.description,
+                    maxLines = 6,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.sharedBounds(
+                        rememberSharedContentState(
+                            key = SnackSharedElementKey(
+                                snackId = item.id,
+                                origin = "",
+                                type = SnackSharedElementType.Overview
+                            )
+                        ),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        boundsTransform = snackDetailBoundsTransform
+                    )
+                )
             }
         )
     }
