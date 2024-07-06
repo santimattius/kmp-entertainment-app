@@ -30,10 +30,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.santimattius.kmp.entertainment.core.ui.animation.LocalNavAnimatedVisibilityScope
 import com.santimattius.kmp.entertainment.core.ui.animation.LocalSharedTransitionScope
-import com.santimattius.kmp.entertainment.core.ui.animation.SnackSharedElementKey
-import com.santimattius.kmp.entertainment.core.ui.animation.SnackSharedElementType
+import com.santimattius.kmp.entertainment.core.ui.animation.EntertainmentSharedElementKey
+import com.santimattius.kmp.entertainment.core.ui.animation.EntertainmentSharedElementType
 import com.santimattius.kmp.entertainment.core.ui.animation.currentOrThrow
-import com.santimattius.kmp.entertainment.core.ui.animation.snackDetailBoundsTransform
+import com.santimattius.kmp.entertainment.core.ui.animation.detailBoundsTransform
 import com.santimattius.kmp.entertainment.core.ui.components.NetworkImage
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -59,16 +59,16 @@ fun DetailContentView(
             Card(
                 modifier = Modifier.padding(8.dp).sharedBounds(
                     rememberSharedContentState(
-                        key = SnackSharedElementKey(
+                        key = EntertainmentSharedElementKey(
                             snackId = model.id,
                             origin = "",
-                            type = SnackSharedElementType.Image
+                            type = EntertainmentSharedElementType.Image
                         )
                     ),
                     animatedVisibilityScope = animatedVisibilityScope,
                     exit = fadeOut(),
                     enter = fadeIn(),
-                    boundsTransform = snackDetailBoundsTransform
+                    boundsTransform = detailBoundsTransform
                 )
             ) {
                 NetworkImage(
@@ -91,14 +91,14 @@ fun DetailContentView(
                     modifier = Modifier.weight(2f).fillMaxWidth()
                         .sharedBounds(
                             rememberSharedContentState(
-                                key = SnackSharedElementKey(
+                                key = EntertainmentSharedElementKey(
                                     snackId = model.id,
                                     origin = "",
-                                    type = SnackSharedElementType.Title
+                                    type = EntertainmentSharedElementType.Title
                                 )
                             ),
                             animatedVisibilityScope = animatedVisibilityScope,
-                            boundsTransform = snackDetailBoundsTransform
+                            boundsTransform = detailBoundsTransform
                         ),
                     text = model.title,
                     style = MaterialTheme.typography.headlineMedium,
@@ -121,14 +121,14 @@ fun DetailContentView(
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.sharedBounds(
                     rememberSharedContentState(
-                        key = SnackSharedElementKey(
+                        key = EntertainmentSharedElementKey(
                             snackId = model.id,
                             origin = "",
-                            type = SnackSharedElementType.Overview
+                            type = EntertainmentSharedElementType.Overview
                         )
                     ),
                     animatedVisibilityScope = animatedVisibilityScope,
-                    boundsTransform = snackDetailBoundsTransform
+                    boundsTransform = detailBoundsTransform
                 )
                     .fillMaxWidth()
                     .padding(

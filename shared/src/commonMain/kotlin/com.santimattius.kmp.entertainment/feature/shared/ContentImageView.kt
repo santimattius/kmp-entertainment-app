@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.santimattius.kmp.entertainment.core.ui.animation.LocalNavAnimatedVisibilityScope
 import com.santimattius.kmp.entertainment.core.ui.animation.LocalSharedTransitionScope
-import com.santimattius.kmp.entertainment.core.ui.animation.SnackSharedElementKey
-import com.santimattius.kmp.entertainment.core.ui.animation.SnackSharedElementType
+import com.santimattius.kmp.entertainment.core.ui.animation.EntertainmentSharedElementKey
+import com.santimattius.kmp.entertainment.core.ui.animation.EntertainmentSharedElementType
 import com.santimattius.kmp.entertainment.core.ui.animation.currentOrThrow
-import com.santimattius.kmp.entertainment.core.ui.animation.snackDetailBoundsTransform
+import com.santimattius.kmp.entertainment.core.ui.animation.detailBoundsTransform
 import com.santimattius.kmp.entertainment.core.ui.components.NetworkImage
 import com.santimattius.kmp.entertainment.core.ui.components.UiModel
 
@@ -45,14 +45,14 @@ fun ContentImageView(
         Card(
             modifier = modifier.sharedBounds(
                 rememberSharedContentState(
-                    key = SnackSharedElementKey(
+                    key = EntertainmentSharedElementKey(
                         snackId = model.id,
                         origin = "",
-                        type = SnackSharedElementType.Image
+                        type = EntertainmentSharedElementType.Image
                     )
                 ),
                 animatedVisibilityScope = animatedVisibilityScope,
-                boundsTransform = snackDetailBoundsTransform
+                boundsTransform = detailBoundsTransform
             ),
             elevation = CardDefaults.elevatedCardElevation(defaultElevation = elevation)
         ) {
@@ -91,14 +91,14 @@ fun ContentItemView(
                         .background(Color.LightGray)
                         .aspectRatio(ratio = IMAGE_ASPECT_RATIO).sharedBounds(
                             rememberSharedContentState(
-                                key = SnackSharedElementKey(
+                                key = EntertainmentSharedElementKey(
                                     snackId = item.id,
                                     origin = "",
-                                    type = SnackSharedElementType.Image
+                                    type = EntertainmentSharedElementType.Image
                                 )
                             ),
                             animatedVisibilityScope = animatedVisibilityScope,
-                            boundsTransform = snackDetailBoundsTransform
+                            boundsTransform = detailBoundsTransform
                         ),
                 )
             },
@@ -107,14 +107,14 @@ fun ContentItemView(
                     text = item.title,
                     modifier = Modifier.sharedBounds(
                         rememberSharedContentState(
-                            key = SnackSharedElementKey(
+                            key = EntertainmentSharedElementKey(
                                 snackId = item.id,
                                 origin = "",
-                                type = SnackSharedElementType.Title
+                                type = EntertainmentSharedElementType.Title
                             )
                         ),
                         animatedVisibilityScope = animatedVisibilityScope,
-                        boundsTransform = snackDetailBoundsTransform
+                        boundsTransform = detailBoundsTransform
                     )
                 )
             },
@@ -125,14 +125,14 @@ fun ContentItemView(
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.sharedBounds(
                         rememberSharedContentState(
-                            key = SnackSharedElementKey(
+                            key = EntertainmentSharedElementKey(
                                 snackId = item.id,
                                 origin = "",
-                                type = SnackSharedElementType.Overview
+                                type = EntertainmentSharedElementType.Overview
                             )
                         ),
                         animatedVisibilityScope = animatedVisibilityScope,
-                        boundsTransform = snackDetailBoundsTransform
+                        boundsTransform = detailBoundsTransform
                     )
                 )
             }
