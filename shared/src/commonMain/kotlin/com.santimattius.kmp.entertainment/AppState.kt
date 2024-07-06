@@ -13,8 +13,8 @@ import com.santimattius.kmp.entertainment.navigation.Movie
 import com.santimattius.kmp.entertainment.navigation.NavItem
 import com.santimattius.kmp.entertainment.navigation.Splash
 import com.santimattius.kmp.entertainment.navigation.TvShow
-import com.santimattius.kmp.entertainment.navigation.toRoute
 import com.santimattius.kmp.entertainment.navigation.navigatePoppingUpToStartDestination
+import com.santimattius.kmp.entertainment.navigation.toRoute
 import kotlinx.coroutines.CoroutineScope
 import kotlin.reflect.KClass
 
@@ -71,9 +71,8 @@ class AppState(
         }
     }
 
-    // TODO: refactor this code
     fun onNavItemClick(navItem: NavItem) {
-        val route = navItem.navCommand.feature.toRoute()
+        val route = navItem.feature.toRoute()
         when (route) {
             Splash::class.qualifiedName -> {
                 navController.navigatePoppingUpToStartDestination(Splash)

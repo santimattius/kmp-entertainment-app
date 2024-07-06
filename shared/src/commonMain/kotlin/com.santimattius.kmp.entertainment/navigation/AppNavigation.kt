@@ -21,7 +21,6 @@ import com.santimattius.kmp.entertainment.feature.movie.home.MoviesRoute
 import com.santimattius.kmp.entertainment.feature.splash.SplashScreen
 import com.santimattius.kmp.entertainment.feature.tvshow.detail.TvShowDetailRoute
 import com.santimattius.kmp.entertainment.feature.tvshow.home.TvShowRoute
-import kotlinx.serialization.Serializable
 
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -91,23 +90,3 @@ inline fun <reified T : Any> NavGraphBuilder.composableNavAnimated(
         }
     }
 }
-
-// TODO: move this definitions
-
-@Serializable
-data object Splash
-
-@Serializable
-data object Movie
-
-@Serializable
-data class MovieDetail(val id: Long)
-
-@Serializable
-data object TvShow
-
-@Serializable
-data class TvShowDetail(val id: Long)
-
-@Serializable
-data object Favorite
