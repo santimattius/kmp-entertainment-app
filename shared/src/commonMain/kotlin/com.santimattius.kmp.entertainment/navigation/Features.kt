@@ -6,3 +6,10 @@ enum class Features(val route: String) {
     TvShows(route = "/tv_shows"),
     Favorites(route = "/favorites")
 }
+
+fun Features.toRoute(): String = when (this) {
+    Features.Splash -> Splash::class.qualifiedName
+    Features.Movies -> Movie::class.qualifiedName
+    Features.TvShows -> TvShow::class.qualifiedName
+    Features.Favorites -> Favorite::class.qualifiedName
+}.orEmpty()

@@ -1,7 +1,6 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.kotlin.konan.properties.Properties
 
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
@@ -13,7 +12,6 @@ plugins {
     alias(libs.plugins.room)
     id("com.codingfeline.buildkonfig")
 }
-true
 
 group = "com.santimattius.kmp.entertainment"
 version = "1.0-SNAPSHOT"
@@ -55,6 +53,7 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(compose.material3)
+            implementation(compose.animation)
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
 

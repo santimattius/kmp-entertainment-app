@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SwipeToDismissComponent(
     dismissState: SwipeToDismissBoxState,

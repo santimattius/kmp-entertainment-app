@@ -82,7 +82,7 @@ fun MoviesContent(
         val elevation by animateDpAsState(if (isDragging) 4.dp else 1.dp)
         ContentImageView(
             modifier = Modifier.clickable { onItemClick(item.id) },
-            imageUrl = item.image,
+            model = item,
             imageDescription = item.title,
             elevation = elevation
         )

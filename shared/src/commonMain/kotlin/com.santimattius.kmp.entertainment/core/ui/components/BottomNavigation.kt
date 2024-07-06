@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import com.santimattius.kmp.entertainment.navigation.NavItem
+import com.santimattius.kmp.entertainment.navigation.toRoute
 
 @Composable
 fun AppBottomNavigation(
@@ -25,7 +26,7 @@ fun AppBottomNavigation(
 ) {
     AppBottomNavigation {
         bottomNavOptions.forEach { item ->
-            val isSelected = currentRoute.contains(item.navCommand.feature.route)
+            val isSelected = currentRoute.contains(item.feature.toRoute())
             val color by animateColorAsState(
                 if (isSelected) contentColor else contentColor.copy(
                     alpha = ContentAlpha.medium
