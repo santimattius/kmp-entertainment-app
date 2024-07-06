@@ -5,7 +5,7 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.core.spring
 
 data class EntertainmentSharedElementKey(
-    val snackId: Long,
+    val id: Long,
     val origin: String,
     val type: EntertainmentSharedElementType
 )

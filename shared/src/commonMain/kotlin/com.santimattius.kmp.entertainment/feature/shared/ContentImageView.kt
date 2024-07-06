@@ -46,7 +46,7 @@ fun ContentImageView(
             modifier = modifier.sharedBounds(
                 rememberSharedContentState(
                     key = EntertainmentSharedElementKey(
-                        snackId = model.id,
+                        id = model.id,
                         origin = "",
                         type = EntertainmentSharedElementType.Image
                     )
@@ -92,7 +92,7 @@ fun ContentItemView(
                         .aspectRatio(ratio = IMAGE_ASPECT_RATIO).sharedBounds(
                             rememberSharedContentState(
                                 key = EntertainmentSharedElementKey(
-                                    snackId = item.id,
+                                    id = item.id,
                                     origin = "",
                                     type = EntertainmentSharedElementType.Image
                                 )
@@ -108,7 +108,7 @@ fun ContentItemView(
                     modifier = Modifier.sharedBounds(
                         rememberSharedContentState(
                             key = EntertainmentSharedElementKey(
-                                snackId = item.id,
+                                id = item.id,
                                 origin = "",
                                 type = EntertainmentSharedElementType.Title
                             )
@@ -126,7 +126,7 @@ fun ContentItemView(
                     modifier = Modifier.sharedBounds(
                         rememberSharedContentState(
                             key = EntertainmentSharedElementKey(
-                                snackId = item.id,
+                                id = item.id,
                                 origin = "",
                                 type = EntertainmentSharedElementType.Overview
                             )

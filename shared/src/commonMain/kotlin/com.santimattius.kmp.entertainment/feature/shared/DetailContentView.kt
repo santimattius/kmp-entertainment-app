@@ -60,7 +60,7 @@ fun DetailContentView(
                 modifier = Modifier.padding(8.dp).sharedBounds(
                     rememberSharedContentState(
                         key = EntertainmentSharedElementKey(
-                            snackId = model.id,
+                            id = model.id,
                             origin = "",
                             type = EntertainmentSharedElementType.Image
                         )
@@ -92,7 +92,7 @@ fun DetailContentView(
                         .sharedBounds(
                             rememberSharedContentState(
                                 key = EntertainmentSharedElementKey(
-                                    snackId = model.id,
+                                    id = model.id,
                                     origin = "",
                                     type = EntertainmentSharedElementType.Title
                                 )
@@ -122,7 +122,7 @@ fun DetailContentView(
                 modifier = Modifier.sharedBounds(
                     rememberSharedContentState(
                         key = EntertainmentSharedElementKey(
-                            snackId = model.id,
+                            id = model.id,
                             origin = "",
                             type = EntertainmentSharedElementType.Overview
                         )
