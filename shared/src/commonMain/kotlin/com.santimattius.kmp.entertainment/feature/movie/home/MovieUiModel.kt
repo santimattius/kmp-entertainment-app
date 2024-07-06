@@ -1,9 +1,15 @@
 package com.santimattius.kmp.entertainment.feature.movie.home
 
-import com.santimattius.kmp.entertainment.core.ui.components.UiModel
+import com.santimattius.kmp.entertainment.feature.shared.UiItem
 
 data class MovieUiModel(
     override val id: Long,
-    val title: String,
+    override val title: String,
     val image: String,
-) : UiModel
+) : UiItem {
+    override val imageUrl: String
+        get() = image
+
+    override val description: String
+        get() = ""
+}
