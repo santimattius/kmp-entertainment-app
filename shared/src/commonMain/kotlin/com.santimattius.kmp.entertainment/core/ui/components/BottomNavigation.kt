@@ -26,7 +26,7 @@ fun AppBottomNavigation(
 ) {
     AppBottomNavigation {
         bottomNavOptions.forEach { item ->
-            val isSelected = currentRoute.contains(item.navCommand.feature.toRoute())
+            val isSelected = currentRoute.contains(item.feature.toRoute())
             val color by animateColorAsState(
                 if (isSelected) contentColor else contentColor.copy(
                     alpha = ContentAlpha.medium
