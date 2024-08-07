@@ -17,6 +17,7 @@ group = "com.santimattius.kmp.entertainment"
 version = "1.0-SNAPSHOT"
 
 kotlin {
+    applyDefaultHierarchyTemplate()
     androidTarget {
         compilations.all {
             kotlinOptions {
@@ -24,7 +25,6 @@ kotlin {
             }
         }
     }
-    applyDefaultHierarchyTemplate()
     iosX64()
     iosArm64()
     iosSimulatorArm64()
@@ -83,6 +83,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koin.android)
+            implementation(libs.androidx.startup.runtime)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

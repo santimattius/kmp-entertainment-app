@@ -3,6 +3,7 @@ package com.santimattius.kmp.entertainment.core.db
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.santimattius.kmp.entertainment.core.db.TMDBDataBase
 
 actual class RoomFactory(private val context: Context) {
     actual fun create(): RoomDatabase.Builder<TMDBDataBase> {

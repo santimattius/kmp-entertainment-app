@@ -1,20 +1,15 @@
 package com.santimattius.kmp.entertainment
 
-import androidx.compose.animation.AnimatedVisibilityScope
-import androidx.compose.animation.ExperimentalSharedTransitionApi
-import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import coil3.ImageLoader
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
 import coil3.network.ktor.KtorNetworkFetcherFactory
-import com.santimattius.kmp.entertainment.core.db.TMDBDataBase
 import com.santimattius.kmp.entertainment.core.ui.components.AppBar
 import com.santimattius.kmp.entertainment.core.ui.components.AppBottomNavigation
 import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
@@ -22,13 +17,10 @@ import com.santimattius.kmp.entertainment.core.ui.themes.AppTheme
 import com.santimattius.kmp.entertainment.di.appModule
 import com.santimattius.kmp.entertainment.navigation.AppNavigation
 import org.koin.compose.KoinApplication
-import org.koin.dsl.module
 
 @OptIn(ExperimentalCoilApi::class)
 @Composable
-fun App(
-    appDatabase: TMDBDataBase,
-) {
+fun App() {
     setSingletonImageLoaderFactory { context ->
         ImageLoader.Builder(context)
             .components {
@@ -36,13 +28,7 @@ fun App(
             }
             .build()
     }
-    KoinApplication(
-        application = {
-            modules(appModule() + module {
-                single { appDatabase }
-            })
-        }
-    ) {
+    KoinApplication(application = { modules(appModule()) }) {
         AppTheme {
             MainApp()
         }
