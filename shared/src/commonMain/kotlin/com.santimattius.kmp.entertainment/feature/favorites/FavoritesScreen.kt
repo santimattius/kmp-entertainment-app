@@ -22,7 +22,6 @@ import com.santimattius.kmp.entertainment.core.ui.components.CustomAnimatedVisib
 import com.santimattius.kmp.entertainment.core.ui.components.SwipeToDismissComponent
 import com.santimattius.kmp.entertainment.feature.shared.ContentItemView
 import org.koin.compose.KoinIsolatedContext
-import org.koin.compose.LocalKoinApplication
 
 
 @Composable
