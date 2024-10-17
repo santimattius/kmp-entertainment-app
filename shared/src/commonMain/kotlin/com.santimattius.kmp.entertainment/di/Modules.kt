@@ -12,13 +12,12 @@ import com.santimattius.kmp.entertainment.core.data.repositories.MovieRepository
 import com.santimattius.kmp.entertainment.core.data.repositories.TvShowRepository
 import com.santimattius.kmp.entertainment.core.db.TMDBDataBase
 import com.santimattius.kmp.entertainment.core.network.ktorHttpClient
-import com.santimattius.kmp.entertainment.feature.favorites.FavoriteViewModel
 import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailViewModel
 import com.santimattius.kmp.entertainment.feature.movie.home.MoviesViewModel
 import com.santimattius.kmp.entertainment.feature.tvshow.detail.TvShowDetailViewModel
 import com.santimattius.kmp.entertainment.feature.tvshow.home.TvShowViewModel
-import org.koin.compose.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -40,14 +39,15 @@ val sharedModules = module {
     single { MovieRepository(remoteMoviesDataSource = get()) }
     single { FavoriteRepository(localDataSource = get()) }
 
+}
+
+val featureModules = module {
     viewModelOf(::MoviesViewModel)
     viewModelOf(::TvShowViewModel)
-    viewModelOf(::FavoriteViewModel)
 
     viewModelOf(::MovieDetailViewModel)
     viewModelOf(::TvShowDetailViewModel)
 }
-
 expect val platformModule: Module
 
-fun appModule() = listOf(platformModule, sharedModules)
+fun appModule() = listOf(featureModules, platformModule, sharedModules)
