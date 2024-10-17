@@ -7,6 +7,9 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.koinApplication
 import org.koin.dsl.module
 
+/**
+ * create for example using KoinContext
+ */
 object FavoriteContext {
 
     val koinApp = koinApplication {
@@ -14,6 +17,6 @@ object FavoriteContext {
     }
 }
 
-val favoriteModule = module {
+private val favoriteModule = module {
     viewModelOf(::FavoriteViewModel)
 }
