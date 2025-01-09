@@ -67,24 +67,24 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 ## Dependencies
 ```toml
 [versions]
-androidGradlePlugin = "8.7.1"
-kotlinVersion = "2.0.20"
-ksp = "2.0.20-1.0.25"
-composeVersion = "1.7.0"
-androidx-room = "2.7.0-alpha10"
-sqlite = "2.5.0-SNAPSHOT"
+androidGradlePlugin = "8.7.3"
+kotlinVersion = "2.1.0"
+ksp = "2.1.0-1.0.29"
+composeVersion = "1.7.3"
+androidx-room = "2.7.0-alpha12"
+sqlite = "2.5.0-alpha12"
 
 activity-compose = "1.9.3"
 appcompat = "1.7.0"
 buildkonfigGradlePlugin = "0.15.1"
-coil= "3.0.0-alpha08"
-core-ktx = "1.13.1"
-kotlinxCoroutinesAndroid = "1.9.0"
-ktorVersion = "2.3.12"
+coil= "3.0.4"
+core-ktx = "1.15.0"
+kotlinxCoroutinesAndroid = "1.10.1"
+ktorVersion = "3.0.3"
 koin = "4.0.0"
 
-androidx-navigation = "2.8.0-alpha08"
-androidx-lifecycle = "2.8.2"
+androidx-navigation = "2.8.0-alpha11"
+androidx-lifecycle = "2.8.4"
 startupRuntime = "1.2.0"
 ```
 
