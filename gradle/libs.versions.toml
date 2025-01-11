@@ -1,5 +1,5 @@
 [versions]
-androidGradlePlugin = "8.7.3"
+androidGradlePlugin = "8.8.0"
 kotlinVersion = "2.1.0"
 ksp = "2.1.0-1.0.29"
 composeVersion = "1.7.3"
