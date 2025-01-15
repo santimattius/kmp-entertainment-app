@@ -13,7 +13,7 @@ coil= "3.0.4"
 core-ktx = "1.15.0"
 kotlinxCoroutinesAndroid = "1.10.1"
 ktorVersion = "3.0.3"
-koin = "4.1.0-Beta3"
+koin = "4.1.0-Beta4"
 
 androidx-navigation = "2.8.0-alpha11"
 androidx-lifecycle = "2.8.4"
