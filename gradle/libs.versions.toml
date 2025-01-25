@@ -13,11 +13,10 @@ coil= "3.0.4"
 core-ktx = "1.15.0"
 kotlinxCoroutinesAndroid = "1.10.1"
 ktorVersion = "3.0.3"
-koin = "4.0.0"
+koin = "4.1.0-Beta4"
 
 androidx-navigation = "2.8.0-alpha11"
 androidx-lifecycle = "2.8.4"
-startupRuntime = "1.2.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
@@ -51,7 +50,6 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "androidx-room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
-androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startupRuntime" }
 
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
 
