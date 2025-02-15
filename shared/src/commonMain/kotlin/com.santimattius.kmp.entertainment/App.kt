@@ -7,7 +7,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import coil3.ImageLoader
-import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
 import coil3.network.ktor3.KtorNetworkFetcherFactory
 import com.santimattius.kmp.entertainment.core.ui.components.AppBar
@@ -16,7 +15,8 @@ import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
 import com.santimattius.kmp.entertainment.core.ui.themes.AppTheme
 import com.santimattius.kmp.entertainment.di.appModule
 import com.santimattius.kmp.entertainment.navigation.AppNavigation
-import org.koin.compose.KoinApplication
+import org.koin.compose.KoinMultiplatformApplication
+import org.koin.dsl.koinConfiguration
 
 @Composable
 fun App() {
@@ -27,7 +27,11 @@ fun App() {
             }
             .build()
     }
-    KoinApplication(application = { modules(appModule()) }) {
+    KoinMultiplatformApplication(
+        config = koinConfiguration {
+            modules(appModule())
+        }
+    ) {
         AppTheme {
             MainApp()
         }
