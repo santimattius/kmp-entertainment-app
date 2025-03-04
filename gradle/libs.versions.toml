@@ -1,12 +1,12 @@
 [versions]
-androidGradlePlugin = "8.8.1"
+androidGradlePlugin = "8.8.2"
 kotlinVersion = "2.1.10"
 ksp = "2.1.10-1.0.30"
 composeVersion = "1.7.3"
-androidx-room = "2.7.0-beta01"
-sqlite = "2.5.0-beta01"
+androidx-room = "2.7.0-rc01"
+sqlite = "2.5.0-rc01"
 
-activity-compose = "1.10.0"
+activity-compose = "1.10.1"
 appcompat = "1.7.0"
 buildkonfigGradlePlugin = "0.15.1"
 coil= "3.0.4"
