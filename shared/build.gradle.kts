@@ -55,6 +55,7 @@ kotlin {
             implementation(compose.animation)
             implementation(compose.materialIconsExtended)
             implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
 
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
@@ -79,6 +80,7 @@ kotlin {
             api(libs.androidx.activity.compose)
             api(libs.androidx.appcompat)
             api(libs.androidx.core.ktx)
+            api(libs.androidx.ui.tooling)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koin.android)
@@ -124,6 +126,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.animation)
+    debugImplementation(libs.androidx.ui.tooling)
 
     // Room
     add("kspAndroid", libs.androidx.room.compiler)
