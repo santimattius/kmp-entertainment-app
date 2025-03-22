@@ -7,6 +7,7 @@ androidx-room = "2.7.0-rc02"
 sqlite = "2.5.0-rc02"
 
 activity-compose = "1.10.1"
+ui-tooling = "1.7.8"
 appcompat = "1.7.0"
 buildkonfigGradlePlugin = "0.15.1"
 coil= "3.1.0"
@@ -22,6 +23,8 @@ androidx-lifecycle = "2.8.4"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+androidx-core-animation = { group = "androidx.core", name = "core-animation", version = "1.0.0" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "ui-tooling" }
 
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesAndroid" }
 
@@ -35,7 +38,6 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorVer
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktorVersion" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktorVersion" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorVersion" }
-androidx-core-animation = { group = "androidx.core", name = "core-animation", version = "1.0.0" }
 
 koin-core = {module="io.insert-koin:koin-core", version.ref="koin"}
 koin-android = {module="io.insert-koin:koin-android", version.ref="koin"}
