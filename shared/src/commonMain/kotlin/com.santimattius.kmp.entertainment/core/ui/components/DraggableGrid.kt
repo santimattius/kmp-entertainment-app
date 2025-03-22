@@ -86,7 +86,7 @@ fun LazyGridItemScope.DraggableItem(
                 translationY = dragDropState.previousItemOffset.value.y
             }
     } else {
-        Modifier.animateItemPlacement()
+        Modifier.animateItem()
     }
     Box(modifier = modifier.then(draggingModifier), propagateMinConstraints = true) {
         content(dragging)
