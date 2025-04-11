@@ -57,7 +57,7 @@ fun ContentImageView(
             elevation = CardDefaults.elevatedCardElevation(defaultElevation = elevation)
         ) {
             NetworkImage(
-                imageUrl = model.imageUrl,
+                image = model.imageUrl,
                 contentDescription = imageDescription,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxWidth()
@@ -83,7 +83,7 @@ fun ContentItemView(
             colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
             leadingContent = {
                 NetworkImage(
-                    imageUrl = item.imageUrl,
+                    image = item.imageUrl,
                     contentDescription = item.description,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier

@@ -72,7 +72,7 @@ fun DetailContentView(
                 )
             ) {
                 NetworkImage(
-                    imageUrl = model.imageUrl,
+                    image = model.imageUrl,
                     contentDescription = model.title,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
