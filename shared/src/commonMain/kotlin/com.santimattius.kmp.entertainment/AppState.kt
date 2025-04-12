@@ -1,7 +1,5 @@
 package com.santimattius.kmp.entertainment
 
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -20,15 +18,13 @@ import kotlin.reflect.KClass
 
 @Composable
 fun rememberAppState(
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
-    navController: NavHostController = rememberNavController(),
+   navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-): AppState = remember(scaffoldState, navController, coroutineScope) {
-    AppState(scaffoldState, navController, coroutineScope)
+): AppState = remember(navController, coroutineScope) {
+    AppState(navController, coroutineScope)
 }
 
 class AppState(
-    val scaffoldState: ScaffoldState,
     val navController: NavHostController,
     private val coroutineScope: CoroutineScope,
 ) {

@@ -21,18 +21,16 @@ import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.CustomAnimatedVisibility
 import com.santimattius.kmp.entertainment.core.ui.components.SwipeToDismissComponent
 import com.santimattius.kmp.entertainment.feature.shared.ContentItemView
-import org.koin.compose.KoinIsolatedContext
+import org.koin.core.annotation.KoinInternalApi
 
 
+@OptIn(KoinInternalApi::class)
 @Composable
 fun FavoriteRoute(
     onFavoriteClick: (FavoriteUiModel) -> Unit,
 ) {
-
-    KoinIsolatedContext(FavoriteContext.koinApp) {
-        val viewModel = koinViewModel<FavoriteViewModel>()
-        FavoriteScreen(viewModel, onFavoriteClick)
-    }
+    val viewModel = koinViewModel<FavoriteViewModel>()
+    FavoriteScreen(viewModel, onFavoriteClick)
 }
 
 @Composable
