@@ -42,8 +42,6 @@ kotlin {
             isStatic = false
             linkerOpts.add("-lsqlite3")
         }
-        extraSpecAttributes["resources"] =
-            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     sourceSets {
@@ -80,6 +78,7 @@ kotlin {
             api(libs.androidx.activity.compose)
             api(libs.androidx.appcompat)
             api(libs.androidx.core.ktx)
+            //TODO: review this dependency
             api(libs.androidx.ui.tooling)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
@@ -139,6 +138,10 @@ room {
     schemaDirectory("$projectDir/schemas")
 }
 
+compose.resources {
+    publicResClass = true
+    generateResClass = always
+}
 
 fun Project.getLocalProperty(key: String, file: String = "local.properties"): String {
     val p = Properties()
