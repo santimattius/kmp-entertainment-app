@@ -42,8 +42,6 @@ kotlin {
             isStatic = false
             linkerOpts.add("-lsqlite3")
         }
-        extraSpecAttributes["resources"] =
-            "['src/commonMain/resources/**', 'src/iosMain/resources/**']"
     }
 
     sourceSets {
@@ -139,6 +137,10 @@ room {
     schemaDirectory("$projectDir/schemas")
 }
 
+compose.resources {
+    publicResClass = true
+    generateResClass = always
+}
 
 fun Project.getLocalProperty(key: String, file: String = "local.properties"): String {
     val p = Properties()
