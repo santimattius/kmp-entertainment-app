@@ -12,6 +12,7 @@ import com.santimattius.kmp.entertainment.core.data.repositories.MovieRepository
 import com.santimattius.kmp.entertainment.core.data.repositories.TvShowRepository
 import com.santimattius.kmp.entertainment.core.db.TMDBDataBase
 import com.santimattius.kmp.entertainment.core.network.ktorHttpClient
+import com.santimattius.kmp.entertainment.feature.favorites.FavoriteViewModel
 import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailViewModel
 import com.santimattius.kmp.entertainment.feature.movie.home.MoviesViewModel
 import com.santimattius.kmp.entertainment.feature.tvshow.detail.TvShowDetailViewModel
@@ -47,6 +48,7 @@ val featureModules = module {
 
     viewModelOf(::MovieDetailViewModel)
     viewModelOf(::TvShowDetailViewModel)
+    viewModelOf(::FavoriteViewModel)
 }
 expect val platformModule: Module
 
