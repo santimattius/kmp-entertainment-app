@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MovableContent
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -25,9 +26,12 @@ fun <T : Any> NavHostController.navigatePoppingUpToStartDestination(route: T) {
 }
 
 inline fun <reified T : Any> NavGraphBuilder.composableNavAnimated(
+    deepLinks: List<NavDeepLink> = emptyList(),
     noinline content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit
 ) {
-    composable<T> {
+    composable<T>(
+        deepLinks = deepLinks
+    ) {
         CompositionLocalProvider(
             LocalNavAnimatedVisibilityScope provides this@composable
         ) {
