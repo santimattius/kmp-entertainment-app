@@ -38,7 +38,7 @@ import com.santimattius.kmp.entertainment.core.ui.components.NetworkImage
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun DetailContentView(
+fun AnimatedDetailContentView(
     model: UiItem,
     isFavorite: Boolean = false,
     onFavoriteClick: () -> Unit = {},
@@ -137,6 +137,71 @@ fun DetailContentView(
                     )
             )
         }
+    }
+}
+
+@Composable
+fun DetailContentView(
+    model: UiItem,
+    isFavorite: Boolean = false,
+    onFavoriteClick: () -> Unit = {},
+) {
+    val scrollState = rememberScrollState()
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        modifier = Modifier
+            .verticalScroll(scrollState)
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+
+        Card(
+            modifier = Modifier.padding(8.dp)
+        ) {
+            NetworkImage(
+                image = model.imageUrl,
+                contentDescription = model.title,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxWidth(fraction = 0.6f)
+                    .background(Color.LightGray, shape = MaterialTheme.shapes.large)
+                    .aspectRatio(ratio = 0.67f)
+            )
+        }
+        Row(
+            modifier = Modifier.padding(
+                horizontal = 8.dp,
+                vertical = 8.dp
+            )
+        ) {
+            Text(
+                modifier = Modifier.weight(2f).fillMaxWidth(),
+                text = model.title,
+                style = MaterialTheme.typography.headlineMedium,
+                textAlign = TextAlign.Center,
+            )
+
+            SmallFloatingActionButton(
+                onClick = onFavoriteClick
+            ) {
+                if (isFavorite) {
+                    Icon(Icons.Default.Favorite, contentDescription = "")
+                } else {
+                    Icon(Icons.Default.FavoriteBorder, contentDescription = "")
+                }
+            }
+        }
+        Text(
+            text = model.description,
+            textAlign = TextAlign.Start,
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.fillMaxWidth()
+                .padding(
+                    horizontal = 8.dp,
+                    vertical = 8.dp
+                )
+        )
     }
 
 }

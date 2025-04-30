@@ -23,48 +23,46 @@ import com.santimattius.kmp.entertainment.feature.tvshow.home.TvShowRoute
 fun AppNavigation(
     navController: NavHostController = rememberNavController()
 ) {
-    SharedTransitionLayout {
-        CompositionLocalProvider(LocalSharedTransitionScope provides this) {
-            NavHost(
-                navController = navController,
-                startDestination = Splash
-            ) {
-                composableNavAnimated<Splash> {
-                    SplashScreen {
-                        with(navController) {
-                            popBackStack()
-                            navigate(Movie)
+    AnimatedTransactionLayout {
+        NavHost(
+            navController = navController,
+            startDestination = Splash
+        ) {
+            composableNavAnimated<Splash> {
+                SplashScreen {
+                    with(navController) {
+                        popBackStack()
+                        navigate(Movie)
+                    }
+                }
+            }
+            composableNavAnimated<Movie> {
+                MoviesRoute {
+                    navController.navigate(MovieDetail(it))
+                }
+            }
+            composableNavAnimated<MovieDetail> { backStackEntry ->
+                val detail = backStackEntry.toRoute<MovieDetail>()
+                MovieDetailRoute(detail.id)
+            }
+            composableNavAnimated<TvShow> {
+                TvShowRoute {
+                    navController.navigate(TvShowDetail(it))
+                }
+            }
+            composableNavAnimated<TvShowDetail> { backStackEntry ->
+                val detail = backStackEntry.toRoute<TvShowDetail>()
+                TvShowDetailRoute(detail.id)
+            }
+            composableNavAnimated<Favorite> {
+                FavoriteRoute {
+                    when (it.type) {
+                        ContentType.MOVIE -> {
+                            navController.navigate(MovieDetail(it.id))
                         }
-                    }
-                }
-                composableNavAnimated<Movie> {
-                    MoviesRoute {
-                        navController.navigate(MovieDetail(it))
-                    }
-                }
-                composableNavAnimated<MovieDetail> { backStackEntry ->
-                    val detail = backStackEntry.toRoute<MovieDetail>()
-                    MovieDetailRoute(detail.id)
-                }
-                composableNavAnimated<TvShow> {
-                    TvShowRoute {
-                        navController.navigate(TvShowDetail(it))
-                    }
-                }
-                composableNavAnimated<TvShowDetail> { backStackEntry ->
-                    val detail = backStackEntry.toRoute<TvShowDetail>()
-                    TvShowDetailRoute(detail.id)
-                }
-                composableNavAnimated<Favorite> {
-                    FavoriteRoute {
-                        when (it.type) {
-                            ContentType.MOVIE -> {
-                                navController.navigate(MovieDetail(it.id))
-                            }
 
-                            ContentType.TV -> {
-                                navController.navigate(TvShowDetail(it.id))
-                            }
+                        ContentType.TV -> {
+                            navController.navigate(TvShowDetail(it.id))
                         }
                     }
                 }

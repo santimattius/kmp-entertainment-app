@@ -12,12 +12,12 @@ appcompat = "1.7.0"
 buildkonfigGradlePlugin = "0.17.0"
 coil= "3.1.0"
 core-ktx = "1.16.0"
-kotlinxCoroutinesAndroid = "1.10.1"
+kotlinxCoroutinesAndroid = "1.10.2"
 ktorVersion = "3.1.2"
 koin = "4.1.0-Beta7"
 
-androidx-navigation = "2.8.0-alpha11"
-androidx-lifecycle = "2.8.4"
+androidx-navigation = "2.9.0-alpha16"
+androidx-lifecycle = "2.9.0-beta01"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
