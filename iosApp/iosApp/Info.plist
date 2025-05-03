@@ -24,7 +24,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.myapplication.MyApplication</string>
+			<string>com.santimattius.entertainment.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>app</string>

@@ -5,10 +5,10 @@ import shared
 class AppDelegate: NSObject, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        print(url.absoluteString)
         ExternalUriHandler.shared.onNewUri(uri: url.absoluteString)
         return true
     }
-    
 
 }
 

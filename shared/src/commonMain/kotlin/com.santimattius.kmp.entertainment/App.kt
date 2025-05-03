@@ -14,6 +14,7 @@ import com.santimattius.kmp.entertainment.core.ui.components.AppBottomNavigation
 import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
 import com.santimattius.kmp.entertainment.core.ui.themes.AppContainer
 import com.santimattius.kmp.entertainment.di.appModule
+import com.santimattius.kmp.entertainment.di.koin.CustomKoinApplication
 import com.santimattius.kmp.entertainment.navigation.AppNavigation
 import org.koin.compose.KoinApplication
 import org.koin.compose.KoinMultiplatformApplication
@@ -31,7 +32,9 @@ fun App() {
             }
             .build()
     }
-    KoinApplication(application = { modules(appModule()) })  {
+    CustomKoinApplication(
+        application = { modules(appModule()) }
+    )  {
         AppContainer {
             MainApp()
         }

@@ -19,6 +19,7 @@ koin = "4.1.0-Beta7"
 androidx-navigation = "2.9.0-alpha16"
 androidx-lifecycle = "2.9.0-beta01"
 startupRuntime = "1.2.0"
+kermit = "2.0.4"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
@@ -27,6 +28,7 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx
 androidx-core-animation = { group = "androidx.core", name = "core-animation", version = "1.0.0" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "ui-tooling" }
 
+kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesAndroid" }
 
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }

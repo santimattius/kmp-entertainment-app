@@ -55,7 +55,8 @@ fun AppNavigation(
             //"app://entertainment.com/movie/1197306"
             composableNavAnimated<MovieDetail>(
                 deepLinks = listOf(
-                    navDeepLink { uriPattern = "app://entertainment.com/movie/{id}" }
+                    navDeepLink<MovieDetail>(basePath = "miapp://entertainment.com/movie"),
+                    //navDeepLink { uriPattern = "miapp://entertainment.com/movie/{id}" }
                 )
             ) { backStackEntry ->
                 val detail = backStackEntry.toRoute<MovieDetail>()

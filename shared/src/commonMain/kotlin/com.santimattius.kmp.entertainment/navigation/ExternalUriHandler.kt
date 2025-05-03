@@ -1,5 +1,7 @@
 package com.santimattius.kmp.entertainment.navigation
 
+import co.touchlab.kermit.Logger
+
 object ExternalUriHandler {
     // Storage for when a URI arrives before the listener is set up
     private var cached: String? = null
@@ -10,6 +12,7 @@ object ExternalUriHandler {
             if (value != null) {
                 // When a listener is set and `cached` is not empty,
                 // immediately invoke the listener with the cached URI
+                Logger.i { cached.toString() }
                 cached?.let { value.invoke(it) }
                 cached = null
             }

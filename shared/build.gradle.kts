@@ -72,6 +72,8 @@ kotlin {
 
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            implementation(libs.kermit)
         }
         androidMain.dependencies {
             api(libs.androidx.activity.compose)
@@ -141,6 +143,10 @@ room {
 compose.resources {
     publicResClass = true
     generateResClass = always
+}
+
+compose.desktop {
+
 }
 
 fun Project.getLocalProperty(key: String, file: String = "local.properties"): String {
