@@ -67,25 +67,26 @@ Otherwise, KDoctor will highlight which parts of your setup still need to be con
 ## Dependencies
 ```toml
 [versions]
-androidGradlePlugin = "8.9.2"
-kotlinVersion = "2.1.20"
-ksp = "2.1.20-1.0.31"
-composeVersion = "1.8.0-rc01"
+androidGradlePlugin = "8.9.3"
+kotlinVersion = "2.1.21"
+ksp = "2.1.21-2.0.1"
+composeVersion = "1.8.1"
 androidx-room = "2.7.1"
-sqlite = "2.5.0"
+sqlite = "2.5.1"
 
 activity-compose = "1.10.1"
-ui-tooling = "1.8.0"
-appcompat = "1.7.0"
+ui-tooling = "1.8.2"
+appcompat = "1.7.1"
 buildkonfigGradlePlugin = "0.17.0"
-coil= "3.1.0"
+coil= "3.2.0"
 core-ktx = "1.16.0"
-kotlinxCoroutinesAndroid = "1.10.1"
-ktorVersion = "3.1.2"
-koin = "4.1.0-Beta7"
+kotlinxCoroutinesAndroid = "1.10.2"
+ktorVersion = "3.1.3"
+koin = "4.1.0"
 
-androidx-navigation = "2.8.0-alpha11"
-androidx-lifecycle = "2.8.4"
+androidx-navigation = "2.9.0-beta01"
+androidx-lifecycle = "2.9.0"
+kermit = "2.0.4"
 ```
 
 Check voyager implementation [here](https://github.com/santimattius/kmp-entertainment-app/tree/feature/voyager)
