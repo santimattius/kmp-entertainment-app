@@ -84,7 +84,6 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koin.android)
-            implementation(libs.androidx.startup.runtime)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

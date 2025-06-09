@@ -27,7 +27,7 @@
 			<string>com.santimattius.entertainment.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>app</string>
+				<string>miapp</string>
 			</array>
 		</dict>
 	</array>
