@@ -9,11 +9,5 @@ import org.koin.dsl.module
 
 actual val platformModule: Module
     get() = module {
-        single<TMDBDataBase> {
-            getRoomDatabase(
-                builder = RoomFactory(
-                    context = androidContext()
-                ).create()
-            )
-        }
+         single<TMDBDataBase> { getRoomDatabase(RoomFactory(androidContext()).create()) }
     }

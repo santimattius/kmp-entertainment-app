@@ -19,6 +19,7 @@ import org.koin.compose.KoinMultiplatformApplication
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.dsl.koinConfiguration
 
+
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun App() {
@@ -30,9 +31,7 @@ fun App() {
             .build()
     }
     KoinMultiplatformApplication(
-        config = koinConfiguration {
-            modules(appModule())
-        }
+        config = koinConfiguration { modules(appModule()) }
     ) {
         AppContainer {
             MainApp()

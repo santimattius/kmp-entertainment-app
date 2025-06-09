@@ -33,7 +33,7 @@ private const val IMAGE_ASPECT_RATIO = 0.67f
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun ContentImageView(
+fun AnimatedContentImageView(
     modifier: Modifier = Modifier,
     model: UiItem,
     imageDescription: String,
@@ -68,9 +68,32 @@ fun ContentImageView(
     }
 }
 
+@Composable
+fun ContentImageView(
+    modifier: Modifier = Modifier,
+    model: UiItem,
+    imageDescription: String,
+    elevation: Dp,
+) {
+    Card(
+        modifier = modifier,
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = elevation)
+    ) {
+        NetworkImage(
+            image = model.imageUrl,
+            contentDescription = imageDescription,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxWidth()
+                .background(Color.LightGray)
+                .aspectRatio(ratio = IMAGE_ASPECT_RATIO),
+        )
+    }
+
+}
+
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
-fun ContentItemView(
+fun AnimatedContentItemView(
     modifier: Modifier = Modifier,
     item: UiItem,
 ) {
@@ -138,6 +161,38 @@ fun ContentItemView(
             }
         )
     }
+}
+
+@Composable
+fun ContentItemView(
+    modifier: Modifier = Modifier,
+    item: UiItem,
+) {
+    ListItem(
+        modifier = modifier.wrapContentHeight(Alignment.Top),
+        colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
+        leadingContent = {
+            NetworkImage(
+                image = item.imageUrl,
+                contentDescription = item.description,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .width(100.dp)
+                    .background(Color.LightGray)
+                    .aspectRatio(ratio = IMAGE_ASPECT_RATIO),
+            )
+        },
+        headlineContent = {
+            Text(text = item.title)
+        },
+        supportingContent = {
+            Text(
+                text = item.description,
+                maxLines = 6,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+    )
 
 }
 
