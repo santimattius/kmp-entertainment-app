@@ -11,16 +11,28 @@ import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil3.ColorImage
+import coil3.annotation.ExperimentalCoilApi
+import coil3.compose.AsyncImagePreviewHandler
+import coil3.compose.LocalAsyncImagePreviewHandler
+import com.santimattius.kmp.entertainment.core.domain.ContentType
 import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.CustomAnimatedVisibility
 import com.santimattius.kmp.entertainment.core.ui.components.SwipeToDismissComponent
+import com.santimattius.kmp.entertainment.core.ui.themes.AppContainer
+import com.santimattius.kmp.entertainment.di.appModule
 import com.santimattius.kmp.entertainment.feature.shared.ContentItemView
+import org.jetbrains.compose.ui.tooling.preview.Preview
+import org.koin.compose.KoinApplicationPreview
 import org.koin.core.annotation.KoinInternalApi
 
 
@@ -30,15 +42,20 @@ fun FavoriteRoute(
     onFavoriteClick: (FavoriteUiModel) -> Unit,
 ) {
     val viewModel = koinViewModel<FavoriteViewModel>()
-    FavoriteScreen(viewModel, onFavoriteClick)
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    FavoriteScreen(
+        state = state,
+        onFavoriteClick = onFavoriteClick,
+        onFavoriteDelete = viewModel::onFavoriteDelete
+    )
 }
 
 @Composable
 fun FavoriteScreen(
-    viewModel: FavoriteViewModel,
-    onFavoriteClick: (FavoriteUiModel) -> Unit,
+    state: List<FavoriteUiModel>,
+    onFavoriteClick: (FavoriteUiModel) -> Unit = {},
+    onFavoriteDelete: (FavoriteUiModel) -> Unit = {},
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
 
     if (state.isEmpty()) {
         Center {
@@ -51,7 +68,7 @@ fun FavoriteScreen(
         FavoriteContent(
             data = state.toMutableStateList(),
             onItemClick = onFavoriteClick,
-            onItemDelete = viewModel::onFavoriteDelete
+            onItemDelete = onFavoriteDelete
         )
     }
 }
@@ -95,4 +112,29 @@ private fun FavoriteItem(
             )
         }
     }
+}
+
+@OptIn(ExperimentalCoilApi::class)
+@Preview
+@Composable
+fun FavoriteScreenPreview() {
+    val previewHandler = AsyncImagePreviewHandler {
+        ColorImage(Color.Red.toArgb())
+    }
+    CompositionLocalProvider(LocalAsyncImagePreviewHandler provides previewHandler) {
+        AppContainer {
+            FavoriteScreen(
+                state = (1..10).map { id ->
+                    FavoriteUiModel(
+                        id = id.toLong(),
+                        title = "title_$id",
+                        description = "description_$id",
+                        imageUrl = "imageUrl_$id",
+                        type = ContentType.MOVIE
+                    )
+                }
+            )
+        }
+    }
+
 }
