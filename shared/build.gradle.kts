@@ -144,12 +144,9 @@ compose.resources {
     generateResClass = always
 }
 
-compose.desktop {
-
-}
 
 fun Project.getLocalProperty(key: String, file: String = "local.properties"): String {
     val p = Properties()
     p.load(project.rootProject.file(file).reader())
-    return p.getProperty(key)
+    return p.getProperty(key) ?: error("'$key' not found in '$file'")
 }
