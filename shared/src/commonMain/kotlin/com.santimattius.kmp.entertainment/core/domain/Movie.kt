@@ -5,4 +5,5 @@ data class Movie(
     val title: String,
     val image: String,
     val overview: String,
+    val homepage: String? = null,
 )

@@ -8,7 +8,8 @@ internal fun MovieDto.asMovie(): Movie {
         id = this.id,
         title = this.title,
         image = this.poster,
-        overview = this.overview
+        overview = this.overview,
+        homepage = this.homepage
     )
 }
 

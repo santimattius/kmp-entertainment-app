@@ -19,3 +19,7 @@ data class TvShowDetail(val id: Long)
 
 @Serializable
 data object Favorite
+
+
+@Serializable
+data class HomeWebPage(val url: String)

@@ -5,6 +5,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
@@ -16,6 +17,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.PlayCircle
+import androidx.compose.material.icons.filled.VideoFile
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -144,7 +148,9 @@ fun AnimatedDetailContentView(
 fun DetailContentView(
     model: UiItem,
     isFavorite: Boolean = false,
+    showPlayButton: Boolean = false,
     onFavoriteClick: () -> Unit = {},
+    onPlayClick: () -> Unit = {},
 ) {
     val scrollState = rememberScrollState()
     Column(
@@ -156,24 +162,53 @@ fun DetailContentView(
             .background(MaterialTheme.colorScheme.background)
     ) {
 
-        Card(
-            modifier = Modifier.padding(8.dp)
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
         ) {
-            NetworkImage(
-                image = model.imageUrl,
-                contentDescription = model.title,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .fillMaxWidth(fraction = 0.6f)
-                    .background(Color.LightGray, shape = MaterialTheme.shapes.large)
-                    .aspectRatio(ratio = 0.67f)
-            )
+            Card(
+                modifier = Modifier.padding(8.dp)
+            ) {
+                NetworkImage(
+                    image = model.imageUrl,
+                    contentDescription = model.title,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth(fraction = 0.6f)
+                        .background(Color.LightGray, shape = MaterialTheme.shapes.large)
+                        .aspectRatio(ratio = 0.67f)
+                )
+            }
+            Column(
+                modifier = Modifier.align(Alignment.BottomEnd)
+                    .padding(16.dp),
+            ) {
+                if (showPlayButton) {
+                    SmallFloatingActionButton(
+                        onClick = onPlayClick
+                    ) {
+                        Icon(Icons.Default.PlayCircle, contentDescription = "")
+                    }
+                }
+
+                SmallFloatingActionButton(
+                    onClick = onFavoriteClick
+                ) {
+                    if (isFavorite) {
+                        Icon(Icons.Default.Favorite, contentDescription = "")
+                    } else {
+                        Icon(Icons.Default.FavoriteBorder, contentDescription = "")
+                    }
+                }
+            }
         }
         Row(
             modifier = Modifier.padding(
                 horizontal = 8.dp,
                 vertical = 8.dp
-            )
+            ),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
                 modifier = Modifier.weight(2f).fillMaxWidth(),
@@ -182,15 +217,6 @@ fun DetailContentView(
                 textAlign = TextAlign.Center,
             )
 
-            SmallFloatingActionButton(
-                onClick = onFavoriteClick
-            ) {
-                if (isFavorite) {
-                    Icon(Icons.Default.Favorite, contentDescription = "")
-                } else {
-                    Icon(Icons.Default.FavoriteBorder, contentDescription = "")
-                }
-            }
         }
         Text(
             text = model.description,

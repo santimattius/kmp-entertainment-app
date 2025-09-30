@@ -14,6 +14,7 @@ data class MovieUiModel(
     override val title: String,
     val image: String,
     val overview: String,
+    val homepage: String? = null,
     val isFavorite: Boolean = false,
 ) : UiItem {
 

@@ -63,6 +63,10 @@ class MovieDetailViewModel(
 
 private fun Movie.asUiModel(): MovieUiModel {
     return MovieUiModel(
-        id = id, title = title, image = image, overview = overview
+        id = id,
+        title = title,
+        image = image,
+        overview = overview,
+        homepage = homepage
     )
 }

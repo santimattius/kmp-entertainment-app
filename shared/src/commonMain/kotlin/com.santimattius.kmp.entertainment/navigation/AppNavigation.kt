@@ -10,6 +10,7 @@ import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 import com.santimattius.kmp.entertainment.core.domain.ContentType
 import com.santimattius.kmp.entertainment.feature.favorites.FavoriteRoute
+import com.santimattius.kmp.entertainment.feature.homepage.HomeWebPageScreen
 import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailRoute
 import com.santimattius.kmp.entertainment.feature.movie.home.MoviesRoute
 import com.santimattius.kmp.entertainment.feature.splash.SplashScreen
@@ -59,7 +60,9 @@ fun AppNavigation(
                 )
             ) { backStackEntry ->
                 val detail = backStackEntry.toRoute<MovieDetail>()
-                MovieDetailRoute(detail.id)
+                MovieDetailRoute(detail.id) {
+                    navController.navigate(HomeWebPage(it))
+                }
             }
             composableNavAnimated<TvShow> {
                 TvShowRoute {
@@ -82,6 +85,10 @@ fun AppNavigation(
                         }
                     }
                 }
+            }
+            composableNavAnimated<HomeWebPage> { backStackEntry ->
+                val detail = backStackEntry.toRoute<HomeWebPage>()
+                HomeWebPageScreen(detail.url)
             }
         }
     }
