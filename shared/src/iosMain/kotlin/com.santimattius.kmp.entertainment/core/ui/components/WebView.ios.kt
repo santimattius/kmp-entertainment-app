@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.viewinterop.UIKitView
+import androidx.compose.ui.viewinterop.UIKitViewController
+import com.santimattius.kmp.entertainment.LocalNativeViewFactory
 import platform.Foundation.NSURL
 import platform.Foundation.NSURLRequest
 import platform.UIKit.UIView
@@ -13,7 +15,7 @@ import platform.WebKit.WKWebView
 
 @Composable
 actual fun WebView(modifier: Modifier, url: String) {
-    val webView = remember { WKWebView() }
+    /*val webView = remember { WKWebView() }
     UIKitView(
         modifier = modifier,
         factory = {
@@ -27,5 +29,12 @@ actual fun WebView(modifier: Modifier, url: String) {
             container.addSubview(webView)
             container
         },
+    )*/
+    val nativeViewFactory = LocalNativeViewFactory.current
+
+    UIKitViewController(
+        modifier = modifier,
+        factory = { nativeViewFactory.createWebView(url) },
+        update = {}
     )
 }
