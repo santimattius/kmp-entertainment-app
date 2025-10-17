@@ -1,7 +1,10 @@
 package com.santimattius.kmp.entertainment.feature.tvshow.home
 
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,11 +35,13 @@ fun TvShowScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    TvShowContent(
-        state = state,
-        onMovieClick = onMovieClick,
-        onMove = viewModel::move
-    )
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        TvShowContent(
+            state = state,
+            onMovieClick = onMovieClick,
+            onMove = viewModel::move
+        )
+    }
 }
 
 @Composable

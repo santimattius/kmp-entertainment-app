@@ -1,7 +1,11 @@
 package com.santimattius.kmp.entertainment.feature.movie.detail
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -9,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
@@ -38,11 +43,13 @@ private fun MovieDetailContent(
     navigateToWebPage: (String) -> Unit = {}
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    DetailContent(
-        state = state,
-        onFavoriteClicked = viewModel::onFavoriteClicked,
-        navigateToWebPage = navigateToWebPage
-    )
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)){
+        DetailContent(
+            state = state,
+            onFavoriteClicked = viewModel::onFavoriteClicked,
+            navigateToWebPage = navigateToWebPage
+        )
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -24,6 +24,7 @@ interface UiModel {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun <T : UiModel> DraggableGrid(
+    modifier: Modifier = Modifier,
     items: List<T>,
     onMove: (Int, Int) -> Unit,
     content: @Composable (T, Boolean) -> Unit,
@@ -34,7 +35,7 @@ fun <T : UiModel> DraggableGrid(
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.dragContainer(dragDropState),
+        modifier = modifier.dragContainer(dragDropState),
         state = gridState,
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
