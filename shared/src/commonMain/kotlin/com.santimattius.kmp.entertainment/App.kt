@@ -14,6 +14,7 @@ import com.santimattius.kmp.entertainment.core.ui.components.AppBottomNavigation
 import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
 import com.santimattius.kmp.entertainment.core.ui.themes.AppContainer
 import com.santimattius.kmp.entertainment.di.appModule
+import com.santimattius.kmp.entertainment.navigation.AppNav3
 import com.santimattius.kmp.entertainment.navigation.AppNavigation
 import org.koin.compose.KoinMultiplatformApplication
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -42,7 +43,7 @@ fun App() {
 
 @Composable
 fun MainApp(
-    appState: AppState = rememberAppState(),
+    appState: AppState3 = rememberAppState3(),
 ) {
     val upNavigation: @Composable () -> Unit = {
         ArrowBackIcon {
@@ -54,24 +55,29 @@ fun MainApp(
 
     Scaffold(
         topBar = {
-            if (appState.showTopAppBar) {
+            if (appState.showTopAppBar()) {
                 AppBar(
                     title = "Movies and TvShows",
-                    navigationIcon = if (appState.showUpNavigation) upNavigation else empty
+                    navigationIcon = if (appState.showUpNavigation()) upNavigation else empty
                 )
             }
         },
         bottomBar = {
-            if (appState.showBottomNavigation) {
+            if (appState.showBottomNavigation()) {
                 AppBottomNavigation(
                     bottomNavOptions = AppState.BOTTOM_NAV_ITEMS,
-                    currentRoute = appState.currentRoute,
+                    currentRoute = appState.getCurrentRoute(),
                     onNavItemClick = { appState.onNavItemClick(it) })
             }
         }
     ) {
         Box(modifier = Modifier.fillMaxSize().padding(it)) {
-            AppNavigation(appState.navController)
+            //AppNavigation(appState.navController)
+            AppNav3(
+                backStack = appState.backStack,
+                onNavClick = { route -> appState.onNavClick(route) },
+                onBack = { appState.onUpClick() }
+            )
         }
     }
 }

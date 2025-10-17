@@ -68,6 +68,9 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
 
+            implementation(libs.androidx.nav3.ui)
+            implementation(libs.androidx.material3.adaptive)
+
             implementation(libs.kermit)
         }
         androidMain.dependencies {

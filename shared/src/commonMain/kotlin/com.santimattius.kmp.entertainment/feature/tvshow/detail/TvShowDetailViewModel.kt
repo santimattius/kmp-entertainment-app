@@ -1,16 +1,23 @@
 package com.santimattius.kmp.entertainment.feature.tvshow.detail
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.CreationExtras
 import com.santimattius.kmp.entertainment.core.data.repositories.FavoriteRepository
 import com.santimattius.kmp.entertainment.core.data.repositories.TvShowRepository
 import com.santimattius.kmp.entertainment.core.domain.ContentType
 import com.santimattius.kmp.entertainment.core.domain.Favorite
+import com.santimattius.kmp.entertainment.navigation.TvShowDetail
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import kotlin.getValue
+import kotlin.reflect.KClass
 
 class TvShowDetailViewModel(
     id: Long,
@@ -65,6 +72,17 @@ class TvShowDetailViewModel(
                     data = tvShow.copy(isFavorite = !tvShow.isFavorite)
                 )
             }
+        }
+    }
+
+    class Factory(
+        private val key: TvShowDetail,
+    ) : ViewModelProvider.Factory, KoinComponent {
+        private val tvShowRepository: TvShowRepository by inject()
+        private val favoriteRepository: FavoriteRepository by inject()
+
+        override fun <T : ViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
+            return TvShowDetailViewModel(key.id, tvShowRepository, favoriteRepository) as T
         }
     }
 }

@@ -18,13 +18,22 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.core.parameter.parametersOf
 
 @Composable
+@Deprecated("Use MovieDetailScene instead for Nav3")
 fun MovieDetailRoute(id: Long, navigateToWebPage: (String) -> Unit = {}) {
     val viewModel = koinViewModel<MovieDetailViewModel> { parametersOf(id) }
     MovieDetailContent(viewModel, navigateToWebPage)
 }
 
 @Composable
-fun MovieDetailContent(
+fun MovieDetailScene(
+    viewModel: MovieDetailViewModel,
+    navigateToWebPage: (String) -> Unit = {}
+){
+    MovieDetailContent(viewModel, navigateToWebPage)
+}
+
+@Composable
+private fun MovieDetailContent(
     viewModel: MovieDetailViewModel,
     navigateToWebPage: (String) -> Unit = {}
 ) {

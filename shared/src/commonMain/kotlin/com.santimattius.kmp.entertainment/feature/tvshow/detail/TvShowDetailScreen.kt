@@ -11,8 +11,16 @@ import com.santimattius.kmp.entertainment.feature.shared.DetailContentView
 import org.koin.core.parameter.parametersOf
 
 @Composable
+@Deprecated("Use TvShowDetailScene instead for Nav3")
 fun TvShowDetailRoute(id: Long) {
     val viewModel = koinViewModel<TvShowDetailViewModel>() { parametersOf(id) }
+    TvShowDetailContent(viewModel)
+}
+
+@Composable
+fun TvShowDetailScene(
+    viewModel: TvShowDetailViewModel,
+){
     TvShowDetailContent(viewModel)
 }
 
