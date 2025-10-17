@@ -1,5 +1,6 @@
 package com.santimattius.kmp.entertainment.feature.favorites
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -80,7 +81,8 @@ fun FavoriteContent(
     onItemDelete: (FavoriteUiModel) -> Unit = {},
 ) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(items = data, key = { item -> item.id }) { item ->

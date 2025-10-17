@@ -1,17 +1,23 @@
 package com.santimattius.kmp.entertainment.feature.movie.detail
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.CreationExtras
 import com.santimattius.kmp.entertainment.core.data.repositories.FavoriteRepository
 import com.santimattius.kmp.entertainment.core.data.repositories.MovieRepository
 import com.santimattius.kmp.entertainment.core.domain.ContentType
 import com.santimattius.kmp.entertainment.core.domain.Favorite
 import com.santimattius.kmp.entertainment.core.domain.Movie
+import com.santimattius.kmp.entertainment.navigation.MovieDetail
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import kotlin.reflect.KClass
 
 class MovieDetailViewModel(
     id: Long,
@@ -39,7 +45,7 @@ class MovieDetailViewModel(
         }
     }
 
-    fun onFavoriteClicked(movie: MovieUiModel) = viewModelScope.launch{
+    fun onFavoriteClicked(movie: MovieUiModel) = viewModelScope.launch {
         if (movie.isFavorite) {
             favoriteRepository.remove(movie.id)
         } else {
@@ -57,6 +63,17 @@ class MovieDetailViewModel(
                 isLoading = false,
                 data = movie.copy(isFavorite = !movie.isFavorite)
             )
+        }
+    }
+
+    class Factory(
+        private val key: MovieDetail,
+    ) : ViewModelProvider.Factory, KoinComponent {
+        private val movieRepository: MovieRepository by inject()
+        private val favoriteRepository: FavoriteRepository by inject()
+
+        override fun <T : ViewModel> create(modelClass: KClass<T>, extras: CreationExtras): T {
+            return MovieDetailViewModel(key.id, movieRepository, favoriteRepository) as T
         }
     }
 }
