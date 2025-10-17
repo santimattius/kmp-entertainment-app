@@ -1,23 +1,23 @@
 [versions]
 androidGradlePlugin = "8.13.0"
 kotlinVersion = "2.2.20"
-ksp = "2.2.20-2.0.2"
-composeVersion = "1.9.0"
-androidx-room = "2.8.1"
+ksp = "2.2.20-2.0.4"
+composeVersion = "1.9.1"
+androidx-room = "2.8.2"
 sqlite = "2.6.1"
 
 activity-compose = "1.11.0"
-ui-tooling = "1.9.2"
+ui-tooling = "1.9.3"
 appcompat = "1.7.1"
 buildkonfigGradlePlugin = "0.17.1"
 coil= "3.3.0"
 core-ktx = "1.17.0"
 kotlinxCoroutinesAndroid = "1.10.2"
-ktorVersion = "3.3.0"
+ktorVersion = "3.3.1"
 koin = "4.1.1"
 
-androidx-navigation = "2.9.0"
-androidx-lifecycle = "2.9.4"
+androidx-navigation = "2.9.1"
+androidx-lifecycle = "2.9.5"
 kermit = "2.0.8"
 
 [libraries]
