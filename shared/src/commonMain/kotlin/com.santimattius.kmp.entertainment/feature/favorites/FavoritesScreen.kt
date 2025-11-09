@@ -18,6 +18,7 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.ColorImage
@@ -30,10 +31,7 @@ import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.CustomAnimatedVisibility
 import com.santimattius.kmp.entertainment.core.ui.components.SwipeToDismissComponent
 import com.santimattius.kmp.entertainment.core.ui.themes.AppContainer
-import com.santimattius.kmp.entertainment.di.appModule
 import com.santimattius.kmp.entertainment.feature.shared.ContentItemView
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.KoinApplicationPreview
 import org.koin.core.annotation.KoinInternalApi
 
 

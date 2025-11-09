@@ -7,6 +7,11 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 
 private val lightScheme = lightColorScheme(
@@ -237,27 +242,36 @@ private val highContrastDarkColorScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDarkHighContrast,
 )
 
+internal val LocalThemeIsDark = compositionLocalOf { mutableStateOf(true) }
+
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
-    val colorScheme = if (darkTheme) darkScheme else lightScheme
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    val systemIsDark = isSystemInDarkTheme()
+    val isDarkState = remember(systemIsDark) { mutableStateOf(darkTheme) }
+    CompositionLocalProvider(
+        LocalThemeIsDark provides isDarkState
+    ) {
+        val isDark by isDarkState
+        SystemAppearance(isDark = !isDark)
+        MaterialTheme(
+            colorScheme = if (isDark) darkScheme else lightScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
 
 @Composable
 fun AppContainer(content: @Composable () -> Unit) {
     AppTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.onBackground
-        ) {
+        Surface(modifier = Modifier.fillMaxSize()) {
             content()
         }
     }
 }
+
+@Composable
+internal expect fun SystemAppearance(isDark: Boolean)

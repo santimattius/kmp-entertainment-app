@@ -14,7 +14,6 @@ import com.santimattius.kmp.entertainment.core.ui.components.AppBottomNavigation
 import com.santimattius.kmp.entertainment.core.ui.components.ArrowBackIcon
 import com.santimattius.kmp.entertainment.core.ui.themes.AppContainer
 import com.santimattius.kmp.entertainment.di.appModule
-import com.santimattius.kmp.entertainment.navigation.AppNav3
 import com.santimattius.kmp.entertainment.navigation.AppNavigation
 import org.koin.compose.KoinMultiplatformApplication
 import org.koin.core.annotation.KoinExperimentalAPI
@@ -43,7 +42,7 @@ fun App() {
 
 @Composable
 fun MainApp(
-    appState: AppState3 = rememberAppState3(),
+    appState: AppState = rememberAppState(),
 ) {
     val upNavigation: @Composable () -> Unit = {
         ArrowBackIcon {
@@ -72,8 +71,7 @@ fun MainApp(
         }
     ) {
         Box(modifier = Modifier.fillMaxSize().padding(it)) {
-            //AppNavigation(appState.navController)
-            AppNav3(
+            AppNavigation(
                 backStack = appState.backStack,
                 onNavClick = { route -> appState.onNavClick(route) },
                 onBack = { appState.onUpClick() }

@@ -1,35 +1,33 @@
 package com.santimattius.kmp.entertainment
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.santimattius.kmp.entertainment.navigation.Favorite
 import com.santimattius.kmp.entertainment.navigation.Movie
 import com.santimattius.kmp.entertainment.navigation.NavItem
 import com.santimattius.kmp.entertainment.navigation.Splash
 import com.santimattius.kmp.entertainment.navigation.TvShow
-import com.santimattius.kmp.entertainment.navigation.navigatePoppingUpToStartDestination
 import com.santimattius.kmp.entertainment.navigation.toRoute
 import kotlinx.coroutines.CoroutineScope
 import kotlin.reflect.KClass
 
 @Composable
 fun rememberAppState(
-   navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
-): AppState = remember(navController, coroutineScope) {
-    AppState(navController, coroutineScope)
+    backStack: SnapshotStateList<Any> = remember { mutableStateListOf(Splash) }
+): AppState = remember(coroutineScope, backStack) {
+    AppState(coroutineScope, backStack)
 }
 
 class AppState(
-    val navController: NavHostController,
     private val coroutineScope: CoroutineScope,
+    val backStack: SnapshotStateList<Any> = mutableStateListOf(Splash)
 ) {
 
-    companion object {
+    companion object Companion {
         val BOTTOM_NAV_ITEMS = listOf(NavItem.Movies, NavItem.TV, NavItem.Favorites)
         val HOME_ROUTES = listOf(
             Movie::class.qualifiedName.orEmpty(),
@@ -38,25 +36,31 @@ class AppState(
         )
     }
 
-    val currentRoute: String
-        @Composable get() = navController.currentBackStackEntryAsState().value?.destination?.route.orEmpty()
+    fun getCurrentRoute() = backStack.last()::class.qualifiedName.orEmpty()
 
-    val isFullScreen: Boolean
-        @Composable get() = !currentRoute.notContainsRoute(Splash::class)
+    fun isFullScreen(): Boolean {
+        val currentRoute = getCurrentRoute()
+        return !currentRoute.notContainsRoute(Splash::class)
+    }
 
+    fun showUpNavigation(): Boolean {
+        val currentRoute = getCurrentRoute()
+        return !HOME_ROUTES.contains(currentRoute)
+    }
 
-    val showUpNavigation: Boolean
-        @Composable get() = !HOME_ROUTES.contains(currentRoute)
+    fun showBottomNavigation(): Boolean {
+        val currentRoute = getCurrentRoute()
+        return currentRoute.notContainsRoute(Splash::class)
+    }
 
-    val showBottomNavigation: Boolean
-        @Composable get() = currentRoute.notContainsRoute(Splash::class)
-
-    val showTopAppBar: Boolean
-        @Composable get() = currentRoute.notContainsRoute(Splash::class)
+    fun showTopAppBar(): Boolean {
+        val currentRoute = getCurrentRoute()
+        return currentRoute.notContainsRoute(Splash::class)
+    }
 
 
     fun onUpClick() {
-        navController.popBackStack()
+        backStack.removeLastOrNull()
     }
 
     private fun <T : Any> String.notContainsRoute(clazz: KClass<T>): Boolean {
@@ -67,24 +71,28 @@ class AppState(
         }
     }
 
+    fun onNavClick(route: Any) {
+        backStack.add(route)
+    }
+
     fun onNavItemClick(navItem: NavItem) {
         val route = navItem.feature.toRoute()
         when (route) {
             Splash::class.qualifiedName -> {
-                navController.navigatePoppingUpToStartDestination(Splash)
+                backStack.add(Splash)
             }
 
             Movie::class.qualifiedName -> {
-                navController.navigatePoppingUpToStartDestination(Movie)
+                backStack.add(Movie)
 
             }
 
             TvShow::class.qualifiedName -> {
-                navController.navigatePoppingUpToStartDestination(TvShow)
+                backStack.add(TvShow)
             }
 
             Favorite::class.qualifiedName -> {
-                navController.navigatePoppingUpToStartDestination(Favorite)
+                backStack.add(Favorite)
             }
         }
     }
