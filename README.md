@@ -64,29 +64,43 @@ Before you start, use the [KDoctor](https://github.com/Kotlin/kdoctor) tool to e
 
 Otherwise, KDoctor will highlight which parts of your setup still need to be configured and will suggest a way to fix them.
 
+## Navigation
+Current implementation is with Nav3. Check old implementation with nav2 in this branch: [nav2](https://github.com/santimattius/kmp-entertainment-app/tree/nav2)
+
 ## Dependencies
 ```toml
 [versions]
-androidGradlePlugin = "8.9.3"
-kotlinVersion = "2.1.21"
-ksp = "2.1.21-2.0.1"
-composeVersion = "1.8.1"
-androidx-room = "2.7.1"
-sqlite = "2.5.1"
+androidGradlePlugin = "8.13.0"
+kotlinVersion = "2.2.21"
+ksp = "2.3.0"
+composeVersion = "1.10.0-beta01"
+buildkonfigGradlePlugin = "0.17.1"
 
-activity-compose = "1.10.1"
-ui-tooling = "1.8.2"
+androidx-room = "2.8.3"
+sqlite = "2.6.1"
+
+activity-compose = "1.11.0"
+ui-tooling = "1.9.4"
 appcompat = "1.7.1"
-buildkonfigGradlePlugin = "0.17.0"
-coil= "3.2.0"
-core-ktx = "1.16.0"
-kotlinxCoroutinesAndroid = "1.10.2"
-ktorVersion = "3.1.3"
-koin = "4.1.0"
 
-androidx-navigation = "2.9.0-beta01"
-androidx-lifecycle = "2.9.0"
-kermit = "2.0.4"
+material3="1.9.0-beta03"
+material="1.7.3"
+
+coil= "3.3.0"
+core-ktx = "1.17.0"
+
+kotlinxCoroutinesAndroid = "1.10.2"
+
+ktorVersion = "3.3.2"
+
+koin = "4.1.1"
+
+androidx-navigation = "2.9.1"
+androidx-lifecycle = "2.10.0-alpha04"
+androidx-nav3 = "1.0.0-alpha04"
+androidx-adaptive = "1.2.0"
+
+kermit = "2.0.8"
 ```
 
 Check voyager implementation [here](https://github.com/santimattius/kmp-entertainment-app/tree/feature/voyager)
