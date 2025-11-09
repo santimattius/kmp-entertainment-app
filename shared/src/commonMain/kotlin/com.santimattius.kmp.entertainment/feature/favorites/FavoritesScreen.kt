@@ -1,5 +1,6 @@
 package com.santimattius.kmp.entertainment.feature.favorites
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,7 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.ColorImage
@@ -29,10 +31,7 @@ import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.CustomAnimatedVisibility
 import com.santimattius.kmp.entertainment.core.ui.components.SwipeToDismissComponent
 import com.santimattius.kmp.entertainment.core.ui.themes.AppContainer
-import com.santimattius.kmp.entertainment.di.appModule
 import com.santimattius.kmp.entertainment.feature.shared.ContentItemView
-import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.KoinApplicationPreview
 import org.koin.core.annotation.KoinInternalApi
 
 
@@ -80,7 +79,8 @@ fun FavoriteContent(
     onItemDelete: (FavoriteUiModel) -> Unit = {},
 ) {
     LazyColumn(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(items = data, key = { item -> item.id }) { item ->

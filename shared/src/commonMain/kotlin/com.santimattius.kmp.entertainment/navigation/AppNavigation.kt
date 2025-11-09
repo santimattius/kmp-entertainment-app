@@ -1,95 +1,80 @@
 package com.santimattius.kmp.entertainment.navigation
 
-import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navDeepLink
-import androidx.navigation.toRoute
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.ui.NavDisplay
 import com.santimattius.kmp.entertainment.core.domain.ContentType
 import com.santimattius.kmp.entertainment.feature.favorites.FavoriteRoute
-import com.santimattius.kmp.entertainment.feature.homepage.HomeWebPageScreen
-import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailRoute
+import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailScene
+import com.santimattius.kmp.entertainment.feature.movie.detail.MovieDetailViewModel
 import com.santimattius.kmp.entertainment.feature.movie.home.MoviesRoute
 import com.santimattius.kmp.entertainment.feature.splash.SplashScreen
-import com.santimattius.kmp.entertainment.feature.tvshow.detail.TvShowDetailRoute
+import com.santimattius.kmp.entertainment.feature.tvshow.detail.TvShowDetailScene
+import com.santimattius.kmp.entertainment.feature.tvshow.detail.TvShowDetailViewModel
 import com.santimattius.kmp.entertainment.feature.tvshow.home.TvShowRoute
 
-
-@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AppNavigation(
-    navController: NavHostController = rememberNavController()
+    modifier: Modifier = Modifier,
+    backStack: SnapshotStateList<Any>,
+    onNavClick: (Any) -> Unit,
+    onBack: () -> Unit,
 ) {
-    DisposableEffect(Unit) {
-        // Sets up the listener to call `NavController.navigate()`
-        // for the composable that has a matching `navDeepLink` listed
-        ExternalUriHandler.listener = { uri ->
-            navController.navigate(uri)
-        }
-        // Removes the listener when the composable is no longer active
-        onDispose {
-            ExternalUriHandler.listener = null
-        }
-    }
-    AnimatedTransactionLayout {
-        NavHost(
-            navController = navController,
-            startDestination = Splash
-        ) {
-            composableNavAnimated<Splash> {
+    NavDisplay(
+        modifier = modifier,
+        backStack = backStack,
+        onBack = { backStack.removeLastOrNull() },
+        entryDecorators = listOf(
+            rememberSaveableStateHolderNavEntryDecorator(),
+            rememberViewModelStoreNavEntryDecorator(),
+        ),
+        entryProvider = entryProvider {
+            entry<Splash> {
                 SplashScreen {
-                    with(navController) {
-                        popBackStack()
-                        navigate(Movie)
-                    }
+                    onBack()
+                    onNavClick(Movie)
                 }
             }
-            composableNavAnimated<Movie> {
-                MoviesRoute {
-                    navController.navigate(MovieDetail(it))
+
+            entry<Movie> {
+                MoviesRoute { id ->
+                    onNavClick(MovieDetail(id))
                 }
             }
-            //"app://entertainment.com/movie/1197306"
-            composableNavAnimated<MovieDetail>(
-                deepLinks = listOf(
-                    navDeepLink<MovieDetail>(basePath = "miapp://entertainment/movie"),
-                    //navDeepLink { uriPattern = "miapp://entertainment.com/movie/{id}" }
-                )
-            ) { backStackEntry ->
-                val detail = backStackEntry.toRoute<MovieDetail>()
-                MovieDetailRoute(detail.id) {
-                    navController.navigate(HomeWebPage(it))
+            entry<MovieDetail> { key ->
+                MovieDetailScene(viewModel = viewModel(factory = MovieDetailViewModel.Factory(key))) {
+                    onNavClick(HomeWebPage(it))
                 }
             }
-            composableNavAnimated<TvShow> {
-                TvShowRoute {
-                    navController.navigate(TvShowDetail(it))
+            entry<TvShow> {
+                TvShowRoute { id ->
+                    onNavClick(TvShowDetail(id))
                 }
             }
-            composableNavAnimated<TvShowDetail> { backStackEntry ->
-                val detail = backStackEntry.toRoute<TvShowDetail>()
-                TvShowDetailRoute(detail.id)
+            entry<TvShowDetail> { key ->
+                TvShowDetailScene(viewModel = viewModel(factory = TvShowDetailViewModel.Factory(key)))
             }
-            composableNavAnimated<Favorite> {
+            entry<Favorite> {
                 FavoriteRoute {
                     when (it.type) {
                         ContentType.MOVIE -> {
-                            navController.navigate(MovieDetail(it.id))
+                            onNavClick(MovieDetail(it.id))
                         }
 
                         ContentType.TV -> {
-                            navController.navigate(TvShowDetail(it.id))
+                            onNavClick(TvShowDetail(it.id))
                         }
                     }
                 }
             }
-            composableNavAnimated<HomeWebPage> { backStackEntry ->
-                val detail = backStackEntry.toRoute<HomeWebPage>()
-                HomeWebPageScreen(detail.url)
+            entry<HomeWebPage> { key ->
+                HomeWebPage(key.url)
             }
         }
-    }
+    )
 }

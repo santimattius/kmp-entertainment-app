@@ -1,7 +1,10 @@
 package com.santimattius.kmp.entertainment.feature.movie.home
 
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,12 +34,14 @@ fun MoviesContent(
     onMovieClick: (Long) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        MoviesContent(
+            state = state,
+            onMovieClick = onMovieClick,
+            onMove = viewModel::move
+        )
+    }
 
-    MoviesContent(
-        state = state,
-        onMovieClick = onMovieClick,
-        onMove = viewModel::move
-    )
 }
 
 @Composable

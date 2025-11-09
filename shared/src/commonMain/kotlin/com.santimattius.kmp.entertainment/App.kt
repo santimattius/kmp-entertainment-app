@@ -54,24 +54,28 @@ fun MainApp(
 
     Scaffold(
         topBar = {
-            if (appState.showTopAppBar) {
+            if (appState.showTopAppBar()) {
                 AppBar(
                     title = "Movies and TvShows",
-                    navigationIcon = if (appState.showUpNavigation) upNavigation else empty
+                    navigationIcon = if (appState.showUpNavigation()) upNavigation else empty
                 )
             }
         },
         bottomBar = {
-            if (appState.showBottomNavigation) {
+            if (appState.showBottomNavigation()) {
                 AppBottomNavigation(
                     bottomNavOptions = AppState.BOTTOM_NAV_ITEMS,
-                    currentRoute = appState.currentRoute,
+                    currentRoute = appState.getCurrentRoute(),
                     onNavItemClick = { appState.onNavItemClick(it) })
             }
         }
     ) {
         Box(modifier = Modifier.fillMaxSize().padding(it)) {
-            AppNavigation(appState.navController)
+            AppNavigation(
+                backStack = appState.backStack,
+                onNavClick = { route -> appState.onNavClick(route) },
+                onBack = { appState.onUpClick() }
+            )
         }
     }
 }

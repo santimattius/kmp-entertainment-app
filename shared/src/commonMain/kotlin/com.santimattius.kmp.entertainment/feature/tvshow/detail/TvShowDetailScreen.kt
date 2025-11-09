@@ -1,9 +1,14 @@
 package com.santimattius.kmp.entertainment.feature.tvshow.detail
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
@@ -11,8 +16,16 @@ import com.santimattius.kmp.entertainment.feature.shared.DetailContentView
 import org.koin.core.parameter.parametersOf
 
 @Composable
+@Deprecated("Use TvShowDetailScene instead for Nav3")
 fun TvShowDetailRoute(id: Long) {
     val viewModel = koinViewModel<TvShowDetailViewModel>() { parametersOf(id) }
+    TvShowDetailContent(viewModel)
+}
+
+@Composable
+fun TvShowDetailScene(
+    viewModel: TvShowDetailViewModel,
+){
     TvShowDetailContent(viewModel)
 }
 
@@ -21,7 +34,9 @@ fun TvShowDetailContent(
     viewModel: TvShowDetailViewModel,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    DetailContent(state = state, onFavoriteClicked = viewModel::onFavoriteClicked)
+    Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)){
+        DetailContent(state = state, onFavoriteClicked = viewModel::onFavoriteClicked)
+    }
 }
 
 @Composable

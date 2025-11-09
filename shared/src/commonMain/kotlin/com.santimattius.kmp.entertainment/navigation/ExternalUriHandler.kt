@@ -2,6 +2,7 @@ package com.santimattius.kmp.entertainment.navigation
 
 import co.touchlab.kermit.Logger
 
+@Deprecated("Waiting support deep links in Nav3")
 object ExternalUriHandler {
     // Storage for when a URI arrives before the listener is set up
     private var cached: String? = null
