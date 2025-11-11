@@ -42,11 +42,11 @@ fun App() {
 
 @Composable
 fun MainApp(
-    appState: AppState = rememberAppState(),
+    navigator: Navigator = rememberNavigator(),
 ) {
     val upNavigation: @Composable () -> Unit = {
         ArrowBackIcon {
-            appState.onUpClick()
+            navigator.onUpClick()
         }
     }
 
@@ -54,27 +54,25 @@ fun MainApp(
 
     Scaffold(
         topBar = {
-            if (appState.showTopAppBar()) {
+            if (navigator.showTopAppBar()) {
                 AppBar(
                     title = "Movies and TvShows",
-                    navigationIcon = if (appState.showUpNavigation()) upNavigation else empty
+                    navigationIcon = if (navigator.showUpNavigation()) upNavigation else empty
                 )
             }
         },
         bottomBar = {
-            if (appState.showBottomNavigation()) {
+            if (navigator.showBottomNavigation()) {
                 AppBottomNavigation(
-                    bottomNavOptions = AppState.BOTTOM_NAV_ITEMS,
-                    currentRoute = appState.getCurrentRoute(),
-                    onNavItemClick = { appState.onNavItemClick(it) })
+                    bottomNavOptions = Navigator.BOTTOM_NAV_ITEMS,
+                    currentRoute = navigator.getCurrentRouteString(),
+                    onNavItemClick = { navigator.onNavItemClick(it) })
             }
         }
     ) {
         Box(modifier = Modifier.fillMaxSize().padding(it)) {
             AppNavigation(
-                backStack = appState.backStack,
-                onNavClick = { route -> appState.onNavClick(route) },
-                onBack = { appState.onUpClick() }
+                navigator = navigator
             )
         }
     }
