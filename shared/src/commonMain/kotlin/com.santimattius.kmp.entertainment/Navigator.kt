@@ -10,19 +10,20 @@ import com.santimattius.kmp.entertainment.navigation.Movie
 import com.santimattius.kmp.entertainment.navigation.NavItem
 import com.santimattius.kmp.entertainment.navigation.Splash
 import com.santimattius.kmp.entertainment.navigation.TvShow
-import com.santimattius.kmp.entertainment.navigation.toRoute
+import com.santimattius.kmp.entertainment.navigation.toDestination
 import kotlinx.coroutines.CoroutineScope
-import kotlin.reflect.KClass
+import org.koin.compose.koinInject
+import org.koin.core.parameter.parametersOf
 
 @Composable
-fun rememberAppState(
+fun rememberNavigator(
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     backStack: SnapshotStateList<Any> = remember { mutableStateListOf(Splash) }
-): AppState = remember(coroutineScope, backStack) {
-    AppState(coroutineScope, backStack)
+): Navigator = koinInject {
+    parametersOf(coroutineScope, backStack)
 }
 
-class AppState(
+class Navigator(
     private val coroutineScope: CoroutineScope,
     val backStack: SnapshotStateList<Any> = mutableStateListOf(Splash)
 ) {
@@ -36,26 +37,32 @@ class AppState(
         )
     }
 
-    fun getCurrentRoute() = backStack.last()::class.qualifiedName.orEmpty()
+    fun getCurrentRoute(): Any? = backStack.lastOrNull()
+
+    fun getCurrentRouteString(): String {
+        val currentRoute = getCurrentRoute() ?: return ""
+        return currentRoute::class.qualifiedName.orEmpty()
+    }
+
 
     fun isFullScreen(): Boolean {
         val currentRoute = getCurrentRoute()
-        return !currentRoute.notContainsRoute(Splash::class)
+        return currentRoute is Splash
     }
 
     fun showUpNavigation(): Boolean {
-        val currentRoute = getCurrentRoute()
+        val currentRoute = getCurrentRouteString()
         return !HOME_ROUTES.contains(currentRoute)
     }
 
     fun showBottomNavigation(): Boolean {
         val currentRoute = getCurrentRoute()
-        return currentRoute.notContainsRoute(Splash::class)
+        return currentRoute !is Splash
     }
 
     fun showTopAppBar(): Boolean {
         val currentRoute = getCurrentRoute()
-        return currentRoute.notContainsRoute(Splash::class)
+        return currentRoute !is Splash
     }
 
 
@@ -63,37 +70,13 @@ class AppState(
         backStack.removeLastOrNull()
     }
 
-    private fun <T : Any> String.notContainsRoute(clazz: KClass<T>): Boolean {
-        return if (isBlank()) {
-            false
-        } else {
-            !contains(clazz.qualifiedName.orEmpty())
-        }
-    }
 
     fun onNavClick(route: Any) {
         backStack.add(route)
     }
 
     fun onNavItemClick(navItem: NavItem) {
-        val route = navItem.feature.toRoute()
-        when (route) {
-            Splash::class.qualifiedName -> {
-                backStack.add(Splash)
-            }
-
-            Movie::class.qualifiedName -> {
-                backStack.add(Movie)
-
-            }
-
-            TvShow::class.qualifiedName -> {
-                backStack.add(TvShow)
-            }
-
-            Favorite::class.qualifiedName -> {
-                backStack.add(Favorite)
-            }
-        }
+        val destination = navItem.feature.toDestination()
+        backStack.add(destination)
     }
 }

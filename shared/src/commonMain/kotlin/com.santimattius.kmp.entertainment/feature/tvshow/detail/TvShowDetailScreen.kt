@@ -10,17 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.feature.shared.DetailContentView
-import org.koin.core.parameter.parametersOf
-
-@Composable
-@Deprecated("Use TvShowDetailScene instead for Nav3")
-fun TvShowDetailRoute(id: Long) {
-    val viewModel = koinViewModel<TvShowDetailViewModel>() { parametersOf(id) }
-    TvShowDetailContent(viewModel)
-}
 
 @Composable
 fun TvShowDetailScene(

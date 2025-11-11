@@ -14,22 +14,13 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.DraggableGrid
 import com.santimattius.kmp.entertainment.feature.shared.ContentImageView
 
 
 @Composable
-fun MoviesRoute(
-    onMovieClick: (Long) -> Unit,
-) {
-    val viewModel = koinViewModel<MoviesViewModel>()
-    MoviesContent(viewModel, onMovieClick)
-}
-
-@Composable
-fun MoviesContent(
+fun MoviesScene(
     viewModel: MoviesViewModel,
     onMovieClick: (Long) -> Unit,
 ) {
@@ -68,7 +59,7 @@ fun MoviesContent(
 
         else -> {
             val movies = state.data.toMutableStateList()
-            MoviesContent(
+            MoviesScene(
                 data = movies,
                 onItemMove = onMove,
                 onItemClick = onMovieClick,
@@ -78,7 +69,7 @@ fun MoviesContent(
 }
 
 @Composable
-fun MoviesContent(
+fun MoviesScene(
     data: List<MovieUiModel>,
     onItemMove: (Int, Int) -> Unit,
     onItemClick: (Long) -> Unit = {},
