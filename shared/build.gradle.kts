@@ -68,6 +68,7 @@ kotlin {
             api(libs.koin.core)
             api(libs.koin.compose)
             api(libs.koin.composeViewModel)
+            api(libs.koin.compose.navigation3)
 
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)

@@ -14,22 +14,12 @@ import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.components.DraggableGrid
 import com.santimattius.kmp.entertainment.feature.shared.ContentImageView
 
-
 @Composable
-fun TvShowRoute(
-    onMovieClick: (Long) -> Unit,
-) {
-    val viewModel = koinViewModel<TvShowViewModel>()
-    TvShowScreen(viewModel, onMovieClick)
-}
-
-@Composable
-fun TvShowScreen(
+fun TvShowScene(
     viewModel: TvShowViewModel,
     onMovieClick: (Long) -> Unit,
 ) {

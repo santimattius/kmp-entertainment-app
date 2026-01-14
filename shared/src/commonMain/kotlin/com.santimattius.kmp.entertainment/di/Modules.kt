@@ -26,7 +26,7 @@ enum class Qualifiers {
     API_KEY;
 }
 
-val sharedModules = module {
+private val sharedModules = module {
 
     single(named(Qualifiers.API_KEY)) { BuildConfig.apiKey }
     single { ktorHttpClient(apiKey = get(named(Qualifiers.API_KEY))) }
@@ -42,7 +42,7 @@ val sharedModules = module {
 
 }
 
-val featureModules = module {
+private val featureModules = module {
     viewModelOf(::MoviesViewModel)
     viewModelOf(::TvShowViewModel)
 
@@ -50,6 +50,7 @@ val featureModules = module {
     viewModelOf(::TvShowDetailViewModel)
     viewModelOf(::FavoriteViewModel)
 }
+
 expect val platformModule: Module
 
-fun appModule() = listOf(featureModules, platformModule, sharedModules)
+fun appModule() = listOf(featureModules, platformModule, sharedModules, navigationModule)

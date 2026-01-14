@@ -14,20 +14,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.santimattius.kmp.entertainment.core.extensions.koinViewModel
 import com.santimattius.kmp.entertainment.core.ui.components.Center
 import com.santimattius.kmp.entertainment.core.ui.themes.AppContainer
 import com.santimattius.kmp.entertainment.feature.shared.DetailContentView
-import org.koin.core.parameter.parametersOf
-
-@Composable
-@Deprecated("Use MovieDetailScene instead for Nav3")
-fun MovieDetailRoute(id: Long, navigateToWebPage: (String) -> Unit = {}) {
-    val viewModel = koinViewModel<MovieDetailViewModel> { parametersOf(id) }
-    MovieDetailContent(viewModel, navigateToWebPage)
-}
 
 @Composable
 fun MovieDetailScene(
@@ -60,9 +52,7 @@ fun DetailContent(
     navigateToWebPage: (String) -> Unit = {}
 ) {
     val content: MovieUiModel? = state.data
-    var openHomePage by rememberSaveable { mutableStateOf<String?>(null) }
-    val bottomSheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
-    when {
+   when {
         state.isLoading -> {
             Center {
                 CircularProgressIndicator()
@@ -91,7 +81,9 @@ fun DetailContent(
     }
 }
 
-@Preview
+@Preview(
+    showSystemUi = true,
+)
 @Composable
 fun MovieDetailScreenPreview() {
     AppContainer {

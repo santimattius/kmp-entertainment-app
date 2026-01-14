@@ -13,3 +13,10 @@ fun Features.toRoute(): String = when (this) {
     Features.TvShows -> TvShow::class.qualifiedName
     Features.Favorites -> Favorite::class.qualifiedName
 }.orEmpty()
+
+fun Features.toDestination(): Any = when (this) {
+    Features.Splash -> Splash
+    Features.Movies -> Movie
+    Features.TvShows -> TvShow
+    Features.Favorites -> Favorite
+}
