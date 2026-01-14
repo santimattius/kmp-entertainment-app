@@ -70,20 +70,20 @@ Current implementation is with Nav3. Check old implementation with nav2 in this 
 ## Dependencies
 ```toml
 [versions]
-androidGradlePlugin = "8.13.0"
-kotlinVersion = "2.2.21"
+androidGradlePlugin = "8.13.2"
+kotlinVersion = "2.3.0"
 ksp = "2.3.0"
-composeVersion = "1.10.0-beta01"
+composeVersion = "1.10.0"
 buildkonfigGradlePlugin = "0.17.1"
 
-androidx-room = "2.8.3"
-sqlite = "2.6.1"
+androidx-room = "2.8.4"
+sqlite = "2.6.2"
 
-activity-compose = "1.11.0"
-ui-tooling = "1.9.4"
+activity-compose = "1.12.2"
+ui-tooling = "1.10.1"
 appcompat = "1.7.1"
 
-material3="1.9.0-beta03"
+material3="1.9.0"
 material="1.7.3"
 
 coil= "3.3.0"
@@ -91,16 +91,20 @@ core-ktx = "1.17.0"
 
 kotlinxCoroutinesAndroid = "1.10.2"
 
-ktorVersion = "3.3.2"
+ktorVersion = "3.3.3"
 
-koin = "4.1.1"
+koin = "4.2.0-beta2"
 
 androidx-navigation = "2.9.1"
-androidx-lifecycle = "2.10.0-alpha04"
-androidx-nav3 = "1.0.0-alpha04"
+androidx-lifecycle = "2.10.0-alpha07"
+androidx-nav3 = "1.0.0-alpha06"
 androidx-adaptive = "1.2.0"
 
 kermit = "2.0.8"
-```
 
-Check voyager implementation [here](https://github.com/santimattius/kmp-entertainment-app/tree/feature/voyager)
+
+kermit = "2.0.8"
+```
+## Navigation Libraries (old)
+- Check voyager implementation [here](https://github.com/santimattius/kmp-entertainment-app/tree/feature/voyager)
+- Check Nav2 implementation [here](https://github.com/santimattius/kmp-entertainment-app/tree/nav2)
