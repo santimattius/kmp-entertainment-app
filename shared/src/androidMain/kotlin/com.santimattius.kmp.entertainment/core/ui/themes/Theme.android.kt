@@ -13,11 +13,17 @@ internal actual fun SystemAppearance(
     isDark: Boolean
 ) {
     val view = LocalView.current
+    val primaryColor = if (isDark) {
+        MaterialTheme.colorScheme.onSurface
+    } else {
+        MaterialTheme.colorScheme.background
+    }
     LaunchedEffect(isDark) {
         val window = (view.context as Activity).window
+        window.statusBarColor = primaryColor.toArgb()
         WindowInsetsControllerCompat(window, window.decorView).apply {
-            isAppearanceLightStatusBars = isDark
-            isAppearanceLightNavigationBars = isDark
+            isAppearanceLightStatusBars = !isDark
+            isAppearanceLightNavigationBars = !isDark
         }
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.AndroidUiModes.UI_MODE_NIGHT_YES
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.santimattius.kmp.entertainment.core.ui.components.Center
@@ -80,7 +81,9 @@ fun DetailContent(
     }
 }
 
-@Preview
+@Preview(
+    showSystemUi = true,
+)
 @Composable
 fun MovieDetailScreenPreview() {
     AppContainer {
