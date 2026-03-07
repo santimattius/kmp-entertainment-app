@@ -15,7 +15,7 @@ fun AppNavigation(
     modifier: Modifier = Modifier,
     navigator: Navigator,
 ) {
-    val koinEntryProvider = koinEntryProvider()
+    val koinEntryProvider = koinEntryProvider<Any>()
 
     NavDisplay(
         modifier = modifier,

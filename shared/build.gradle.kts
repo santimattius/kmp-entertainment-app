@@ -22,7 +22,6 @@ kotlin {
     @OptIn(ExperimentalKotlinGradlePluginApi::class)
     compilerOptions {
         androidTarget {
-            // compilerOptions DSL: https://kotl.in/u1r8ln
             compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
         }
     }
@@ -82,7 +81,6 @@ kotlin {
             api(libs.androidx.activity.compose)
             api(libs.androidx.appcompat)
             api(libs.androidx.core.ktx)
-            //TODO: review this dependency
             api(libs.androidx.ui.tooling)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
@@ -108,15 +106,12 @@ buildkonfig {
 
 android {
     compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    namespace = "com.santimattius.entertainment.app"
-
+    namespace = "com.santimattius.kmp.entertainment.shared"
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res")
     sourceSets["main"].resources.srcDirs("src/commonMain/composeResources")
-
     defaultConfig {
         minSdk = (findProperty("android.minSdk") as String).toInt()
-        targetSdk = (findProperty("android.targetSdk") as String).toInt()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -130,8 +125,6 @@ android {
 dependencies {
     implementation(libs.androidx.core.animation)
     debugImplementation(libs.androidx.ui.tooling)
-
-    // Room
     add("kspAndroid", libs.androidx.room.compiler)
     add("kspIosX64", libs.androidx.room.compiler)
     add("kspIosSimulatorArm64", libs.androidx.room.compiler)
