@@ -1,9 +1,9 @@
 package com.santimattius.kmp.entertainment.core.db
 
-import androidx.room.ConstructedBy
-import androidx.room.Database
-import androidx.room.RoomDatabase
-import androidx.room.RoomDatabaseConstructor
+import androidx.room3.ConstructedBy
+import androidx.room3.Database
+import androidx.room3.RoomDatabase
+import androidx.room3.RoomDatabaseConstructor
 
 interface DB {
     fun clearAllTables() {}
@@ -20,7 +20,7 @@ abstract class TMDBDataBase : RoomDatabase(), DB {
     }
 }
 
-// The Room compiler generates the `actual` implementations.
+// Room 3 compiler generates the `actual` implementations.
 @Suppress("NO_ACTUAL_FOR_EXPECT")
 expect object AppDatabaseConstructor : RoomDatabaseConstructor<TMDBDataBase> {
     override fun initialize(): TMDBDataBase

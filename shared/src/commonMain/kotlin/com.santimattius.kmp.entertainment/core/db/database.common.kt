@@ -1,11 +1,10 @@
 package com.santimattius.kmp.entertainment.core.db
 
-import androidx.room.RoomDatabase
+import androidx.room3.RoomDatabase
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
-
 
 expect class RoomFactory {
 
