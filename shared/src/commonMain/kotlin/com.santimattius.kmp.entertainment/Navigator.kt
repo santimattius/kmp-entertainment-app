@@ -1,6 +1,7 @@
 package com.santimattius.kmp.entertainment
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -23,6 +24,7 @@ fun rememberNavigator(
     parametersOf(coroutineScope, backStack)
 }
 
+@Stable
 class Navigator(
     private val coroutineScope: CoroutineScope,
     val backStack: SnapshotStateList<Any> = mutableStateListOf(Splash)

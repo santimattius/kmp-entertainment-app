@@ -76,6 +76,7 @@ kotlin {
             implementation(libs.androidx.material3.adaptive)
 
             implementation(libs.kermit)
+            implementation(libs.structured.coroutines.annotations)
         }
         androidMain.dependencies {
             api(libs.androidx.activity.compose)

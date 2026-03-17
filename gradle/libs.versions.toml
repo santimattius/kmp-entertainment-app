@@ -1,29 +1,30 @@
 [versions]
 # AGP 9.x — Kotlin built-in; KMP usa com.android.kotlin.multiplatform.library en shared
-androidGradlePlugin = "9.0.1"
-kotlinVersion = "2.3.10"
-ksp = "2.3.5"
+androidGradlePlugin = "9.1.0"
+kotlinVersion = "2.3.20"
+ksp = "2.3.6"
 composeVersion = "1.10.2"
 buildkonfigGradlePlugin = "0.17.1"
+structuredCoroutinesAnnotations = "0.5.0"
 
 androidx-room = "2.8.4"
 sqlite = "2.6.2"
 
-activity-compose = "1.12.4"
-ui-tooling = "1.10.4"
+activity-compose = "1.13.0"
+ui-tooling = "1.10.5"
 appcompat = "1.7.1"
 
 material3="1.9.0"
 material="1.7.3"
 
 coil= "3.4.0"
-core-ktx = "1.17.0"
+core-ktx = "1.18.0"
 
 kotlinxCoroutinesAndroid = "1.10.2"
 
 ktorVersion = "3.4.1"
 
-koin = "4.2.0-RC1"
+koin = "4.2.0"
 
 androidx-navigation = "2.9.2"
 androidx-lifecycle = "2.10.0-beta01"
@@ -88,6 +89,7 @@ androidx-room-runtime = { group = "androidx.room", name = "room-runtime", versio
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
+structured-coroutines-annotations = { module = "io.github.santimattius:structured-coroutines-annotations", version.ref = "structuredCoroutinesAnnotations" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

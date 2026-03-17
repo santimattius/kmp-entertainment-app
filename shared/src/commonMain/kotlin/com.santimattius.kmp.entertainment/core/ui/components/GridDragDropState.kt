@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.toOffset
 import androidx.compose.ui.unit.toSize
+import io.github.santimattius.structured.annotations.StructuredScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun rememberGridDragDropState(
     gridState: LazyGridState,
-    onMove: (Int, Int) -> Unit,
+    onMove: (Int, Int) -> Unit = { _, _ -> },
 ): GridDragDropState {
     val scope = rememberCoroutineScope()
     val state = remember(gridState) {
@@ -49,7 +50,7 @@ fun rememberGridDragDropState(
 
 class GridDragDropState internal constructor(
     private val state: LazyGridState,
-    private val scope: CoroutineScope,
+    @property:StructuredScope private val scope: CoroutineScope,
     private val onMove: (Int, Int) -> Unit,
 ) {
     var draggingItemIndex by mutableStateOf<Int?>(null)
