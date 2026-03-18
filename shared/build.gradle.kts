@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
+    alias(libs.plugins.room3)
     id("com.codingfeline.buildkonfig")
 }
 
@@ -27,7 +27,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64(),
     ).forEach {
@@ -69,7 +68,7 @@ kotlin {
             api(libs.koin.composeViewModel)
             api(libs.koin.compose.navigation3)
 
-            implementation(libs.androidx.room.runtime)
+            implementation(libs.androidx.room3.runtime)
             implementation(libs.sqlite.bundled)
 
             implementation(libs.androidx.nav3.ui)
@@ -126,13 +125,12 @@ android {
 dependencies {
     implementation(libs.androidx.core.animation)
     debugImplementation(libs.androidx.ui.tooling)
-    add("kspAndroid", libs.androidx.room.compiler)
-    add("kspIosX64", libs.androidx.room.compiler)
-    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
-    add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspAndroid", libs.androidx.room3.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room3.compiler)
+    add("kspIosArm64", libs.androidx.room3.compiler)
 }
 
-room {
+room3 {
     schemaDirectory("$projectDir/schemas")
 }
 

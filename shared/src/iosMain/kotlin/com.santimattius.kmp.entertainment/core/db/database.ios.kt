@@ -1,7 +1,7 @@
 package com.santimattius.kmp.entertainment.core.db
 
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room3.Room
+import androidx.room3.RoomDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
@@ -9,10 +9,8 @@ import platform.Foundation.NSUserDomainMask
 
 actual class RoomFactory {
     actual fun create(): RoomDatabase.Builder<TMDBDataBase> {
-        val dbFilePath = documentDirectory()  + "/${DB_NAME}"
-        return Room.databaseBuilder<TMDBDataBase>(
-            name = dbFilePath,
-        )
+        val dbFilePath = documentDirectory() + "/$DB_NAME"
+        return Room.databaseBuilder<TMDBDataBase>(name = dbFilePath)
     }
 
     @OptIn(ExperimentalForeignApi::class)

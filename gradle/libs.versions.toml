@@ -8,6 +8,7 @@ buildkonfigGradlePlugin = "0.17.1"
 structuredCoroutinesAnnotations = "0.5.0"
 
 androidx-room = "2.8.4"
+androidx-room3 = "3.0.0-alpha01"
 sqlite = "2.6.2"
 
 activity-compose = "1.13.0"
@@ -86,6 +87,8 @@ androidx-material3-adaptive = { module = "org.jetbrains.compose.material3.adapti
 
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "androidx-room" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
+androidx-room3-compiler = { group = "androidx.room3", name = "room3-compiler", version.ref = "androidx-room3" }
+androidx-room3-runtime = { group = "androidx.room3", name = "room3-runtime", version.ref = "androidx-room3" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
 
 buildkonfig-gradle-plugin = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin", version.ref = "buildkonfigGradlePlugin" }
@@ -102,3 +105,4 @@ compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeVersion" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "androidx-room" }
+room3 = { id = "androidx.room3", version.ref = "androidx-room3" }
