@@ -29,7 +29,7 @@ koin = "4.2.0"
 
 androidx-navigation = "2.9.2"
 androidx-lifecycle = "2.10.0-beta01"
-androidx-nav3 = "1.0.0-alpha06"
+androidx-nav3 = "1.1.0"
 androidx-adaptive = "1.2.0"
 
 kermit = "2.1.0"
