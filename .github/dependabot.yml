@@ -10,4 +10,4 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
-    rebase-strategy: "monthly"
+    rebase-strategy: "disabled"
