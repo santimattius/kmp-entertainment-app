@@ -28,7 +28,7 @@ ktorVersion = "3.4.1"
 koin = "4.2.1"
 
 androidx-navigation = "2.9.2"
-androidx-lifecycle = "2.10.0-beta01"
+androidx-lifecycle = "2.11.0-alpha03"
 androidx-nav3 = "1.1.0"
 androidx-adaptive = "1.2.0"
 
