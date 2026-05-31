@@ -1,11 +1,9 @@
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.multiplatform.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
@@ -19,11 +17,14 @@ version = "1.0-SNAPSHOT"
 
 kotlin {
     applyDefaultHierarchyTemplate()
-    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    compilerOptions {
-        androidTarget {
-            compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
-        }
+
+    jvmToolchain(17)
+
+    android {
+        namespace = "com.santimattius.kmp.entertainment.shared"
+        compileSdk = (findProperty("android.compileSdk") as String).toInt()
+        minSdk = (findProperty("android.minSdk") as String).toInt()
+        androidResources { enable = true }
     }
 
     listOf(
@@ -85,6 +86,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.koin.android)
+            implementation(libs.androidx.core.animation)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -95,6 +97,7 @@ kotlin {
         freeCompilerArgs.add("-Xexpect-actual-classes")
     }
 }
+
 buildkonfig {
     packageName = "com.santimattius.kmp.entertainment"
     objectName = "BuildConfig"
@@ -104,27 +107,7 @@ buildkonfig {
     }
 }
 
-android {
-    compileSdk = (findProperty("android.compileSdk") as String).toInt()
-    namespace = "com.santimattius.kmp.entertainment.shared"
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    sourceSets["main"].res.srcDirs("src/androidMain/res")
-    sourceSets["main"].resources.srcDirs("src/commonMain/composeResources")
-    defaultConfig {
-        minSdk = (findProperty("android.minSdk") as String).toInt()
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlin {
-        jvmToolchain(17)
-    }
-}
-
 dependencies {
-    implementation(libs.androidx.core.animation)
-    debugImplementation(libs.androidx.ui.tooling)
     add("kspAndroid", libs.androidx.room3.compiler)
     add("kspIosSimulatorArm64", libs.androidx.room3.compiler)
     add("kspIosArm64", libs.androidx.room3.compiler)
@@ -138,7 +121,6 @@ compose.resources {
     publicResClass = true
     generateResClass = always
 }
-
 
 fun Project.getLocalProperty(key: String, file: String = "local.properties"): String {
     val p = Properties()
