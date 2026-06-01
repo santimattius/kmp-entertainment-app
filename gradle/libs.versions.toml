@@ -2,7 +2,7 @@
 # AGP 9.x — Kotlin built-in; KMP usa com.android.kotlin.multiplatform.library en shared
 androidGradlePlugin = "9.2.1"
 kotlinVersion = "2.3.21"
-ksp = "2.3.6"
+ksp = "2.3.9"
 composeVersion = "1.11.0"
 buildkonfigGradlePlugin = "0.21.2"
 structuredCoroutinesAnnotations = "0.8.0"
