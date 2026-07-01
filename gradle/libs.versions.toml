@@ -5,7 +5,7 @@ kotlinVersion = "2.3.21"
 ksp = "2.3.9"
 composeVersion = "1.11.0"
 buildkonfigGradlePlugin = "0.21.2"
-structuredCoroutinesAnnotations = "0.8.0"
+structuredCoroutinesAnnotations = "1.1.0"
 
 androidx-room = "2.8.4"
 androidx-room3 = "3.0.0-alpha05"
