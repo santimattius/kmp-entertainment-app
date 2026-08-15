@@ -2,7 +2,7 @@
 # AGP 9.x — Kotlin built-in; KMP usa com.android.kotlin.multiplatform.library en shared
 androidGradlePlugin = "9.2.1"
 kotlinVersion = "2.4.0"
-ksp = "2.3.9"
+ksp = "2.3.10"
 composeVersion = "1.11.1"
 buildkonfigGradlePlugin = "0.21.2"
 structuredCoroutinesAnnotations = "1.1.0"
@@ -19,7 +19,7 @@ material3="1.9.0"
 material="1.7.3"
 
 coil= "3.4.0"
-core-ktx = "1.18.0"
+core-ktx = "1.19.0"
 
 kotlinxCoroutinesAndroid = "1.11.0"
 
@@ -28,7 +28,7 @@ ktorVersion = "3.5.1"
 koin = "4.2.1"
 
 androidx-navigation = "2.9.2"
-androidx-lifecycle = "2.11.0-rc01"
+androidx-lifecycle = "2.11.0"
 androidx-nav3 = "1.1.1"
 androidx-adaptive = "1.2.0"
 
