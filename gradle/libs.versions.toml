@@ -25,7 +25,7 @@ kotlinxCoroutinesAndroid = "1.11.0"
 
 ktorVersion = "3.5.1"
 
-koin = "4.2.1"
+koin = "4.2.2"
 
 androidx-navigation = "2.9.2"
 androidx-lifecycle = "2.11.0"
