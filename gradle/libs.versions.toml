@@ -3,7 +3,7 @@
 androidGradlePlugin = "9.3.2"
 kotlinVersion = "2.4.10"
 ksp = "2.3.10"
-composeVersion = "1.11.1"
+composeVersion = "1.12.1"
 buildkonfigGradlePlugin = "0.21.2"
 structuredCoroutinesAnnotations = "1.1.0"
 
