@@ -23,7 +23,7 @@ core-ktx = "1.19.0"
 
 kotlinxCoroutinesAndroid = "1.11.0"
 
-ktorVersion = "3.5.2"
+ktorVersion = "3.6.0"
 
 koin = "4.2.2"
 
