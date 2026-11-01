@@ -32,7 +32,7 @@ androidx-lifecycle = "2.11.0"
 androidx-nav3 = "1.1.1"
 androidx-adaptive = "1.2.0"
 
-kermit = "2.1.0"
+kermit = "2.2.0"
 # Android SDK (acceso: libs.versions.android.compileSdk.get().toInt())
 android-compileSdk = "37"
 android-minSdk = "24"
